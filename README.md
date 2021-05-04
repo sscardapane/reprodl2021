@@ -27,6 +27,11 @@ conda install -y pytorch-lightning -c conda-forge
 
 This should be enough to let you run the initial notebook.
 
+> :warning: For Windows only, install a [backend for torchaudio](https://pytorch.org/audio/stable/backend.html):
+> ```bash
+> pip install soundfile
+> ```
+
 ### Additional set-up steps
 
 The following steps are not mandatory, but will considerably simplify the experience.
@@ -68,3 +73,7 @@ git log --graph --abbrev-commit --decorate
 ```
 
 If you want to inspect a specific change, you can checkout again using the ID of the commit.
+
+### Advanced reading material
+
+If you liked the exercises and are planning to explore more, the new edition of [Full Stack Deep Learning](https://fullstackdeeplearning.com/) (UC Berkeley CS194-080) covers a larger set of material than this course. Another good resource (divided in small exercises) is the [MLOps](https://github.com/GokuMohandas/mlops) repository by Goku Mohandas.
