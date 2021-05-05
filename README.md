@@ -6,7 +6,7 @@ This practical PhD course explores the design of a simple *reproducible* environ
 
 ## Local set-up
 
-The use-case of the course is an audio classification model trained on the [ESC-50](https://github.com/karolpiczak/ESC-50) dataset. To set-up your local machine (or a proper virtual / remote environment), configure [Anaconda](https://www.anaconda.com/products/individual), and create a clean environment:
+The use case of the course is an audio classification model trained on the [ESC-50](https://github.com/karolpiczak/ESC-50) dataset. To set-up your local machine (or a proper virtual / remote environment), configure [Anaconda](https://www.anaconda.com/products/individual), and create a clean environment:
 
 ```bash
 conda create -n reprodl; conda activate reprodl
@@ -25,7 +25,7 @@ conda install -y pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch -c c
 conda install -y pytorch-lightning -c conda-forge
 ```
 
-This should be enough to let you run the initial notebook.
+This should be enough to let you run the [initial notebook](https://github.com/sscardapane/reprodl2021/blob/main/Initial%20Notebook.ipynb). More information on the use case can be found inside the notebook itself.
 
 > :warning: For Windows only, install a [backend for torchaudio](https://pytorch.org/audio/stable/backend.html):
 > ```bash
@@ -76,4 +76,4 @@ If you want to inspect a specific change, you can checkout again using the ID of
 
 ### Advanced reading material
 
-If you liked the exercises and are planning to explore more, the new edition of [Full Stack Deep Learning](https://fullstackdeeplearning.com/) (UC Berkeley CS194-080) covers a larger set of material than this course. Another good resource (divided in small exercises) is the [MLOps](https://github.com/GokuMohandas/mlops) repository by Goku Mohandas.
+If you liked the exercises and are planning to explore more, the new edition of [Full Stack Deep Learning](https://fullstackdeeplearning.com/) (UC Berkeley CS194-080) covers a larger set of material than this course. Another good resource (divided in small exercises) is the [MLOps](https://github.com/GokuMohandas/mlops) repository by Goku Mohandas. [lucmos/nn-template](https://github.com/lucmos/nn-template) is a fully-functioning template implementing many of the tools described in this course.
