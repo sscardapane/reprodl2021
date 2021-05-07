@@ -14,6 +14,9 @@ import pandas as pd
 import hydra
 from omegaconf import DictConfig, OmegaConf
 
+import logging
+logger = logging.getLogger(__name__)
+
 class ESC50Dataset(torch.utils.data.Dataset):
     # Simple class to load the desired folders inside ESC-50
     
@@ -109,6 +112,9 @@ class AudioNet(pl.LightningModule):
 @hydra.main(config_path='configs', config_name='default')
 def train(cfg: DictConfig):
     # The decorator is enough to let Hydra load the configuration file.
+    
+    # Simple logging of the configuration
+    logger.info(OmegaConf.to_yaml(cfg))
     
     # We recover the original path of the dataset:
     path = Path(hydra.utils.get_original_cwd()) / Path(cfg.data.path)
