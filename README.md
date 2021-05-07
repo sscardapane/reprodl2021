@@ -1,79 +1,72 @@
 # Reproducible Deep Learning
-## PhD Course in Data Science, 2021, 3 CFU
-[[Official website](https://www.sscardapane.it/teaching/reproducibledl/)]
+## Exercise 1: Git & Scripting
+[[Official website](https://www.sscardapane.it/teaching/reproducibledl/)] [[Slides](https://docs.google.com/presentation/d/1_AYIcCyVI59QiiXqU4Sn7VzwtVyfqv-lG36EPFzeSdY/edit?usp=sharing)]
 
-This practical PhD course explores the design of a simple *reproducible* environment for a deep learning project, using free, open-source tools ([Git](https://git-scm.com/), [DVC](http://dvc.org/), [Docker](https://www.docker.com/), [Hydra](https://github.com/facebookresearch/hydra), ...). The choice of tools is opinionated, and was made as a trade-off between practicality and didactical concerns.
+## Objectives for the exercise
 
-## Local set-up
+- [ ] Experimenting with Git branches.
+- [ ] Turning a notebook into a runnable script.
 
-The use case of the course is an audio classification model trained on the [ESC-50](https://github.com/karolpiczak/ESC-50) dataset. To set-up your local machine (or a proper virtual / remote environment), configure [Anaconda](https://www.anaconda.com/products/individual), and create a clean environment:
-
-```bash
-conda create -n reprodl; conda activate reprodl
-```
-
-Then, install a few generic prerequisites (notebook handling, Pandas, …):
-
-```bash
-conda install -y -c conda-forge notebook matplotlib pandas ipywidgets pathlib
-```
-
-Finally, install [PyTorch](https://pytorch.org/) and [PyTorch Lightning](https://github.com/PyTorchLightning/pytorch-lightning). The instructions below can vary depending on whether you have a CUDA-enabled machine, Linux, etc. In general, follow the instructions from the websites.
-
-```bash
-conda install -y pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch -c conda-forge
-conda install -y pytorch-lightning -c conda-forge
-```
-
-This should be enough to let you run the [initial notebook](https://github.com/sscardapane/reprodl2021/blob/main/Initial%20Notebook.ipynb). More information on the use case can be found inside the notebook itself.
-
-> :warning: For Windows only, install a [backend for torchaudio](https://pytorch.org/audio/stable/backend.html):
-> ```bash
-> pip install soundfile
-> ```
-
-### Additional set-up steps
-
-The following steps are not mandatory, but will considerably simplify the experience.
-
-1. If you are on Windows, install the [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10). This is useful in a number of contexts, including Docker installation.
-2. We will use Git from the command line multiple times, so consider enabling [GitHub access with an SSH key](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh).
-3. We will experiment with Docker reproducibility on the [Sapienza DGX environment](https://www.uniroma1.it/sites/default/files/field_file_allegati/presentazione_ga_13-05-2019_sgiagu.pdf). If you have not done so already, set-up your access to the machine.
-
-## Organization of the course
-
-<p align="center">
-<img align="center" src="https://github.com/sscardapane/reprodl2021/blob/main/reprodl_overview.png" width="500" style="border: 1px solid black;">
-</p>
-
-The course is split into **exercises** (e.g., adding DVC support). The material for each exercise is provided as a Git branch. To follow an exercise, switch to the corresponding branch, and follow the README there. If you want to see the completed exercise, add *_completed* to the name of the branch. Additional material and information can be found on the [main website](https://www.sscardapane.it/teaching/reproducibledl/) of the course.
-
-**List of exercises**:
-
-- [ ] Experimenting with Git and Hydra (*exercise1_git*).
-
-### An example
-
-If you want to follow the first exercise, switch to the corresponding branch and follow the instructions from there:
-
-```bash
-git checkout exercise1_git
-```
-
-If you want to see the completed exercise:
+See the completed exercise:
 
 ```bash
 git checkout exercise1_git_completed
 ```
 
-You can inspect the commits to look at specific changes in the code:
+## Prerequisites
+
+1. Uncompress the [ESC-50 dataset](https://github.com/karolpiczak/ESC-50) inside the *data* folder.
+2. Run *Initial Notebook.ipynb* to see an example of training.
+
+## Instructions
+
+The aim of this exercise is to get some familarity with Git branches and Python scripts. You are tasked with turning the [training notebook](Initial%20Notebook.ipynb) into a runnable Python script, working on a separate Git branch, and merging the result at the end.
+
+1. Start by initializing and moving to an experimental branch:
 
 ```bash
-git log --graph --abbrev-commit --decorate
+git branch experimental_branch
+git checkout experimental branch
 ```
 
-If you want to inspect a specific change, you can checkout again using the ID of the commit.
+2. Convert the notebook into a Python script by running `nbconvert`:
 
-### Advanced reading material
+```bash
+jupyter nbconvert --to script --output "train" "Initial Notebook.ipynb"
+```
 
-If you liked the exercises and are planning to explore more, the new edition of [Full Stack Deep Learning](https://fullstackdeeplearning.com/) (UC Berkeley CS194-080) covers a larger set of material than this course. Another good resource (divided in small exercises) is the [MLOps](https://github.com/GokuMohandas/mlops) repository by Goku Mohandas. [lucmos/nn-template](https://github.com/lucmos/nn-template) is a fully-functioning template implementing many of the tools described in this course.
+> :speech_balloon: The command has [several useful flags](https://nbconvert.readthedocs.io/en/latest/config_options.html) to simplify the conversion (e.g., check `TemplateExporter.exclude_markdown`).
+
+3. Reorganize the script so that it is runnable from terminal:
+   * Remove all instructions that are not required for training;
+   * Put all training instructions inside a new `train()` function.
+
+4. Add a [top-level instruction](https://docs.python.org/3/library/__main__.html) to run the module as a script:
+
+```python
+if __name__ == "__main__":
+    train()
+```
+
+5. Create a [.gitignore file](https://git-scm.com/docs/gitignore) to ignore the *data* and *lightning_logs* folders.
+6. Remove the notebook, and check that the training script is working correctly:
+
+```bash
+python train.py
+```
+
+7. Merge the experimental branch into the main one, and delete the experimental branch:
+
+```bash
+git checkout main
+git merge experimental_branch
+git branch -d experimental  branch
+```
+
+Congratulations! You have concluded the first move to a reproducible deep learning world. :nerd_face:
+
+Move to the next exercise:
+
+```bash
+git checkout exercise2_hydra
+```
