@@ -77,6 +77,10 @@ If everything went well, you should be able to experiment a little bit with Hydr
 - Remove a flag from the configuration:
    
   ``` python train.py ~trainer.gpus ```
+  
+- Change the output directory:
+   
+  ``` python train.py hydra.run.dir="custom_dir" ```
 
 Congratulations! You have concluded another move to a reproducible deep learning world. :nerd_face:
 
@@ -94,7 +98,7 @@ Start by importing the logging function:
   
 ```python 
 import logging
-logger = logging.getLogger(__main__)
+logger = logging.getLogger(__name__)
 ```
 
 You can use the logger to save some important information, debug messages, errors, etc. You will find the log inside the `train.log` file in each generated folder. For example, you can log the initial configuration of the training script:
