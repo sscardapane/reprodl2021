@@ -1,0 +1,19 @@
+seed: 0
+
+data:
+  path: "data/ESC-50"
+  sample_rate: 8000
+  train_folds: [1,2,3]
+  val_folds: [4]
+  test_folds: [5]
+  batch_size: 8
+
+model:
+  base_filters: 32
+  n_classes: 50
+  optimizer:
+    lr: 3e-4
+
+trainer:
+  gpus: 1
+  max_epochs: 10
