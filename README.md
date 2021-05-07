@@ -50,7 +50,8 @@ The course is split into **exercises** (e.g., adding DVC support). The material 
 
 **List of exercises**:
 
-- [ ] Experimenting with Git and Hydra (*exercise1_git*).
+- [x] Experimenting with Git, branches, and scripting (*exercise1_git*).
+- [x] Adding Hydra configuration (*exercise2_hydra*).
 
 ### An example
 
