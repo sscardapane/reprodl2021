@@ -6,6 +6,7 @@ from torch import nn
 from torch.nn import functional as F
 
 import pytorch_lightning as pl
+from pytorch_lightning.metrics import functional
 
 from pathlib import Path
 import matplotlib.pyplot as plt
@@ -59,7 +60,7 @@ class AudioNet(pl.LightningModule):
 
         # Fundamental, this will save the hyper-parameters
         # in a way that is meaningful to PyTorch Lightning.
-        self.hparams = hparams 
+        self.save_hyperparameters(hparams) 
 
         self.conv1 = nn.Conv2d(1, hparams.base_filters, 11, padding=5)
         self.bn1 = nn.BatchNorm2d(hparams.base_filters)
@@ -100,7 +101,7 @@ class AudioNet(pl.LightningModule):
         x, y = batch
         y_hat = self(x)
         y_hat = torch.argmax(y_hat, dim=1)
-        acc = pl.metrics.functional.accuracy(y_hat, y)
+        acc = functional.accuracy(y_hat, y)
         self.log('val_acc', acc, on_epoch=True, prog_bar=True)
         return acc
         
