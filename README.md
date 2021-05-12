@@ -51,7 +51,7 @@ For a more powerful alternative, you can start a [Portainer CE](https://document
 
 ```bash
 docker volume create portainer_data
-docker run -d -p 9001:9001 --name=portainer --entrypoint /portainer -p :9001 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce
+docker run -d -p 9001:9000 --name=portainer -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce
 ```
 
 > :speech_balloon: We are using port 9001 to avoid conflicts with MinIO on port 9000.
@@ -77,20 +77,13 @@ docker build . --rm -t reprodl/env
 Run the environment in interactive mode:
 
 ```bash
-docker run -d -it -p 9000:9000 reprodl/env
+docker run -d -it -p 9002:9000 reprodl/env
 ```
 > :speech_balloon: Adding a volume is also a good idea at this point. You can avoid mapping the port if you do not plan to use MinIO.
 
 Find the container ID running `docker ps`, and try attaching to the container running `docker attach <id>`. Alternatively, you can [attach to a running container](https://code.visualstudio.com/docs/remote/attach-container) from Visual Studio Code.
 
-From inside the container, try to replicate a training run. If the MinIO server is active, the minimal set of instructions should be:
-
-```bash
-git clone <repo-path> # Your fork of the repository
-# Possibly checkout on correct branch
-dvc pull
-python train.py ~trainer.gpus
-```
+From inside the container, try to replicate a training run.
 
 ## Dockerfile \#2: an executable container
 
@@ -110,7 +103,7 @@ docker build . --rm --build-arg AWS_ACCESS_KEY_ID="minioadmin" --build-arg AWS_S
 Launch another container:
 
 ```bash
-docker run -d reprodl/train
+docker run reprodl/train
 ```
 
 > :speech_balloon: Change the access keys according to your installation.
