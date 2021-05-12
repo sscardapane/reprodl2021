@@ -97,7 +97,7 @@ dvc remote add -d minio s3://esc50/
 dvc remote modify minio endpointurl <minio-url>
 ```
 
-> :speech_balloon: Locally, `<minio-url>` will be *https://localhost:9000*.
+> :speech_balloon: Locally, `<minio-url>` will be *http://localhost:9000*.
 
 4. Push everything to the MinIO server:
 
