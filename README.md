@@ -102,7 +102,7 @@ dvc remote modify minio endpointurl <minio-url>
 4. Push everything to the MinIO server:
 
 ```bash
-export AWS_ACCESS_KEY=minioadmin
+export AWS_ACCESS_KEY_ID=minioadmin
 export AWS_SECRET_ACCESS_KEY=minioadmin
 dvc push
 ```
