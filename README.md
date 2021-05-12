@@ -52,6 +52,9 @@ The course is split into **exercises** (e.g., adding DVC support). The material 
 
 - [x] Experimenting with Git, branches, and scripting (*exercise1_git*).
 - [x] Adding Hydra configuration (*exercise2_hydra*).
+- [x] Versioning data with DVC (*exercise3_dvc*).
+- [x] Creating a Dockerfile (*exercise4_docker*).
+- [ ] Experiment management with Weight & Biases. 
 
 ### An example
 
