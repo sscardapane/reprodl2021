@@ -1,4 +1,4 @@
-data/ESC-50*
+data/ESC-50/*
 .vscode/*
 lightning_logs/*
 outputs/*
