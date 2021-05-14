@@ -46,7 +46,7 @@ wandb.init(project="reprodl")
 3. Change the default logger in PyTorch Lightning:
 
 ```python
-wandb_logger = pl.logger.WandbLogger()
+wandb_logger = pl.loggers.WandbLogger()
 trainer = pl.Trainer(..., logger=wandb_logger)
 ```
 
