@@ -1,0 +1,21 @@
+program: train.py
+method: bayes
+metric:
+  name: val_acc
+  goal: maximize
+parameters:
+  sample_rate:
+    values: [2000, 4000, 8000]
+  base_filters:
+    min: 16
+    max: 64
+  lr:
+    distribution: log_uniform
+    min: -4
+    max: -1
+
+# Essential for Hydra: no argument parsing
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
