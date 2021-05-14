@@ -18,6 +18,8 @@ from omegaconf import DictConfig, OmegaConf
 import logging
 logger = logging.getLogger(__name__)
 
+import wandb
+
 class ESC50Dataset(torch.utils.data.Dataset):
     # Simple class to load the desired folders inside ESC-50
     
@@ -112,8 +114,11 @@ class AudioNet(pl.LightningModule):
 
 @hydra.main(config_path='configs', config_name='default')
 def train(cfg: DictConfig):
-    # The decorator is enough to let Hydra load the configuration file.
     
+    # Initialize the W&B agent and the logger
+    wandb.init(project="reprodl")
+    wandb_logger = pl.loggers.WandbLogger()
+
     # Simple logging of the configuration
     logger.info(OmegaConf.to_yaml(cfg))
     
@@ -134,7 +139,7 @@ def train(cfg: DictConfig):
 
     # Initialize the network
     audionet = AudioNet(cfg.model)
-    trainer = pl.Trainer(**cfg.trainer)
+    trainer = pl.Trainer(**cfg.trainer, logger=wandb_logger)
     trainer.fit(audionet, train_loader, val_loader)
 
 if __name__ == "__main__":
