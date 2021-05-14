@@ -115,10 +115,19 @@ class AudioNet(pl.LightningModule):
 @hydra.main(config_path='configs', config_name='default')
 def train(cfg: DictConfig):
     
-    # Initialize the W&B agent and the logger
-    wandb.init(project="reprodl")
-    wandb_logger = pl.loggers.WandbLogger()
+    # Initialize the W&B agent using the default values from cfg
+    config = {
+        'sample_rate': cfg.data.sample_rate,
+        'lr': cfg.model.optimizer.lr,
+        'base_filters': cfg.model.base_filters
+    }
+    wandb.init(project="reprodl", config=config)
 
+    # Get the (possibly updated) values from wandb
+    cfg.data.sample_rate = wandb.config.sample_rate
+    cfg.model.optimizer.lr = wandb.config.lr
+    cfg.model.base_filters = wandb.config.base_filters
+    
     # Simple logging of the configuration
     logger.info(OmegaConf.to_yaml(cfg))
     
@@ -139,6 +148,7 @@ def train(cfg: DictConfig):
 
     # Initialize the network
     audionet = AudioNet(cfg.model)
+    wandb_logger = pl.loggers.WandbLogger()
     trainer = pl.Trainer(**cfg.trainer, logger=wandb_logger)
     trainer.fit(audionet, train_loader, val_loader)
 
