@@ -3,3 +3,4 @@ data/ESC-50/*
 lightning_logs/*
 outputs/*
 wandb/*
+__pycache__/*
