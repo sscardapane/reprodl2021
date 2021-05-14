@@ -54,7 +54,8 @@ The course is split into **exercises** (e.g., adding DVC support). The material 
 - [x] Adding Hydra configuration (*exercise2_hydra*).
 - [x] Versioning data with DVC (*exercise3_dvc*).
 - [x] Creating a Dockerfile (*exercise4_docker*).
-- [ ] Experiment management with Weight & Biases. 
+- [x] Experiment management with Weight & Biases (*exercise5_wandb*). 
+- [x] Unit testing and formatting with continuous integration (*exercise6_hooks*).
 
 ### An example
 
