@@ -1,0 +1,17 @@
+name: push-workflow
+on: [push]
+jobs:
+  build: # Build the environment
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2 # Checkout the repository
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install nose black wandb
+          sudo apt-get install -y libsndfile1-dev
+      - name: Run all unit tests 
+        run: nosetests
+      - name: Check with Black formatter
+        run: black --check --diff train.py test_audionet.py

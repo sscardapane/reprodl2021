@@ -8,7 +8,10 @@ def testAudioNet():
     with initialize(config_path="configs"):
 
         # Load the configuration
-        cfg = compose(config_name="default.yaml", overrides=["trainer.max_epochs=250"])
+        cfg = compose(
+            config_name="default.yaml",
+            overrides=["trainer.max_epochs=250", "trainer.gpus=0"],
+        )
 
         pl.seed_everything(cfg.seed)
 
