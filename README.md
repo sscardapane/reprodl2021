@@ -49,7 +49,7 @@ nosetests
 
 ### Step 2 - Add formatting
 
-[Black](https://github.com/psf/black) provides a powerful way to automatically format any code according to well-defined style guide.
+[Black](https://github.com/psf/black) provides a powerful way to automatically format any code according to well-defined style guides.
 
 First, check the adherence of your code to the Black style:
 
