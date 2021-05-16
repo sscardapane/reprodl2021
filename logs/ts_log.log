@@ -308,3 +308,312 @@ Enable metrics API: true
 2021-05-16 21:47:53,229 [WARN ] W-9007-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle -   return _VF.stft(input, n_fft, hop_length, win_length, window,  # type: ignore
 2021-05-16 21:47:53,258 [INFO ] W-9007-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Backend response time: 50
 2021-05-16 21:47:53,259 [DEBUG] W-9007-audionet_1.0 org.pytorch.serve.job.Job - Waiting time ns: 107186, Backend time ns: 51712767
+2021-05-16 21:49:50,806 [INFO ] epollEventLoopGroup-2-1 org.pytorch.serve.ModelServer - Inference model server stopped.
+2021-05-16 21:49:50,807 [INFO ] epollEventLoopGroup-2-2 org.pytorch.serve.ModelServer - Management model server stopped.
+2021-05-16 21:49:50,807 [INFO ] epollEventLoopGroup-2-1 org.pytorch.serve.ModelServer - Metrics model server stopped.
+2021-05-16 21:49:52,829 [INFO ] main org.pytorch.serve.ModelServer - Torchserve stopped.
+2021-05-16 21:49:52,859 [INFO ] Thread-0 org.pytorch.serve.ModelServer - Unregistering model audionet version 1.0
+2021-05-16 21:49:52,859 [DEBUG] Thread-0 org.pytorch.serve.wlm.ModelVersionedRefs - Removed model: audionet version: 1.0
+2021-05-16 21:49:52,860 [DEBUG] Thread-0 org.pytorch.serve.wlm.WorkerThread - W-9023-audionet_1.0 State change WORKER_MODEL_LOADED -> WORKER_SCALED_DOWN
+2021-05-16 21:49:52,860 [WARN ] Thread-0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9023-audionet_1.0-stderr
+2021-05-16 21:49:52,860 [WARN ] Thread-0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9023-audionet_1.0-stdout
+2021-05-16 21:49:52,860 [INFO ] epollEventLoopGroup-5-1 org.pytorch.serve.wlm.WorkerThread - 9023 Worker disconnected. WORKER_SCALED_DOWN
+2021-05-16 21:49:52,860 [INFO ] W-9023-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Frontend disconnected.
+2021-05-16 21:49:52,860 [INFO ] W-9023-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Stopped Scanner - W-9023-audionet_1.0-stdout
+2021-05-16 21:49:52,861 [DEBUG] W-9023-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - System state is : WORKER_SCALED_DOWN
+2021-05-16 21:49:52,861 [DEBUG] W-9023-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Shutting down the thread .. Scaling down.
+2021-05-16 21:49:52,861 [DEBUG] W-9023-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9023-audionet_1.0 State change WORKER_SCALED_DOWN -> WORKER_STOPPED
+2021-05-16 21:49:52,861 [WARN ] W-9023-audionet_1.0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9023-audionet_1.0-stderr
+2021-05-16 21:49:52,861 [WARN ] W-9023-audionet_1.0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9023-audionet_1.0-stdout
+2021-05-16 21:49:52,861 [DEBUG] W-9023-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Worker terminated due to scale-down call.
+2021-05-16 21:49:52,862 [DEBUG] Thread-0 org.pytorch.serve.wlm.WorkerThread - W-9022-audionet_1.0 State change WORKER_MODEL_LOADED -> WORKER_SCALED_DOWN
+2021-05-16 21:49:52,863 [WARN ] Thread-0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9022-audionet_1.0-stderr
+2021-05-16 21:49:52,863 [WARN ] Thread-0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9022-audionet_1.0-stdout
+2021-05-16 21:49:52,863 [INFO ] epollEventLoopGroup-5-6 org.pytorch.serve.wlm.WorkerThread - 9022 Worker disconnected. WORKER_SCALED_DOWN
+2021-05-16 21:49:52,863 [DEBUG] W-9022-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - System state is : WORKER_SCALED_DOWN
+2021-05-16 21:49:52,863 [DEBUG] W-9022-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Shutting down the thread .. Scaling down.
+2021-05-16 21:49:52,863 [DEBUG] W-9022-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9022-audionet_1.0 State change WORKER_SCALED_DOWN -> WORKER_STOPPED
+2021-05-16 21:49:52,863 [INFO ] W-9022-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Frontend disconnected.
+2021-05-16 21:49:52,863 [INFO ] W-9022-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Stopped Scanner - W-9022-audionet_1.0-stdout
+2021-05-16 21:49:52,863 [WARN ] W-9022-audionet_1.0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9022-audionet_1.0-stderr
+2021-05-16 21:49:52,863 [WARN ] W-9022-audionet_1.0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9022-audionet_1.0-stdout
+2021-05-16 21:49:52,863 [DEBUG] W-9022-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Worker terminated due to scale-down call.
+2021-05-16 21:49:52,865 [DEBUG] Thread-0 org.pytorch.serve.wlm.WorkerThread - W-9021-audionet_1.0 State change WORKER_MODEL_LOADED -> WORKER_SCALED_DOWN
+2021-05-16 21:49:52,865 [WARN ] Thread-0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9021-audionet_1.0-stderr
+2021-05-16 21:49:52,865 [WARN ] Thread-0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9021-audionet_1.0-stdout
+2021-05-16 21:49:52,865 [INFO ] epollEventLoopGroup-5-22 org.pytorch.serve.wlm.WorkerThread - 9021 Worker disconnected. WORKER_SCALED_DOWN
+2021-05-16 21:49:52,865 [DEBUG] W-9021-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - System state is : WORKER_SCALED_DOWN
+2021-05-16 21:49:52,865 [DEBUG] W-9021-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Shutting down the thread .. Scaling down.
+2021-05-16 21:49:52,865 [INFO ] W-9021-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Frontend disconnected.
+2021-05-16 21:49:52,865 [DEBUG] W-9021-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9021-audionet_1.0 State change WORKER_SCALED_DOWN -> WORKER_STOPPED
+2021-05-16 21:49:52,865 [INFO ] W-9021-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Stopped Scanner - W-9021-audionet_1.0-stdout
+2021-05-16 21:49:52,866 [WARN ] W-9021-audionet_1.0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9021-audionet_1.0-stderr
+2021-05-16 21:49:52,866 [WARN ] W-9021-audionet_1.0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9021-audionet_1.0-stdout
+2021-05-16 21:49:52,866 [DEBUG] W-9021-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Worker terminated due to scale-down call.
+2021-05-16 21:49:52,867 [DEBUG] Thread-0 org.pytorch.serve.wlm.WorkerThread - W-9020-audionet_1.0 State change WORKER_MODEL_LOADED -> WORKER_SCALED_DOWN
+2021-05-16 21:49:52,867 [INFO ] W-9023-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle - Stopped Scanner - W-9023-audionet_1.0-stderr
+2021-05-16 21:49:52,867 [WARN ] Thread-0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9020-audionet_1.0-stderr
+2021-05-16 21:49:52,867 [WARN ] Thread-0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9020-audionet_1.0-stdout
+2021-05-16 21:49:52,867 [INFO ] epollEventLoopGroup-5-19 org.pytorch.serve.wlm.WorkerThread - 9020 Worker disconnected. WORKER_SCALED_DOWN
+2021-05-16 21:49:52,867 [DEBUG] W-9020-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - System state is : WORKER_SCALED_DOWN
+2021-05-16 21:49:52,867 [INFO ] W-9020-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Frontend disconnected.
+2021-05-16 21:49:52,867 [DEBUG] W-9020-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Shutting down the thread .. Scaling down.
+2021-05-16 21:49:52,867 [INFO ] W-9020-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Stopped Scanner - W-9020-audionet_1.0-stdout
+2021-05-16 21:49:52,867 [DEBUG] W-9020-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9020-audionet_1.0 State change WORKER_SCALED_DOWN -> WORKER_STOPPED
+2021-05-16 21:49:52,868 [WARN ] W-9020-audionet_1.0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9020-audionet_1.0-stderr
+2021-05-16 21:49:52,868 [WARN ] W-9020-audionet_1.0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9020-audionet_1.0-stdout
+2021-05-16 21:49:52,868 [DEBUG] W-9020-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Worker terminated due to scale-down call.
+2021-05-16 21:49:52,869 [DEBUG] Thread-0 org.pytorch.serve.wlm.WorkerThread - W-9019-audionet_1.0 State change WORKER_MODEL_LOADED -> WORKER_SCALED_DOWN
+2021-05-16 21:49:52,869 [WARN ] Thread-0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9019-audionet_1.0-stderr
+2021-05-16 21:49:52,869 [WARN ] Thread-0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9019-audionet_1.0-stdout
+2021-05-16 21:49:52,869 [DEBUG] W-9019-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - System state is : WORKER_SCALED_DOWN
+2021-05-16 21:49:52,869 [DEBUG] W-9019-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Shutting down the thread .. Scaling down.
+2021-05-16 21:49:52,869 [INFO ] W-9019-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Frontend disconnected.
+2021-05-16 21:49:52,869 [DEBUG] W-9019-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9019-audionet_1.0 State change WORKER_SCALED_DOWN -> WORKER_STOPPED
+2021-05-16 21:49:52,869 [INFO ] epollEventLoopGroup-5-9 org.pytorch.serve.wlm.WorkerThread - 9019 Worker disconnected. WORKER_SCALED_DOWN
+2021-05-16 21:49:52,870 [INFO ] W-9019-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Stopped Scanner - W-9019-audionet_1.0-stdout
+2021-05-16 21:49:52,870 [WARN ] W-9019-audionet_1.0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9019-audionet_1.0-stderr
+2021-05-16 21:49:52,870 [WARN ] W-9019-audionet_1.0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9019-audionet_1.0-stdout
+2021-05-16 21:49:52,870 [DEBUG] W-9019-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Worker terminated due to scale-down call.
+2021-05-16 21:49:52,870 [INFO ] W-9022-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle - Stopped Scanner - W-9022-audionet_1.0-stderr
+2021-05-16 21:49:52,871 [DEBUG] Thread-0 org.pytorch.serve.wlm.WorkerThread - W-9018-audionet_1.0 State change WORKER_MODEL_LOADED -> WORKER_SCALED_DOWN
+2021-05-16 21:49:52,871 [WARN ] Thread-0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9018-audionet_1.0-stderr
+2021-05-16 21:49:52,871 [WARN ] Thread-0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9018-audionet_1.0-stdout
+2021-05-16 21:49:52,871 [DEBUG] W-9018-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - System state is : WORKER_SCALED_DOWN
+2021-05-16 21:49:52,871 [INFO ] epollEventLoopGroup-5-18 org.pytorch.serve.wlm.WorkerThread - 9018 Worker disconnected. WORKER_SCALED_DOWN
+2021-05-16 21:49:52,871 [DEBUG] W-9018-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Shutting down the thread .. Scaling down.
+2021-05-16 21:49:52,871 [INFO ] W-9018-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Frontend disconnected.
+2021-05-16 21:49:52,871 [DEBUG] W-9018-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9018-audionet_1.0 State change WORKER_SCALED_DOWN -> WORKER_STOPPED
+2021-05-16 21:49:52,871 [INFO ] W-9018-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Stopped Scanner - W-9018-audionet_1.0-stdout
+2021-05-16 21:49:52,871 [WARN ] W-9018-audionet_1.0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9018-audionet_1.0-stderr
+2021-05-16 21:49:52,871 [WARN ] W-9018-audionet_1.0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9018-audionet_1.0-stdout
+2021-05-16 21:49:52,871 [DEBUG] W-9018-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Worker terminated due to scale-down call.
+2021-05-16 21:49:52,873 [DEBUG] Thread-0 org.pytorch.serve.wlm.WorkerThread - W-9017-audionet_1.0 State change WORKER_MODEL_LOADED -> WORKER_SCALED_DOWN
+2021-05-16 21:49:52,873 [INFO ] W-9021-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle - Stopped Scanner - W-9021-audionet_1.0-stderr
+2021-05-16 21:49:52,873 [WARN ] Thread-0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9017-audionet_1.0-stderr
+2021-05-16 21:49:52,873 [WARN ] Thread-0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9017-audionet_1.0-stdout
+2021-05-16 21:49:52,873 [DEBUG] W-9017-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - System state is : WORKER_SCALED_DOWN
+2021-05-16 21:49:52,873 [INFO ] epollEventLoopGroup-5-20 org.pytorch.serve.wlm.WorkerThread - 9017 Worker disconnected. WORKER_SCALED_DOWN
+2021-05-16 21:49:52,873 [INFO ] W-9017-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Frontend disconnected.
+2021-05-16 21:49:52,873 [DEBUG] W-9017-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Shutting down the thread .. Scaling down.
+2021-05-16 21:49:52,873 [INFO ] W-9017-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Stopped Scanner - W-9017-audionet_1.0-stdout
+2021-05-16 21:49:52,873 [DEBUG] W-9017-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9017-audionet_1.0 State change WORKER_SCALED_DOWN -> WORKER_STOPPED
+2021-05-16 21:49:52,874 [WARN ] W-9017-audionet_1.0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9017-audionet_1.0-stderr
+2021-05-16 21:49:52,874 [WARN ] W-9017-audionet_1.0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9017-audionet_1.0-stdout
+2021-05-16 21:49:52,874 [DEBUG] W-9017-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Worker terminated due to scale-down call.
+2021-05-16 21:49:52,874 [INFO ] W-9020-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle - Stopped Scanner - W-9020-audionet_1.0-stderr
+2021-05-16 21:49:52,875 [DEBUG] Thread-0 org.pytorch.serve.wlm.WorkerThread - W-9016-audionet_1.0 State change WORKER_MODEL_LOADED -> WORKER_SCALED_DOWN
+2021-05-16 21:49:52,875 [WARN ] Thread-0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9016-audionet_1.0-stderr
+2021-05-16 21:49:52,875 [WARN ] Thread-0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9016-audionet_1.0-stdout
+2021-05-16 21:49:52,875 [DEBUG] W-9016-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - System state is : WORKER_SCALED_DOWN
+2021-05-16 21:49:52,875 [INFO ] epollEventLoopGroup-5-23 org.pytorch.serve.wlm.WorkerThread - 9016 Worker disconnected. WORKER_SCALED_DOWN
+2021-05-16 21:49:52,875 [DEBUG] W-9016-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Shutting down the thread .. Scaling down.
+2021-05-16 21:49:52,875 [INFO ] W-9016-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Frontend disconnected.
+2021-05-16 21:49:52,875 [DEBUG] W-9016-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9016-audionet_1.0 State change WORKER_SCALED_DOWN -> WORKER_STOPPED
+2021-05-16 21:49:52,875 [INFO ] W-9016-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Stopped Scanner - W-9016-audionet_1.0-stdout
+2021-05-16 21:49:52,875 [WARN ] W-9016-audionet_1.0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9016-audionet_1.0-stderr
+2021-05-16 21:49:52,875 [WARN ] W-9016-audionet_1.0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9016-audionet_1.0-stdout
+2021-05-16 21:49:52,875 [DEBUG] W-9016-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Worker terminated due to scale-down call.
+2021-05-16 21:49:52,877 [DEBUG] Thread-0 org.pytorch.serve.wlm.WorkerThread - W-9015-audionet_1.0 State change WORKER_MODEL_LOADED -> WORKER_SCALED_DOWN
+2021-05-16 21:49:52,877 [WARN ] Thread-0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9015-audionet_1.0-stderr
+2021-05-16 21:49:52,877 [WARN ] Thread-0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9015-audionet_1.0-stdout
+2021-05-16 21:49:52,877 [INFO ] epollEventLoopGroup-5-13 org.pytorch.serve.wlm.WorkerThread - 9015 Worker disconnected. WORKER_SCALED_DOWN
+2021-05-16 21:49:52,877 [DEBUG] W-9015-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - System state is : WORKER_SCALED_DOWN
+2021-05-16 21:49:52,877 [DEBUG] W-9015-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Shutting down the thread .. Scaling down.
+2021-05-16 21:49:52,878 [DEBUG] W-9015-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9015-audionet_1.0 State change WORKER_SCALED_DOWN -> WORKER_STOPPED
+2021-05-16 21:49:52,878 [INFO ] W-9015-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Frontend disconnected.
+2021-05-16 21:49:52,878 [INFO ] W-9015-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Stopped Scanner - W-9015-audionet_1.0-stdout
+2021-05-16 21:49:52,878 [WARN ] W-9015-audionet_1.0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9015-audionet_1.0-stderr
+2021-05-16 21:49:52,878 [WARN ] W-9015-audionet_1.0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9015-audionet_1.0-stdout
+2021-05-16 21:49:52,878 [DEBUG] W-9015-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Worker terminated due to scale-down call.
+2021-05-16 21:49:52,878 [INFO ] W-9019-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle - Stopped Scanner - W-9019-audionet_1.0-stderr
+2021-05-16 21:49:52,879 [DEBUG] Thread-0 org.pytorch.serve.wlm.WorkerThread - W-9014-audionet_1.0 State change WORKER_MODEL_LOADED -> WORKER_SCALED_DOWN
+2021-05-16 21:49:52,879 [WARN ] Thread-0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9014-audionet_1.0-stderr
+2021-05-16 21:49:52,879 [WARN ] Thread-0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9014-audionet_1.0-stdout
+2021-05-16 21:49:52,879 [DEBUG] W-9014-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - System state is : WORKER_SCALED_DOWN
+2021-05-16 21:49:52,879 [INFO ] epollEventLoopGroup-5-5 org.pytorch.serve.wlm.WorkerThread - 9014 Worker disconnected. WORKER_SCALED_DOWN
+2021-05-16 21:49:52,879 [DEBUG] W-9014-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Shutting down the thread .. Scaling down.
+2021-05-16 21:49:52,879 [INFO ] W-9014-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Frontend disconnected.
+2021-05-16 21:49:52,879 [INFO ] W-9014-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Stopped Scanner - W-9014-audionet_1.0-stdout
+2021-05-16 21:49:52,879 [DEBUG] W-9014-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9014-audionet_1.0 State change WORKER_SCALED_DOWN -> WORKER_STOPPED
+2021-05-16 21:49:52,880 [WARN ] W-9014-audionet_1.0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9014-audionet_1.0-stderr
+2021-05-16 21:49:52,880 [WARN ] W-9014-audionet_1.0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9014-audionet_1.0-stdout
+2021-05-16 21:49:52,880 [DEBUG] W-9014-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Worker terminated due to scale-down call.
+2021-05-16 21:49:52,881 [DEBUG] Thread-0 org.pytorch.serve.wlm.WorkerThread - W-9013-audionet_1.0 State change WORKER_MODEL_LOADED -> WORKER_SCALED_DOWN
+2021-05-16 21:49:52,881 [WARN ] Thread-0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9013-audionet_1.0-stderr
+2021-05-16 21:49:52,881 [WARN ] Thread-0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9013-audionet_1.0-stdout
+2021-05-16 21:49:52,881 [INFO ] epollEventLoopGroup-5-15 org.pytorch.serve.wlm.WorkerThread - 9013 Worker disconnected. WORKER_SCALED_DOWN
+2021-05-16 21:49:52,881 [DEBUG] W-9013-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - System state is : WORKER_SCALED_DOWN
+2021-05-16 21:49:52,881 [DEBUG] W-9013-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Shutting down the thread .. Scaling down.
+2021-05-16 21:49:52,881 [INFO ] W-9013-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Frontend disconnected.
+2021-05-16 21:49:52,881 [DEBUG] W-9013-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9013-audionet_1.0 State change WORKER_SCALED_DOWN -> WORKER_STOPPED
+2021-05-16 21:49:52,881 [INFO ] W-9013-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Stopped Scanner - W-9013-audionet_1.0-stdout
+2021-05-16 21:49:52,881 [WARN ] W-9013-audionet_1.0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9013-audionet_1.0-stderr
+2021-05-16 21:49:52,881 [WARN ] W-9013-audionet_1.0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9013-audionet_1.0-stdout
+2021-05-16 21:49:52,881 [DEBUG] W-9013-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Worker terminated due to scale-down call.
+2021-05-16 21:49:52,882 [INFO ] W-9017-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle - Stopped Scanner - W-9017-audionet_1.0-stderr
+2021-05-16 21:49:52,883 [DEBUG] Thread-0 org.pytorch.serve.wlm.WorkerThread - W-9012-audionet_1.0 State change WORKER_MODEL_LOADED -> WORKER_SCALED_DOWN
+2021-05-16 21:49:52,883 [INFO ] W-9018-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle - Stopped Scanner - W-9018-audionet_1.0-stderr
+2021-05-16 21:49:52,884 [WARN ] Thread-0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9012-audionet_1.0-stderr
+2021-05-16 21:49:52,884 [WARN ] Thread-0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9012-audionet_1.0-stdout
+2021-05-16 21:49:52,884 [INFO ] epollEventLoopGroup-5-11 org.pytorch.serve.wlm.WorkerThread - 9012 Worker disconnected. WORKER_SCALED_DOWN
+2021-05-16 21:49:52,884 [DEBUG] W-9012-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - System state is : WORKER_SCALED_DOWN
+2021-05-16 21:49:52,884 [DEBUG] W-9012-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Shutting down the thread .. Scaling down.
+2021-05-16 21:49:52,884 [DEBUG] W-9012-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9012-audionet_1.0 State change WORKER_SCALED_DOWN -> WORKER_STOPPED
+2021-05-16 21:49:52,884 [INFO ] W-9012-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Frontend disconnected.
+2021-05-16 21:49:52,884 [INFO ] W-9012-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Stopped Scanner - W-9012-audionet_1.0-stdout
+2021-05-16 21:49:52,884 [WARN ] W-9012-audionet_1.0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9012-audionet_1.0-stderr
+2021-05-16 21:49:52,884 [WARN ] W-9012-audionet_1.0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9012-audionet_1.0-stdout
+2021-05-16 21:49:52,884 [DEBUG] W-9012-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Worker terminated due to scale-down call.
+2021-05-16 21:49:52,885 [INFO ] W-9016-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle - Stopped Scanner - W-9016-audionet_1.0-stderr
+2021-05-16 21:49:52,886 [DEBUG] Thread-0 org.pytorch.serve.wlm.WorkerThread - W-9011-audionet_1.0 State change WORKER_MODEL_LOADED -> WORKER_SCALED_DOWN
+2021-05-16 21:49:52,886 [WARN ] Thread-0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9011-audionet_1.0-stderr
+2021-05-16 21:49:52,886 [WARN ] Thread-0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9011-audionet_1.0-stdout
+2021-05-16 21:49:52,886 [DEBUG] W-9011-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - System state is : WORKER_SCALED_DOWN
+2021-05-16 21:49:52,886 [INFO ] epollEventLoopGroup-5-2 org.pytorch.serve.wlm.WorkerThread - 9011 Worker disconnected. WORKER_SCALED_DOWN
+2021-05-16 21:49:52,886 [DEBUG] W-9011-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Shutting down the thread .. Scaling down.
+2021-05-16 21:49:52,886 [DEBUG] W-9011-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9011-audionet_1.0 State change WORKER_SCALED_DOWN -> WORKER_STOPPED
+2021-05-16 21:49:52,886 [INFO ] W-9011-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Frontend disconnected.
+2021-05-16 21:49:52,886 [INFO ] W-9011-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Stopped Scanner - W-9011-audionet_1.0-stdout
+2021-05-16 21:49:52,886 [WARN ] W-9011-audionet_1.0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9011-audionet_1.0-stderr
+2021-05-16 21:49:52,886 [WARN ] W-9011-audionet_1.0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9011-audionet_1.0-stdout
+2021-05-16 21:49:52,886 [DEBUG] W-9011-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Worker terminated due to scale-down call.
+2021-05-16 21:49:52,887 [INFO ] W-9015-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle - Stopped Scanner - W-9015-audionet_1.0-stderr
+2021-05-16 21:49:52,888 [DEBUG] Thread-0 org.pytorch.serve.wlm.WorkerThread - W-9010-audionet_1.0 State change WORKER_MODEL_LOADED -> WORKER_SCALED_DOWN
+2021-05-16 21:49:52,888 [WARN ] Thread-0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9010-audionet_1.0-stderr
+2021-05-16 21:49:52,888 [WARN ] Thread-0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9010-audionet_1.0-stdout
+2021-05-16 21:49:52,888 [DEBUG] W-9010-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - System state is : WORKER_SCALED_DOWN
+2021-05-16 21:49:52,888 [DEBUG] W-9010-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Shutting down the thread .. Scaling down.
+2021-05-16 21:49:52,888 [INFO ] epollEventLoopGroup-5-3 org.pytorch.serve.wlm.WorkerThread - 9010 Worker disconnected. WORKER_SCALED_DOWN
+2021-05-16 21:49:52,888 [DEBUG] W-9010-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9010-audionet_1.0 State change WORKER_SCALED_DOWN -> WORKER_STOPPED
+2021-05-16 21:49:52,888 [INFO ] W-9010-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Frontend disconnected.
+2021-05-16 21:49:52,888 [WARN ] W-9010-audionet_1.0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9010-audionet_1.0-stderr
+2021-05-16 21:49:52,888 [INFO ] W-9010-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Stopped Scanner - W-9010-audionet_1.0-stdout
+2021-05-16 21:49:52,888 [WARN ] W-9010-audionet_1.0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9010-audionet_1.0-stdout
+2021-05-16 21:49:52,888 [DEBUG] W-9010-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Worker terminated due to scale-down call.
+2021-05-16 21:49:52,888 [INFO ] W-9014-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle - Stopped Scanner - W-9014-audionet_1.0-stderr
+2021-05-16 21:49:52,889 [DEBUG] Thread-0 org.pytorch.serve.wlm.WorkerThread - W-9009-audionet_1.0 State change WORKER_MODEL_LOADED -> WORKER_SCALED_DOWN
+2021-05-16 21:49:52,889 [INFO ] W-9013-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle - Stopped Scanner - W-9013-audionet_1.0-stderr
+2021-05-16 21:49:52,889 [WARN ] Thread-0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9009-audionet_1.0-stderr
+2021-05-16 21:49:52,889 [WARN ] Thread-0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9009-audionet_1.0-stdout
+2021-05-16 21:49:52,889 [DEBUG] W-9009-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - System state is : WORKER_SCALED_DOWN
+2021-05-16 21:49:52,889 [INFO ] epollEventLoopGroup-5-12 org.pytorch.serve.wlm.WorkerThread - 9009 Worker disconnected. WORKER_SCALED_DOWN
+2021-05-16 21:49:52,889 [DEBUG] W-9009-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Shutting down the thread .. Scaling down.
+2021-05-16 21:49:52,890 [DEBUG] W-9009-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9009-audionet_1.0 State change WORKER_SCALED_DOWN -> WORKER_STOPPED
+2021-05-16 21:49:52,890 [INFO ] W-9009-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Frontend disconnected.
+2021-05-16 21:49:52,890 [INFO ] W-9009-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Stopped Scanner - W-9009-audionet_1.0-stdout
+2021-05-16 21:49:52,890 [WARN ] W-9009-audionet_1.0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9009-audionet_1.0-stderr
+2021-05-16 21:49:52,890 [WARN ] W-9009-audionet_1.0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9009-audionet_1.0-stdout
+2021-05-16 21:49:52,890 [DEBUG] W-9009-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Worker terminated due to scale-down call.
+2021-05-16 21:49:52,891 [DEBUG] Thread-0 org.pytorch.serve.wlm.WorkerThread - W-9008-audionet_1.0 State change WORKER_MODEL_LOADED -> WORKER_SCALED_DOWN
+2021-05-16 21:49:52,891 [WARN ] Thread-0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9008-audionet_1.0-stderr
+2021-05-16 21:49:52,891 [WARN ] Thread-0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9008-audionet_1.0-stdout
+2021-05-16 21:49:52,891 [INFO ] epollEventLoopGroup-5-17 org.pytorch.serve.wlm.WorkerThread - 9008 Worker disconnected. WORKER_SCALED_DOWN
+2021-05-16 21:49:52,891 [DEBUG] W-9008-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - System state is : WORKER_SCALED_DOWN
+2021-05-16 21:49:52,891 [DEBUG] W-9008-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Shutting down the thread .. Scaling down.
+2021-05-16 21:49:52,891 [DEBUG] W-9008-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9008-audionet_1.0 State change WORKER_SCALED_DOWN -> WORKER_STOPPED
+2021-05-16 21:49:52,891 [INFO ] W-9008-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Frontend disconnected.
+2021-05-16 21:49:52,891 [INFO ] W-9008-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Stopped Scanner - W-9008-audionet_1.0-stdout
+2021-05-16 21:49:52,891 [WARN ] W-9008-audionet_1.0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9008-audionet_1.0-stderr
+2021-05-16 21:49:52,891 [WARN ] W-9008-audionet_1.0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9008-audionet_1.0-stdout
+2021-05-16 21:49:52,891 [DEBUG] W-9008-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Worker terminated due to scale-down call.
+2021-05-16 21:49:52,892 [DEBUG] Thread-0 org.pytorch.serve.wlm.WorkerThread - W-9007-audionet_1.0 State change WORKER_MODEL_LOADED -> WORKER_SCALED_DOWN
+2021-05-16 21:49:52,892 [WARN ] Thread-0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9007-audionet_1.0-stderr
+2021-05-16 21:49:52,892 [WARN ] Thread-0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9007-audionet_1.0-stdout
+2021-05-16 21:49:52,893 [INFO ] epollEventLoopGroup-5-24 org.pytorch.serve.wlm.WorkerThread - 9007 Worker disconnected. WORKER_SCALED_DOWN
+2021-05-16 21:49:52,893 [DEBUG] W-9007-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - System state is : WORKER_SCALED_DOWN
+2021-05-16 21:49:52,893 [INFO ] W-9007-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Frontend disconnected.
+2021-05-16 21:49:52,893 [INFO ] W-9012-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle - Stopped Scanner - W-9012-audionet_1.0-stderr
+2021-05-16 21:49:52,893 [DEBUG] W-9007-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Shutting down the thread .. Scaling down.
+2021-05-16 21:49:52,893 [INFO ] W-9007-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Stopped Scanner - W-9007-audionet_1.0-stdout
+2021-05-16 21:49:52,893 [DEBUG] W-9007-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9007-audionet_1.0 State change WORKER_SCALED_DOWN -> WORKER_STOPPED
+2021-05-16 21:49:52,894 [WARN ] W-9007-audionet_1.0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9007-audionet_1.0-stderr
+2021-05-16 21:49:52,894 [WARN ] W-9007-audionet_1.0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9007-audionet_1.0-stdout
+2021-05-16 21:49:52,894 [DEBUG] W-9007-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Worker terminated due to scale-down call.
+2021-05-16 21:49:52,895 [DEBUG] Thread-0 org.pytorch.serve.wlm.WorkerThread - W-9006-audionet_1.0 State change WORKER_MODEL_LOADED -> WORKER_SCALED_DOWN
+2021-05-16 21:49:52,895 [WARN ] Thread-0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9006-audionet_1.0-stderr
+2021-05-16 21:49:52,895 [INFO ] W-9011-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle - Stopped Scanner - W-9011-audionet_1.0-stderr
+2021-05-16 21:49:52,895 [WARN ] Thread-0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9006-audionet_1.0-stdout
+2021-05-16 21:49:52,895 [INFO ] epollEventLoopGroup-5-21 org.pytorch.serve.wlm.WorkerThread - 9006 Worker disconnected. WORKER_SCALED_DOWN
+2021-05-16 21:49:52,895 [DEBUG] W-9006-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - System state is : WORKER_SCALED_DOWN
+2021-05-16 21:49:52,895 [DEBUG] W-9006-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Shutting down the thread .. Scaling down.
+2021-05-16 21:49:52,895 [DEBUG] W-9006-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9006-audionet_1.0 State change WORKER_SCALED_DOWN -> WORKER_STOPPED
+2021-05-16 21:49:52,895 [INFO ] W-9006-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Frontend disconnected.
+2021-05-16 21:49:52,895 [INFO ] W-9006-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Stopped Scanner - W-9006-audionet_1.0-stdout
+2021-05-16 21:49:52,895 [WARN ] W-9006-audionet_1.0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9006-audionet_1.0-stderr
+2021-05-16 21:49:52,895 [WARN ] W-9006-audionet_1.0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9006-audionet_1.0-stdout
+2021-05-16 21:49:52,895 [DEBUG] W-9006-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Worker terminated due to scale-down call.
+2021-05-16 21:49:52,897 [DEBUG] Thread-0 org.pytorch.serve.wlm.WorkerThread - W-9005-audionet_1.0 State change WORKER_MODEL_LOADED -> WORKER_SCALED_DOWN
+2021-05-16 21:49:52,897 [WARN ] Thread-0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9005-audionet_1.0-stderr
+2021-05-16 21:49:52,897 [WARN ] Thread-0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9005-audionet_1.0-stdout
+2021-05-16 21:49:52,897 [INFO ] epollEventLoopGroup-5-7 org.pytorch.serve.wlm.WorkerThread - 9005 Worker disconnected. WORKER_SCALED_DOWN
+2021-05-16 21:49:52,897 [DEBUG] W-9005-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - System state is : WORKER_SCALED_DOWN
+2021-05-16 21:49:52,897 [DEBUG] W-9005-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Shutting down the thread .. Scaling down.
+2021-05-16 21:49:52,897 [DEBUG] W-9005-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9005-audionet_1.0 State change WORKER_SCALED_DOWN -> WORKER_STOPPED
+2021-05-16 21:49:52,897 [WARN ] W-9005-audionet_1.0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9005-audionet_1.0-stderr
+2021-05-16 21:49:52,897 [WARN ] W-9005-audionet_1.0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9005-audionet_1.0-stdout
+2021-05-16 21:49:52,897 [DEBUG] W-9005-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Worker terminated due to scale-down call.
+2021-05-16 21:49:52,897 [INFO ] W-9010-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle - Stopped Scanner - W-9010-audionet_1.0-stderr
+2021-05-16 21:49:52,898 [DEBUG] Thread-0 org.pytorch.serve.wlm.WorkerThread - W-9004-audionet_1.0 State change WORKER_MODEL_LOADED -> WORKER_SCALED_DOWN
+2021-05-16 21:49:52,898 [WARN ] Thread-0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9004-audionet_1.0-stderr
+2021-05-16 21:49:52,898 [WARN ] Thread-0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9004-audionet_1.0-stdout
+2021-05-16 21:49:52,898 [INFO ] epollEventLoopGroup-5-14 org.pytorch.serve.wlm.WorkerThread - 9004 Worker disconnected. WORKER_SCALED_DOWN
+2021-05-16 21:49:52,898 [DEBUG] W-9004-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - System state is : WORKER_SCALED_DOWN
+2021-05-16 21:49:52,898 [DEBUG] W-9004-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Shutting down the thread .. Scaling down.
+2021-05-16 21:49:52,898 [DEBUG] W-9004-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9004-audionet_1.0 State change WORKER_SCALED_DOWN -> WORKER_STOPPED
+2021-05-16 21:49:52,898 [WARN ] W-9004-audionet_1.0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9004-audionet_1.0-stderr
+2021-05-16 21:49:52,899 [WARN ] W-9004-audionet_1.0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9004-audionet_1.0-stdout
+2021-05-16 21:49:52,899 [DEBUG] W-9004-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Worker terminated due to scale-down call.
+2021-05-16 21:49:52,900 [INFO ] W-9009-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle - Stopped Scanner - W-9009-audionet_1.0-stderr
+2021-05-16 21:49:52,900 [DEBUG] Thread-0 org.pytorch.serve.wlm.WorkerThread - W-9003-audionet_1.0 State change WORKER_MODEL_LOADED -> WORKER_SCALED_DOWN
+2021-05-16 21:49:52,900 [WARN ] Thread-0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9003-audionet_1.0-stderr
+2021-05-16 21:49:52,900 [WARN ] Thread-0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9003-audionet_1.0-stdout
+2021-05-16 21:49:52,900 [INFO ] epollEventLoopGroup-5-4 org.pytorch.serve.wlm.WorkerThread - 9003 Worker disconnected. WORKER_SCALED_DOWN
+2021-05-16 21:49:52,900 [DEBUG] W-9003-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - System state is : WORKER_SCALED_DOWN
+2021-05-16 21:49:52,900 [DEBUG] W-9003-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Shutting down the thread .. Scaling down.
+2021-05-16 21:49:52,900 [DEBUG] W-9003-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9003-audionet_1.0 State change WORKER_SCALED_DOWN -> WORKER_STOPPED
+2021-05-16 21:49:52,900 [INFO ] W-9003-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Frontend disconnected.
+2021-05-16 21:49:52,900 [INFO ] W-9003-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Stopped Scanner - W-9003-audionet_1.0-stdout
+2021-05-16 21:49:52,900 [WARN ] W-9003-audionet_1.0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9003-audionet_1.0-stderr
+2021-05-16 21:49:52,900 [WARN ] W-9003-audionet_1.0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9003-audionet_1.0-stdout
+2021-05-16 21:49:52,900 [DEBUG] W-9003-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Worker terminated due to scale-down call.
+2021-05-16 21:49:52,901 [INFO ] W-9008-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle - Stopped Scanner - W-9008-audionet_1.0-stderr
+2021-05-16 21:49:52,901 [DEBUG] Thread-0 org.pytorch.serve.wlm.WorkerThread - W-9002-audionet_1.0 State change WORKER_MODEL_LOADED -> WORKER_SCALED_DOWN
+2021-05-16 21:49:52,902 [WARN ] Thread-0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9002-audionet_1.0-stderr
+2021-05-16 21:49:52,902 [WARN ] Thread-0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9002-audionet_1.0-stdout
+2021-05-16 21:49:52,902 [INFO ] epollEventLoopGroup-5-8 org.pytorch.serve.wlm.WorkerThread - 9002 Worker disconnected. WORKER_SCALED_DOWN
+2021-05-16 21:49:52,902 [DEBUG] W-9002-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - System state is : WORKER_SCALED_DOWN
+2021-05-16 21:49:52,902 [DEBUG] W-9002-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Shutting down the thread .. Scaling down.
+2021-05-16 21:49:52,902 [INFO ] W-9002-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Frontend disconnected.
+2021-05-16 21:49:52,902 [DEBUG] W-9002-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9002-audionet_1.0 State change WORKER_SCALED_DOWN -> WORKER_STOPPED
+2021-05-16 21:49:52,902 [INFO ] W-9002-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Stopped Scanner - W-9002-audionet_1.0-stdout
+2021-05-16 21:49:52,902 [WARN ] W-9002-audionet_1.0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9002-audionet_1.0-stderr
+2021-05-16 21:49:52,902 [WARN ] W-9002-audionet_1.0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9002-audionet_1.0-stdout
+2021-05-16 21:49:52,902 [DEBUG] W-9002-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Worker terminated due to scale-down call.
+2021-05-16 21:49:52,903 [DEBUG] Thread-0 org.pytorch.serve.wlm.WorkerThread - W-9001-audionet_1.0 State change WORKER_MODEL_LOADED -> WORKER_SCALED_DOWN
+2021-05-16 21:49:52,903 [WARN ] Thread-0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9001-audionet_1.0-stderr
+2021-05-16 21:49:52,903 [WARN ] Thread-0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9001-audionet_1.0-stdout
+2021-05-16 21:49:52,903 [INFO ] epollEventLoopGroup-5-16 org.pytorch.serve.wlm.WorkerThread - 9001 Worker disconnected. WORKER_SCALED_DOWN
+2021-05-16 21:49:52,903 [DEBUG] W-9001-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - System state is : WORKER_SCALED_DOWN
+2021-05-16 21:49:52,903 [DEBUG] W-9001-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Shutting down the thread .. Scaling down.
+2021-05-16 21:49:52,903 [DEBUG] W-9001-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9001-audionet_1.0 State change WORKER_SCALED_DOWN -> WORKER_STOPPED
+2021-05-16 21:49:52,903 [WARN ] W-9001-audionet_1.0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9001-audionet_1.0-stderr
+2021-05-16 21:49:52,903 [WARN ] W-9001-audionet_1.0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9001-audionet_1.0-stdout
+2021-05-16 21:49:52,903 [DEBUG] W-9001-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Worker terminated due to scale-down call.
+2021-05-16 21:49:52,905 [INFO ] W-9006-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle - Stopped Scanner - W-9006-audionet_1.0-stderr
+2021-05-16 21:49:52,905 [DEBUG] Thread-0 org.pytorch.serve.wlm.WorkerThread - W-9000-audionet_1.0 State change WORKER_MODEL_LOADED -> WORKER_SCALED_DOWN
+2021-05-16 21:49:52,905 [WARN ] Thread-0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9000-audionet_1.0-stderr
+2021-05-16 21:49:52,905 [WARN ] Thread-0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9000-audionet_1.0-stdout
+2021-05-16 21:49:52,905 [INFO ] W-9005-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Stopped Scanner - W-9005-audionet_1.0-stdout
+2021-05-16 21:49:52,906 [DEBUG] W-9000-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - System state is : WORKER_SCALED_DOWN
+2021-05-16 21:49:52,906 [INFO ] epollEventLoopGroup-5-10 org.pytorch.serve.wlm.WorkerThread - 9000 Worker disconnected. WORKER_SCALED_DOWN
+2021-05-16 21:49:52,906 [INFO ] W-9005-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle - Stopped Scanner - W-9005-audionet_1.0-stderr
+2021-05-16 21:49:52,906 [DEBUG] W-9000-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Shutting down the thread .. Scaling down.
+2021-05-16 21:49:52,906 [INFO ] W-9000-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Frontend disconnected.
+2021-05-16 21:49:52,906 [DEBUG] W-9000-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9000-audionet_1.0 State change WORKER_SCALED_DOWN -> WORKER_STOPPED
+2021-05-16 21:49:52,906 [INFO ] W-9000-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Stopped Scanner - W-9000-audionet_1.0-stdout
+2021-05-16 21:49:52,906 [WARN ] W-9000-audionet_1.0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9000-audionet_1.0-stderr
+2021-05-16 21:49:52,906 [WARN ] W-9000-audionet_1.0 org.pytorch.serve.wlm.WorkerLifeCycle - terminateIOStreams() threadName=W-9000-audionet_1.0-stdout
+2021-05-16 21:49:52,906 [DEBUG] W-9000-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Worker terminated due to scale-down call.
+2021-05-16 21:49:52,906 [INFO ] W-9007-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle - Stopped Scanner - W-9007-audionet_1.0-stderr
+2021-05-16 21:49:52,907 [INFO ] Thread-0 org.pytorch.serve.wlm.ModelManager - Model audionet unregistered.

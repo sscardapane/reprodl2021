@@ -4,3 +4,4 @@ lightning_logs/*
 Initial Notebook.ipynb
 custom_dir/*
 outputs/*
+logs/*
