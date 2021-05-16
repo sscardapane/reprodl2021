@@ -1,0 +1,310 @@
+2021-05-16 21:47:36,231 [INFO ] main org.pytorch.serve.ModelServer - 
+Torchserve version: 0.3.1
+TS Home: /home/luca/anaconda3/envs/reprodl/lib/python3.9/site-packages
+Current directory: /home/luca/Scrivania/reprodl_serve/reprodl2021
+Temp directory: /tmp
+Number of GPUs: 0
+Number of CPUs: 24
+Max heap size: 8020 M
+Python executable: /home/luca/anaconda3/envs/reprodl/bin/python3.9
+Config file: N/A
+Inference address: http://127.0.0.1:8080
+Management address: http://127.0.0.1:8081
+Metrics address: http://127.0.0.1:8082
+Model Store: /home/luca/Scrivania/reprodl_serve/reprodl2021/serve/model_store
+Initial Models: audionet=AUDIONET.mar
+Log dir: /home/luca/Scrivania/reprodl_serve/reprodl2021/logs
+Metrics dir: /home/luca/Scrivania/reprodl_serve/reprodl2021/logs
+Netty threads: 0
+Netty client threads: 0
+Default workers per model: 24
+Blacklist Regex: N/A
+Maximum Response Size: 6553500
+Maximum Request Size: 6553500
+Prefer direct buffer: false
+Allowed Urls: [file://.*|http(s)?://.*]
+Custom python dependency for model allowed: false
+Metrics report format: prometheus
+Enable metrics API: true
+2021-05-16 21:47:36,247 [INFO ] main org.pytorch.serve.ModelServer - Loading initial models: AUDIONET.mar
+2021-05-16 21:47:36,263 [INFO ] main org.pytorch.serve.archive.ModelArchive - eTag d8ac6719e8514e299777a4e2f133f8ad
+2021-05-16 21:47:36,267 [DEBUG] main org.pytorch.serve.wlm.ModelVersionedRefs - Adding new version 1.0 for model audionet
+2021-05-16 21:47:36,267 [DEBUG] main org.pytorch.serve.wlm.ModelVersionedRefs - Setting default version to 1.0 for model audionet
+2021-05-16 21:47:36,267 [INFO ] main org.pytorch.serve.wlm.ModelManager - Model audionet loaded.
+2021-05-16 21:47:36,267 [DEBUG] main org.pytorch.serve.wlm.ModelManager - updateModel: audionet, count: 24
+2021-05-16 21:47:36,280 [INFO ] main org.pytorch.serve.ModelServer - Initialize Inference server with: EpollServerSocketChannel.
+2021-05-16 21:47:36,381 [INFO ] W-9019-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Listening on port: /tmp/.ts.sock.9019
+2021-05-16 21:47:36,384 [INFO ] W-9012-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Listening on port: /tmp/.ts.sock.9012
+2021-05-16 21:47:36,381 [INFO ] W-9000-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Listening on port: /tmp/.ts.sock.9000
+2021-05-16 21:47:36,382 [INFO ] W-9010-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Listening on port: /tmp/.ts.sock.9010
+2021-05-16 21:47:36,382 [INFO ] W-9022-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Listening on port: /tmp/.ts.sock.9022
+2021-05-16 21:47:36,382 [INFO ] W-9002-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Listening on port: /tmp/.ts.sock.9002
+2021-05-16 21:47:36,382 [INFO ] W-9020-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Listening on port: /tmp/.ts.sock.9020
+2021-05-16 21:47:36,381 [INFO ] W-9015-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Listening on port: /tmp/.ts.sock.9015
+2021-05-16 21:47:36,381 [INFO ] W-9005-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Listening on port: /tmp/.ts.sock.9005
+2021-05-16 21:47:36,381 [INFO ] W-9001-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Listening on port: /tmp/.ts.sock.9001
+2021-05-16 21:47:36,381 [INFO ] W-9018-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Listening on port: /tmp/.ts.sock.9018
+2021-05-16 21:47:36,384 [INFO ] W-9021-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Listening on port: /tmp/.ts.sock.9021
+2021-05-16 21:47:36,382 [INFO ] W-9004-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Listening on port: /tmp/.ts.sock.9004
+2021-05-16 21:47:36,382 [INFO ] W-9016-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Listening on port: /tmp/.ts.sock.9016
+2021-05-16 21:47:36,382 [INFO ] W-9007-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Listening on port: /tmp/.ts.sock.9007
+2021-05-16 21:47:36,382 [INFO ] W-9011-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Listening on port: /tmp/.ts.sock.9011
+2021-05-16 21:47:36,381 [INFO ] W-9008-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Listening on port: /tmp/.ts.sock.9008
+2021-05-16 21:47:36,381 [INFO ] W-9003-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Listening on port: /tmp/.ts.sock.9003
+2021-05-16 21:47:36,381 [INFO ] W-9006-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Listening on port: /tmp/.ts.sock.9006
+2021-05-16 21:47:36,381 [INFO ] W-9023-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Listening on port: /tmp/.ts.sock.9023
+2021-05-16 21:47:36,385 [INFO ] W-9013-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Listening on port: /tmp/.ts.sock.9013
+2021-05-16 21:47:36,386 [INFO ] W-9009-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Listening on port: /tmp/.ts.sock.9009
+2021-05-16 21:47:36,386 [INFO ] W-9017-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Listening on port: /tmp/.ts.sock.9017
+2021-05-16 21:47:36,387 [INFO ] W-9019-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - [PID]6366
+2021-05-16 21:47:36,387 [INFO ] W-9014-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Listening on port: /tmp/.ts.sock.9014
+2021-05-16 21:47:36,387 [INFO ] W-9017-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - [PID]6360
+2021-05-16 21:47:36,387 [INFO ] W-9009-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - [PID]6362
+2021-05-16 21:47:36,387 [INFO ] W-9023-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - [PID]6369
+2021-05-16 21:47:36,387 [INFO ] W-9013-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - [PID]6354
+2021-05-16 21:47:36,387 [INFO ] W-9006-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - [PID]6355
+2021-05-16 21:47:36,387 [INFO ] W-9023-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Torch worker started.
+2021-05-16 21:47:36,387 [INFO ] W-9017-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Torch worker started.
+2021-05-16 21:47:36,387 [INFO ] W-9003-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - [PID]6376
+2021-05-16 21:47:36,388 [INFO ] W-9008-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - [PID]6365
+2021-05-16 21:47:36,388 [INFO ] W-9011-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - [PID]6373
+2021-05-16 21:47:36,388 [DEBUG] W-9017-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9017-audionet_1.0 State change null -> WORKER_STARTED
+2021-05-16 21:47:36,388 [DEBUG] W-9023-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9023-audionet_1.0 State change null -> WORKER_STARTED
+2021-05-16 21:47:36,388 [DEBUG] W-9008-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9008-audionet_1.0 State change null -> WORKER_STARTED
+2021-05-16 21:47:36,388 [INFO ] W-9016-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - [PID]6372
+2021-05-16 21:47:36,388 [INFO ] W-9008-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Torch worker started.
+2021-05-16 21:47:36,388 [INFO ] W-9003-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Torch worker started.
+2021-05-16 21:47:36,388 [DEBUG] W-9003-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9003-audionet_1.0 State change null -> WORKER_STARTED
+2021-05-16 21:47:36,388 [INFO ] W-9007-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - [PID]6361
+2021-05-16 21:47:36,389 [INFO ] W-9005-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - [PID]6368
+2021-05-16 21:47:36,389 [DEBUG] W-9016-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9016-audionet_1.0 State change null -> WORKER_STARTED
+2021-05-16 21:47:36,389 [INFO ] W-9016-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Torch worker started.
+2021-05-16 21:47:36,389 [INFO ] W-9001-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - [PID]6375
+2021-05-16 21:47:36,389 [INFO ] W-9018-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - [PID]6357
+2021-05-16 21:47:36,388 [INFO ] W-9021-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - [PID]6370
+2021-05-16 21:47:36,388 [INFO ] W-9004-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - [PID]6374
+2021-05-16 21:47:36,390 [INFO ] W-9000-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - [PID]6364
+2021-05-16 21:47:36,390 [INFO ] W-9010-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - [PID]6356
+2021-05-16 21:47:36,390 [INFO ] W-9021-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Torch worker started.
+2021-05-16 21:47:36,390 [DEBUG] W-9005-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9005-audionet_1.0 State change null -> WORKER_STARTED
+2021-05-16 21:47:36,390 [INFO ] W-9022-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - [PID]6367
+2021-05-16 21:47:36,389 [INFO ] W-9005-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Torch worker started.
+2021-05-16 21:47:36,389 [INFO ] W-9002-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - [PID]6371
+2021-05-16 21:47:36,389 [INFO ] W-9020-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - [PID]6358
+2021-05-16 21:47:36,389 [INFO ] W-9015-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - [PID]6363
+2021-05-16 21:47:36,390 [INFO ] W-9008-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Python runtime: 3.9.2
+2021-05-16 21:47:36,390 [INFO ] W-9003-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Python runtime: 3.9.2
+2021-05-16 21:47:36,390 [DEBUG] W-9007-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9007-audionet_1.0 State change null -> WORKER_STARTED
+2021-05-16 21:47:36,390 [INFO ] W-9007-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Torch worker started.
+2021-05-16 21:47:36,390 [DEBUG] W-9001-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9001-audionet_1.0 State change null -> WORKER_STARTED
+2021-05-16 21:47:36,390 [INFO ] W-9016-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Python runtime: 3.9.2
+2021-05-16 21:47:36,390 [INFO ] W-9001-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Torch worker started.
+2021-05-16 21:47:36,390 [DEBUG] W-9018-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9018-audionet_1.0 State change null -> WORKER_STARTED
+2021-05-16 21:47:36,390 [DEBUG] W-9021-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9021-audionet_1.0 State change null -> WORKER_STARTED
+2021-05-16 21:47:36,390 [INFO ] W-9018-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Torch worker started.
+2021-05-16 21:47:36,390 [INFO ] W-9012-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - [PID]6353
+2021-05-16 21:47:36,390 [INFO ] W-9013-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Torch worker started.
+2021-05-16 21:47:36,390 [DEBUG] W-9006-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9006-audionet_1.0 State change null -> WORKER_STARTED
+2021-05-16 21:47:36,390 [INFO ] W-9006-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Torch worker started.
+2021-05-16 21:47:36,390 [INFO ] W-9019-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Torch worker started.
+2021-05-16 21:47:36,390 [INFO ] W-9001-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Python runtime: 3.9.2
+2021-05-16 21:47:36,390 [INFO ] W-9023-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Python runtime: 3.9.2
+2021-05-16 21:47:36,390 [INFO ] W-9017-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Python runtime: 3.9.2
+2021-05-16 21:47:36,390 [DEBUG] W-9011-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9011-audionet_1.0 State change null -> WORKER_STARTED
+2021-05-16 21:47:36,390 [INFO ] W-9011-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Torch worker started.
+2021-05-16 21:47:36,391 [INFO ] W-9007-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Python runtime: 3.9.2
+2021-05-16 21:47:36,391 [INFO ] W-9018-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Python runtime: 3.9.2
+2021-05-16 21:47:36,391 [DEBUG] W-9012-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9012-audionet_1.0 State change null -> WORKER_STARTED
+2021-05-16 21:47:36,391 [INFO ] W-9012-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Torch worker started.
+2021-05-16 21:47:36,390 [DEBUG] W-9019-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9019-audionet_1.0 State change null -> WORKER_STARTED
+2021-05-16 21:47:36,390 [INFO ] W-9013-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Python runtime: 3.9.2
+2021-05-16 21:47:36,390 [DEBUG] W-9009-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9009-audionet_1.0 State change null -> WORKER_STARTED
+2021-05-16 21:47:36,391 [INFO ] W-9020-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Torch worker started.
+2021-05-16 21:47:36,390 [INFO ] W-9014-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - [PID]6359
+2021-05-16 21:47:36,390 [DEBUG] W-9013-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9013-audionet_1.0 State change null -> WORKER_STARTED
+2021-05-16 21:47:36,390 [INFO ] W-9009-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Torch worker started.
+2021-05-16 21:47:36,391 [DEBUG] W-9022-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9022-audionet_1.0 State change null -> WORKER_STARTED
+2021-05-16 21:47:36,391 [INFO ] W-9022-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Torch worker started.
+2021-05-16 21:47:36,391 [INFO ] W-9005-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Python runtime: 3.9.2
+2021-05-16 21:47:36,391 [INFO ] W-9000-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Torch worker started.
+2021-05-16 21:47:36,391 [INFO ] W-9004-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Torch worker started.
+2021-05-16 21:47:36,391 [DEBUG] W-9002-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9002-audionet_1.0 State change null -> WORKER_STARTED
+2021-05-16 21:47:36,391 [DEBUG] W-9020-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9020-audionet_1.0 State change null -> WORKER_STARTED
+2021-05-16 21:47:36,391 [INFO ] W-9002-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Torch worker started.
+2021-05-16 21:47:36,391 [DEBUG] W-9015-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9015-audionet_1.0 State change null -> WORKER_STARTED
+2021-05-16 21:47:36,391 [INFO ] W-9015-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Torch worker started.
+2021-05-16 21:47:36,391 [INFO ] W-9011-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Python runtime: 3.9.2
+2021-05-16 21:47:36,391 [DEBUG] W-9014-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9014-audionet_1.0 State change null -> WORKER_STARTED
+2021-05-16 21:47:36,391 [INFO ] W-9020-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Python runtime: 3.9.2
+2021-05-16 21:47:36,391 [INFO ] W-9002-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Python runtime: 3.9.2
+2021-05-16 21:47:36,391 [INFO ] W-9014-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Torch worker started.
+2021-05-16 21:47:36,391 [INFO ] W-9009-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Python runtime: 3.9.2
+2021-05-16 21:47:36,392 [INFO ] W-9012-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Python runtime: 3.9.2
+2021-05-16 21:47:36,391 [INFO ] W-9022-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Python runtime: 3.9.2
+2021-05-16 21:47:36,391 [DEBUG] W-9004-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9004-audionet_1.0 State change null -> WORKER_STARTED
+2021-05-16 21:47:36,391 [DEBUG] W-9000-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9000-audionet_1.0 State change null -> WORKER_STARTED
+2021-05-16 21:47:36,391 [DEBUG] W-9010-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9010-audionet_1.0 State change null -> WORKER_STARTED
+2021-05-16 21:47:36,391 [INFO ] W-9010-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Torch worker started.
+2021-05-16 21:47:36,391 [INFO ] W-9021-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Python runtime: 3.9.2
+2021-05-16 21:47:36,392 [INFO ] W-9006-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Python runtime: 3.9.2
+2021-05-16 21:47:36,392 [INFO ] W-9019-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Python runtime: 3.9.2
+2021-05-16 21:47:36,392 [INFO ] W-9014-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Python runtime: 3.9.2
+2021-05-16 21:47:36,392 [INFO ] W-9015-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Python runtime: 3.9.2
+2021-05-16 21:47:36,392 [INFO ] W-9004-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Python runtime: 3.9.2
+2021-05-16 21:47:36,392 [INFO ] W-9000-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Python runtime: 3.9.2
+2021-05-16 21:47:36,392 [INFO ] W-9010-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Python runtime: 3.9.2
+2021-05-16 21:47:36,393 [INFO ] W-9023-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Connecting to: /tmp/.ts.sock.9023
+2021-05-16 21:47:36,393 [INFO ] W-9018-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Connecting to: /tmp/.ts.sock.9018
+2021-05-16 21:47:36,393 [INFO ] W-9021-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Connecting to: /tmp/.ts.sock.9021
+2021-05-16 21:47:36,393 [INFO ] W-9007-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Connecting to: /tmp/.ts.sock.9007
+2021-05-16 21:47:36,393 [INFO ] W-9001-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Connecting to: /tmp/.ts.sock.9001
+2021-05-16 21:47:36,393 [INFO ] W-9022-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Connecting to: /tmp/.ts.sock.9022
+2021-05-16 21:47:36,393 [INFO ] W-9000-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Connecting to: /tmp/.ts.sock.9000
+2021-05-16 21:47:36,393 [INFO ] W-9002-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Connecting to: /tmp/.ts.sock.9002
+2021-05-16 21:47:36,393 [INFO ] W-9017-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Connecting to: /tmp/.ts.sock.9017
+2021-05-16 21:47:36,393 [INFO ] W-9013-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Connecting to: /tmp/.ts.sock.9013
+2021-05-16 21:47:36,393 [INFO ] W-9012-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Connecting to: /tmp/.ts.sock.9012
+2021-05-16 21:47:36,393 [INFO ] W-9015-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Connecting to: /tmp/.ts.sock.9015
+2021-05-16 21:47:36,393 [INFO ] W-9005-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Connecting to: /tmp/.ts.sock.9005
+2021-05-16 21:47:36,393 [INFO ] W-9003-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Connecting to: /tmp/.ts.sock.9003
+2021-05-16 21:47:36,393 [INFO ] W-9019-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Connecting to: /tmp/.ts.sock.9019
+2021-05-16 21:47:36,393 [INFO ] W-9011-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Connecting to: /tmp/.ts.sock.9011
+2021-05-16 21:47:36,393 [INFO ] W-9020-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Connecting to: /tmp/.ts.sock.9020
+2021-05-16 21:47:36,393 [INFO ] W-9014-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Connecting to: /tmp/.ts.sock.9014
+2021-05-16 21:47:36,393 [INFO ] W-9016-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Connecting to: /tmp/.ts.sock.9016
+2021-05-16 21:47:36,393 [INFO ] W-9004-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Connecting to: /tmp/.ts.sock.9004
+2021-05-16 21:47:36,393 [INFO ] W-9008-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Connecting to: /tmp/.ts.sock.9008
+2021-05-16 21:47:36,393 [INFO ] W-9009-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Connecting to: /tmp/.ts.sock.9009
+2021-05-16 21:47:36,393 [INFO ] W-9006-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Connecting to: /tmp/.ts.sock.9006
+2021-05-16 21:47:36,393 [INFO ] W-9010-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Connecting to: /tmp/.ts.sock.9010
+2021-05-16 21:47:36,424 [INFO ] main org.pytorch.serve.ModelServer - Inference API bind to: http://127.0.0.1:8080
+2021-05-16 21:47:36,424 [INFO ] main org.pytorch.serve.ModelServer - Initialize Management server with: EpollServerSocketChannel.
+2021-05-16 21:47:36,428 [INFO ] main org.pytorch.serve.ModelServer - Management API bind to: http://127.0.0.1:8081
+2021-05-16 21:47:36,428 [INFO ] main org.pytorch.serve.ModelServer - Initialize Metrics server with: EpollServerSocketChannel.
+2021-05-16 21:47:36,428 [INFO ] main org.pytorch.serve.ModelServer - Metrics API bind to: http://127.0.0.1:8082
+2021-05-16 21:47:36,430 [INFO ] W-9010-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Connection accepted: /tmp/.ts.sock.9010.
+2021-05-16 21:47:36,430 [INFO ] W-9013-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Connection accepted: /tmp/.ts.sock.9013.
+2021-05-16 21:47:36,430 [INFO ] W-9016-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Connection accepted: /tmp/.ts.sock.9016.
+2021-05-16 21:47:36,431 [INFO ] W-9009-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Connection accepted: /tmp/.ts.sock.9009.
+2021-05-16 21:47:36,430 [INFO ] W-9000-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Connection accepted: /tmp/.ts.sock.9000.
+2021-05-16 21:47:36,431 [INFO ] W-9001-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Connection accepted: /tmp/.ts.sock.9001.
+2021-05-16 21:47:36,430 [INFO ] W-9022-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Connection accepted: /tmp/.ts.sock.9022.
+2021-05-16 21:47:36,430 [INFO ] W-9003-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Connection accepted: /tmp/.ts.sock.9003.
+2021-05-16 21:47:36,430 [INFO ] W-9005-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Connection accepted: /tmp/.ts.sock.9005.
+2021-05-16 21:47:36,431 [INFO ] W-9020-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Connection accepted: /tmp/.ts.sock.9020.
+2021-05-16 21:47:36,430 [INFO ] W-9004-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Connection accepted: /tmp/.ts.sock.9004.
+2021-05-16 21:47:36,431 [INFO ] W-9018-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Connection accepted: /tmp/.ts.sock.9018.
+2021-05-16 21:47:36,431 [INFO ] W-9019-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Connection accepted: /tmp/.ts.sock.9019.
+2021-05-16 21:47:36,433 [INFO ] W-9014-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Connection accepted: /tmp/.ts.sock.9014.
+2021-05-16 21:47:36,433 [INFO ] W-9021-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Connection accepted: /tmp/.ts.sock.9021.
+2021-05-16 21:47:36,433 [INFO ] W-9008-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Connection accepted: /tmp/.ts.sock.9008.
+2021-05-16 21:47:36,433 [INFO ] W-9002-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Connection accepted: /tmp/.ts.sock.9002.
+2021-05-16 21:47:36,433 [INFO ] W-9006-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Connection accepted: /tmp/.ts.sock.9006.
+2021-05-16 21:47:36,433 [INFO ] W-9007-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Connection accepted: /tmp/.ts.sock.9007.
+2021-05-16 21:47:36,434 [INFO ] W-9011-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Connection accepted: /tmp/.ts.sock.9011.
+2021-05-16 21:47:36,434 [INFO ] W-9012-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Connection accepted: /tmp/.ts.sock.9012.
+2021-05-16 21:47:36,434 [INFO ] W-9023-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Connection accepted: /tmp/.ts.sock.9023.
+2021-05-16 21:47:36,434 [INFO ] W-9017-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Connection accepted: /tmp/.ts.sock.9017.
+2021-05-16 21:47:36,434 [INFO ] W-9015-audionet_1.0-stdout org.pytorch.serve.wlm.WorkerLifeCycle - Connection accepted: /tmp/.ts.sock.9015.
+2021-05-16 21:47:37,086 [WARN ] W-9016-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle - /home/luca/anaconda3/envs/reprodl/lib/python3.9/site-packages/torchaudio/backend/utils.py:53: UserWarning: "sox" backend is being deprecated. The default backend will be changed to "sox_io" backend in 0.8.0 and "sox" backend will be removed in 0.9.0. Please migrate to "sox_io" backend. Please refer to https://github.com/pytorch/audio/issues/903 for the detail.
+2021-05-16 21:47:37,086 [WARN ] W-9000-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle - /home/luca/anaconda3/envs/reprodl/lib/python3.9/site-packages/torchaudio/backend/utils.py:53: UserWarning: "sox" backend is being deprecated. The default backend will be changed to "sox_io" backend in 0.8.0 and "sox" backend will be removed in 0.9.0. Please migrate to "sox_io" backend. Please refer to https://github.com/pytorch/audio/issues/903 for the detail.
+2021-05-16 21:47:37,087 [WARN ] W-9016-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle -   warnings.warn(
+2021-05-16 21:47:37,087 [WARN ] W-9000-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle -   warnings.warn(
+2021-05-16 21:47:37,094 [WARN ] W-9007-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle - /home/luca/anaconda3/envs/reprodl/lib/python3.9/site-packages/torchaudio/backend/utils.py:53: UserWarning: "sox" backend is being deprecated. The default backend will be changed to "sox_io" backend in 0.8.0 and "sox" backend will be removed in 0.9.0. Please migrate to "sox_io" backend. Please refer to https://github.com/pytorch/audio/issues/903 for the detail.
+2021-05-16 21:47:37,094 [WARN ] W-9007-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle -   warnings.warn(
+2021-05-16 21:47:37,101 [WARN ] W-9001-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle - /home/luca/anaconda3/envs/reprodl/lib/python3.9/site-packages/torchaudio/backend/utils.py:53: UserWarning: "sox" backend is being deprecated. The default backend will be changed to "sox_io" backend in 0.8.0 and "sox" backend will be removed in 0.9.0. Please migrate to "sox_io" backend. Please refer to https://github.com/pytorch/audio/issues/903 for the detail.
+2021-05-16 21:47:37,101 [WARN ] W-9001-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle -   warnings.warn(
+2021-05-16 21:47:37,105 [WARN ] W-9008-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle - /home/luca/anaconda3/envs/reprodl/lib/python3.9/site-packages/torchaudio/backend/utils.py:53: UserWarning: "sox" backend is being deprecated. The default backend will be changed to "sox_io" backend in 0.8.0 and "sox" backend will be removed in 0.9.0. Please migrate to "sox_io" backend. Please refer to https://github.com/pytorch/audio/issues/903 for the detail.
+2021-05-16 21:47:37,105 [WARN ] W-9008-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle -   warnings.warn(
+2021-05-16 21:47:37,110 [WARN ] W-9013-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle - /home/luca/anaconda3/envs/reprodl/lib/python3.9/site-packages/torchaudio/backend/utils.py:53: UserWarning: "sox" backend is being deprecated. The default backend will be changed to "sox_io" backend in 0.8.0 and "sox" backend will be removed in 0.9.0. Please migrate to "sox_io" backend. Please refer to https://github.com/pytorch/audio/issues/903 for the detail.
+2021-05-16 21:47:37,110 [WARN ] W-9013-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle -   warnings.warn(
+2021-05-16 21:47:37,112 [WARN ] W-9014-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle - /home/luca/anaconda3/envs/reprodl/lib/python3.9/site-packages/torchaudio/backend/utils.py:53: UserWarning: "sox" backend is being deprecated. The default backend will be changed to "sox_io" backend in 0.8.0 and "sox" backend will be removed in 0.9.0. Please migrate to "sox_io" backend. Please refer to https://github.com/pytorch/audio/issues/903 for the detail.
+2021-05-16 21:47:37,112 [WARN ] W-9014-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle -   warnings.warn(
+2021-05-16 21:47:37,125 [WARN ] W-9015-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle - /home/luca/anaconda3/envs/reprodl/lib/python3.9/site-packages/torchaudio/backend/utils.py:53: UserWarning: "sox" backend is being deprecated. The default backend will be changed to "sox_io" backend in 0.8.0 and "sox" backend will be removed in 0.9.0. Please migrate to "sox_io" backend. Please refer to https://github.com/pytorch/audio/issues/903 for the detail.
+2021-05-16 21:47:37,125 [WARN ] W-9015-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle -   warnings.warn(
+2021-05-16 21:47:37,127 [WARN ] W-9002-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle - /home/luca/anaconda3/envs/reprodl/lib/python3.9/site-packages/torchaudio/backend/utils.py:53: UserWarning: "sox" backend is being deprecated. The default backend will be changed to "sox_io" backend in 0.8.0 and "sox" backend will be removed in 0.9.0. Please migrate to "sox_io" backend. Please refer to https://github.com/pytorch/audio/issues/903 for the detail.
+2021-05-16 21:47:37,127 [WARN ] W-9002-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle -   warnings.warn(
+2021-05-16 21:47:37,130 [WARN ] W-9021-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle - /home/luca/anaconda3/envs/reprodl/lib/python3.9/site-packages/torchaudio/backend/utils.py:53: UserWarning: "sox" backend is being deprecated. The default backend will be changed to "sox_io" backend in 0.8.0 and "sox" backend will be removed in 0.9.0. Please migrate to "sox_io" backend. Please refer to https://github.com/pytorch/audio/issues/903 for the detail.
+2021-05-16 21:47:37,130 [WARN ] W-9021-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle -   warnings.warn(
+2021-05-16 21:47:37,134 [WARN ] W-9004-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle - /home/luca/anaconda3/envs/reprodl/lib/python3.9/site-packages/torchaudio/backend/utils.py:53: UserWarning: "sox" backend is being deprecated. The default backend will be changed to "sox_io" backend in 0.8.0 and "sox" backend will be removed in 0.9.0. Please migrate to "sox_io" backend. Please refer to https://github.com/pytorch/audio/issues/903 for the detail.
+2021-05-16 21:47:37,134 [WARN ] W-9004-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle -   warnings.warn(
+2021-05-16 21:47:37,139 [WARN ] W-9018-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle - /home/luca/anaconda3/envs/reprodl/lib/python3.9/site-packages/torchaudio/backend/utils.py:53: UserWarning: "sox" backend is being deprecated. The default backend will be changed to "sox_io" backend in 0.8.0 and "sox" backend will be removed in 0.9.0. Please migrate to "sox_io" backend. Please refer to https://github.com/pytorch/audio/issues/903 for the detail.
+2021-05-16 21:47:37,139 [WARN ] W-9018-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle -   warnings.warn(
+2021-05-16 21:47:37,142 [WARN ] W-9012-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle - /home/luca/anaconda3/envs/reprodl/lib/python3.9/site-packages/torchaudio/backend/utils.py:53: UserWarning: "sox" backend is being deprecated. The default backend will be changed to "sox_io" backend in 0.8.0 and "sox" backend will be removed in 0.9.0. Please migrate to "sox_io" backend. Please refer to https://github.com/pytorch/audio/issues/903 for the detail.
+2021-05-16 21:47:37,142 [WARN ] W-9012-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle -   warnings.warn(
+2021-05-16 21:47:37,145 [WARN ] W-9019-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle - /home/luca/anaconda3/envs/reprodl/lib/python3.9/site-packages/torchaudio/backend/utils.py:53: UserWarning: "sox" backend is being deprecated. The default backend will be changed to "sox_io" backend in 0.8.0 and "sox" backend will be removed in 0.9.0. Please migrate to "sox_io" backend. Please refer to https://github.com/pytorch/audio/issues/903 for the detail.
+2021-05-16 21:47:37,145 [WARN ] W-9019-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle -   warnings.warn(
+2021-05-16 21:47:37,146 [WARN ] W-9006-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle - /home/luca/anaconda3/envs/reprodl/lib/python3.9/site-packages/torchaudio/backend/utils.py:53: UserWarning: "sox" backend is being deprecated. The default backend will be changed to "sox_io" backend in 0.8.0 and "sox" backend will be removed in 0.9.0. Please migrate to "sox_io" backend. Please refer to https://github.com/pytorch/audio/issues/903 for the detail.
+2021-05-16 21:47:37,146 [WARN ] W-9006-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle -   warnings.warn(
+2021-05-16 21:47:37,146 [WARN ] W-9017-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle - /home/luca/anaconda3/envs/reprodl/lib/python3.9/site-packages/torchaudio/backend/utils.py:53: UserWarning: "sox" backend is being deprecated. The default backend will be changed to "sox_io" backend in 0.8.0 and "sox" backend will be removed in 0.9.0. Please migrate to "sox_io" backend. Please refer to https://github.com/pytorch/audio/issues/903 for the detail.
+2021-05-16 21:47:37,146 [WARN ] W-9017-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle -   warnings.warn(
+2021-05-16 21:47:37,147 [WARN ] W-9023-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle - /home/luca/anaconda3/envs/reprodl/lib/python3.9/site-packages/torchaudio/backend/utils.py:53: UserWarning: "sox" backend is being deprecated. The default backend will be changed to "sox_io" backend in 0.8.0 and "sox" backend will be removed in 0.9.0. Please migrate to "sox_io" backend. Please refer to https://github.com/pytorch/audio/issues/903 for the detail.
+2021-05-16 21:47:37,147 [WARN ] W-9023-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle -   warnings.warn(
+2021-05-16 21:47:37,147 [WARN ] W-9009-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle - /home/luca/anaconda3/envs/reprodl/lib/python3.9/site-packages/torchaudio/backend/utils.py:53: UserWarning: "sox" backend is being deprecated. The default backend will be changed to "sox_io" backend in 0.8.0 and "sox" backend will be removed in 0.9.0. Please migrate to "sox_io" backend. Please refer to https://github.com/pytorch/audio/issues/903 for the detail.
+2021-05-16 21:47:37,147 [WARN ] W-9009-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle -   warnings.warn(
+2021-05-16 21:47:37,158 [WARN ] W-9005-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle - /home/luca/anaconda3/envs/reprodl/lib/python3.9/site-packages/torchaudio/backend/utils.py:53: UserWarning: "sox" backend is being deprecated. The default backend will be changed to "sox_io" backend in 0.8.0 and "sox" backend will be removed in 0.9.0. Please migrate to "sox_io" backend. Please refer to https://github.com/pytorch/audio/issues/903 for the detail.
+2021-05-16 21:47:37,158 [WARN ] W-9005-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle -   warnings.warn(
+2021-05-16 21:47:37,158 [WARN ] W-9022-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle - /home/luca/anaconda3/envs/reprodl/lib/python3.9/site-packages/torchaudio/backend/utils.py:53: UserWarning: "sox" backend is being deprecated. The default backend will be changed to "sox_io" backend in 0.8.0 and "sox" backend will be removed in 0.9.0. Please migrate to "sox_io" backend. Please refer to https://github.com/pytorch/audio/issues/903 for the detail.
+2021-05-16 21:47:37,158 [WARN ] W-9022-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle -   warnings.warn(
+2021-05-16 21:47:37,178 [WARN ] W-9020-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle - /home/luca/anaconda3/envs/reprodl/lib/python3.9/site-packages/torchaudio/backend/utils.py:53: UserWarning: "sox" backend is being deprecated. The default backend will be changed to "sox_io" backend in 0.8.0 and "sox" backend will be removed in 0.9.0. Please migrate to "sox_io" backend. Please refer to https://github.com/pytorch/audio/issues/903 for the detail.
+2021-05-16 21:47:37,178 [WARN ] W-9020-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle -   warnings.warn(
+2021-05-16 21:47:37,180 [WARN ] W-9003-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle - /home/luca/anaconda3/envs/reprodl/lib/python3.9/site-packages/torchaudio/backend/utils.py:53: UserWarning: "sox" backend is being deprecated. The default backend will be changed to "sox_io" backend in 0.8.0 and "sox" backend will be removed in 0.9.0. Please migrate to "sox_io" backend. Please refer to https://github.com/pytorch/audio/issues/903 for the detail.
+2021-05-16 21:47:37,180 [WARN ] W-9003-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle -   warnings.warn(
+2021-05-16 21:47:37,186 [WARN ] W-9010-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle - /home/luca/anaconda3/envs/reprodl/lib/python3.9/site-packages/torchaudio/backend/utils.py:53: UserWarning: "sox" backend is being deprecated. The default backend will be changed to "sox_io" backend in 0.8.0 and "sox" backend will be removed in 0.9.0. Please migrate to "sox_io" backend. Please refer to https://github.com/pytorch/audio/issues/903 for the detail.
+2021-05-16 21:47:37,186 [WARN ] W-9010-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle -   warnings.warn(
+2021-05-16 21:47:37,210 [WARN ] W-9011-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle - /home/luca/anaconda3/envs/reprodl/lib/python3.9/site-packages/torchaudio/backend/utils.py:53: UserWarning: "sox" backend is being deprecated. The default backend will be changed to "sox_io" backend in 0.8.0 and "sox" backend will be removed in 0.9.0. Please migrate to "sox_io" backend. Please refer to https://github.com/pytorch/audio/issues/903 for the detail.
+2021-05-16 21:47:37,212 [WARN ] W-9011-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle -   warnings.warn(
+2021-05-16 21:47:38,309 [INFO ] W-9007-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Backend response time: 1796
+2021-05-16 21:47:38,309 [DEBUG] W-9007-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9007-audionet_1.0 State change WORKER_STARTED -> WORKER_MODEL_LOADED
+2021-05-16 21:47:38,309 [INFO ] W-9000-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Backend response time: 1785
+2021-05-16 21:47:38,309 [DEBUG] W-9000-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9000-audionet_1.0 State change WORKER_STARTED -> WORKER_MODEL_LOADED
+2021-05-16 21:47:38,338 [INFO ] W-9016-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Backend response time: 1840
+2021-05-16 21:47:38,338 [DEBUG] W-9016-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9016-audionet_1.0 State change WORKER_STARTED -> WORKER_MODEL_LOADED
+2021-05-16 21:47:38,393 [INFO ] W-9014-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Backend response time: 1886
+2021-05-16 21:47:38,393 [DEBUG] W-9014-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9014-audionet_1.0 State change WORKER_STARTED -> WORKER_MODEL_LOADED
+2021-05-16 21:47:38,419 [INFO ] W-9008-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Backend response time: 1902
+2021-05-16 21:47:38,419 [DEBUG] W-9008-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9008-audionet_1.0 State change WORKER_STARTED -> WORKER_MODEL_LOADED
+2021-05-16 21:47:38,434 [INFO ] W-9013-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Backend response time: 1932
+2021-05-16 21:47:38,434 [DEBUG] W-9013-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9013-audionet_1.0 State change WORKER_STARTED -> WORKER_MODEL_LOADED
+2021-05-16 21:47:38,460 [INFO ] W-9019-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Backend response time: 1946
+2021-05-16 21:47:38,460 [DEBUG] W-9019-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9019-audionet_1.0 State change WORKER_STARTED -> WORKER_MODEL_LOADED
+2021-05-16 21:47:38,475 [INFO ] W-9001-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Backend response time: 1976
+2021-05-16 21:47:38,475 [DEBUG] W-9001-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9001-audionet_1.0 State change WORKER_STARTED -> WORKER_MODEL_LOADED
+2021-05-16 21:47:38,476 [INFO ] W-9006-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Backend response time: 1978
+2021-05-16 21:47:38,477 [DEBUG] W-9006-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9006-audionet_1.0 State change WORKER_STARTED -> WORKER_MODEL_LOADED
+2021-05-16 21:47:38,488 [INFO ] W-9002-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Backend response time: 1978
+2021-05-16 21:47:38,488 [DEBUG] W-9002-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9002-audionet_1.0 State change WORKER_STARTED -> WORKER_MODEL_LOADED
+2021-05-16 21:47:38,507 [INFO ] W-9021-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Backend response time: 1993
+2021-05-16 21:47:38,507 [DEBUG] W-9021-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9021-audionet_1.0 State change WORKER_STARTED -> WORKER_MODEL_LOADED
+2021-05-16 21:47:38,522 [INFO ] W-9009-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Backend response time: 2015
+2021-05-16 21:47:38,522 [DEBUG] W-9009-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9009-audionet_1.0 State change WORKER_STARTED -> WORKER_MODEL_LOADED
+2021-05-16 21:47:38,523 [INFO ] W-9023-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Backend response time: 2025
+2021-05-16 21:47:38,523 [INFO ] W-9022-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Backend response time: 2025
+2021-05-16 21:47:38,523 [DEBUG] W-9023-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9023-audionet_1.0 State change WORKER_STARTED -> WORKER_MODEL_LOADED
+2021-05-16 21:47:38,523 [DEBUG] W-9022-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9022-audionet_1.0 State change WORKER_STARTED -> WORKER_MODEL_LOADED
+2021-05-16 21:47:38,527 [INFO ] W-9004-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Backend response time: 2009
+2021-05-16 21:47:38,527 [DEBUG] W-9004-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9004-audionet_1.0 State change WORKER_STARTED -> WORKER_MODEL_LOADED
+2021-05-16 21:47:38,535 [INFO ] W-9015-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Backend response time: 2021
+2021-05-16 21:47:38,535 [DEBUG] W-9015-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9015-audionet_1.0 State change WORKER_STARTED -> WORKER_MODEL_LOADED
+2021-05-16 21:47:38,543 [INFO ] W-9010-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Backend response time: 2036
+2021-05-16 21:47:38,543 [DEBUG] W-9010-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9010-audionet_1.0 State change WORKER_STARTED -> WORKER_MODEL_LOADED
+2021-05-16 21:47:38,550 [INFO ] W-9005-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Backend response time: 2036
+2021-05-16 21:47:38,550 [DEBUG] W-9005-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9005-audionet_1.0 State change WORKER_STARTED -> WORKER_MODEL_LOADED
+2021-05-16 21:47:38,550 [INFO ] W-9018-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Backend response time: 2036
+2021-05-16 21:47:38,550 [DEBUG] W-9018-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9018-audionet_1.0 State change WORKER_STARTED -> WORKER_MODEL_LOADED
+2021-05-16 21:47:38,551 [INFO ] W-9017-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Backend response time: 2034
+2021-05-16 21:47:38,551 [DEBUG] W-9017-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9017-audionet_1.0 State change WORKER_STARTED -> WORKER_MODEL_LOADED
+2021-05-16 21:47:38,557 [INFO ] W-9011-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Backend response time: 2047
+2021-05-16 21:47:38,557 [DEBUG] W-9011-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9011-audionet_1.0 State change WORKER_STARTED -> WORKER_MODEL_LOADED
+2021-05-16 21:47:38,559 [INFO ] W-9003-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Backend response time: 2035
+2021-05-16 21:47:38,559 [DEBUG] W-9003-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9003-audionet_1.0 State change WORKER_STARTED -> WORKER_MODEL_LOADED
+2021-05-16 21:47:38,570 [INFO ] W-9012-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Backend response time: 2064
+2021-05-16 21:47:38,570 [DEBUG] W-9012-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9012-audionet_1.0 State change WORKER_STARTED -> WORKER_MODEL_LOADED
+2021-05-16 21:47:38,571 [INFO ] W-9020-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Backend response time: 2045
+2021-05-16 21:47:38,571 [DEBUG] W-9020-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - W-9020-audionet_1.0 State change WORKER_STARTED -> WORKER_MODEL_LOADED
+2021-05-16 21:47:53,229 [WARN ] W-9007-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle - /home/luca/anaconda3/envs/reprodl/lib/python3.9/site-packages/torch/functional.py:515: UserWarning: stft will require the return_complex parameter be explicitly  specified in a future PyTorch release. Use return_complex=False  to preserve the current behavior or return_complex=True to return  a complex output. (Triggered internally at  /pytorch/aten/src/ATen/native/SpectralOps.cpp:653.)
+2021-05-16 21:47:53,229 [WARN ] W-9007-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle -   return _VF.stft(input, n_fft, hop_length, win_length, window,  # type: ignore
+2021-05-16 21:47:53,229 [WARN ] W-9007-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle - /home/luca/anaconda3/envs/reprodl/lib/python3.9/site-packages/torch/functional.py:515: UserWarning: The function torch.rfft is deprecated and will be removed in a future PyTorch release. Use the new torch.fft module functions, instead, by importing torch.fft and calling torch.fft.fft or torch.fft.rfft. (Triggered internally at  /pytorch/aten/src/ATen/native/SpectralOps.cpp:590.)
+2021-05-16 21:47:53,229 [WARN ] W-9007-audionet_1.0-stderr org.pytorch.serve.wlm.WorkerLifeCycle -   return _VF.stft(input, n_fft, hop_length, win_length, window,  # type: ignore
+2021-05-16 21:47:53,258 [INFO ] W-9007-audionet_1.0 org.pytorch.serve.wlm.WorkerThread - Backend response time: 50
+2021-05-16 21:47:53,259 [DEBUG] W-9007-audionet_1.0 org.pytorch.serve.job.Job - Waiting time ns: 107186, Backend time ns: 51712767
