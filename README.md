@@ -1,72 +1,53 @@
 # Reproducible Deep Learning
-## Exercise 1: Git & Scripting
-[[Official website](https://www.sscardapane.it/teaching/reproducibledl/)] [[Slides](https://docs.google.com/presentation/d/1_AYIcCyVI59QiiXqU4Sn7VzwtVyfqv-lG36EPFzeSdY/edit?usp=sharing)]
+## Extra: Optuna for hyperparameters fine-tuning
+### Author: Gabriele D'Acunto
+[[Official website](https://www.sscardapane.it/teaching/reproducibledl/)]
 
-## Objectives for the exercise
+## Goals
 
-- [ ] Experimenting with Git branches.
-- [ ] Turning a notebook into a runnable script.
-
-See the completed exercise:
-
-```bash
-git checkout exercise1_git_completed
-```
+- [ ] Adding Optuna support for hyperparameters fine-tuning in combination with PyTorch Lightning.
 
 ## Prerequisites
 
 1. Uncompress the [ESC-50 dataset](https://github.com/karolpiczak/ESC-50) inside the *data* folder.
-2. Run *Initial Notebook.ipynb* to see an example of training.
+2. Install [Optuna](https://optuna.readthedocs.io/en/latest/installation.html):
 
-## Instructions
-
-The aim of this exercise is to get some familarity with Git branches and Python scripts. You are tasked with turning the [training notebook](Initial%20Notebook.ipynb) into a runnable Python script, working on a separate Git branch, and merging the result at the end.
-
-1. Start by initializing and moving to an experimental branch:
-
-```bash
-git branch experimental_branch
-git checkout experimental branch
+```bash (recommended)
+pip install optuna
 ```
 
-2. Convert the notebook into a Python script by running `nbconvert`:
+## Steps
+In this experiment we try to combine Optuna with PyTorch Lightning module in order to validate both the learning rate (**lr**) of the model and the optimizer (**optimizer_name**).
+More precisely, we let vary the **lr** within [1.e-4, 1.e-3]. Furthermore, we test two different optimizers ('SGD', 'Adam')
 
-```bash
-jupyter nbconvert --to script --output "train" "Initial Notebook.ipynb"
-```
+1. Convert "Initial Notebook.ipynb" to a Python script by running:
 
-> :speech_balloon: The command has [several useful flags](https://nbconvert.readthedocs.io/en/latest/config_options.html) to simplify the conversion (e.g., check `TemplateExporter.exclude_markdown`).
+``` jupyter nbconvert --TemplateExporter.exclude\_markdown=True --TemplateExporter.exclude\_input_prompt=True --to script --output "train" "Initial Notebook.ipynb" ```
 
-3. Reorganize the script so that it is runnable from terminal:
-   * Remove all instructions that are not required for training;
-   * Put all training instructions inside a new `train()` function.
+and reorganize the notebook similarly to _exercise1\_git_. 
 
-4. Add a [top-level instruction](https://docs.python.org/3/library/__main__.html) to run the module as a script:
-
+2. Import Optuna library at the beginning of the code, including the pruning module and a sampler as follows
 ```python
-if __name__ == "__main__":
-    train()
+import optuna
+from optuna.integration import PyTorchLightningPruningCallback
+from optuna.pruners import MedianPrune
+from optuna.samplers import TPESampler
 ```
+3. Build a training function equipped with Optuna support (**train_with_optuna_support**). The backbone of this function is essentially constituted by 3 major blocks:
 
-5. Create a [.gitignore file](https://git-scm.com/docs/gitignore) to ignore the *data* and *lightning_logs* folders.
-6. Remove the notebook, and check that the training script is working correctly:
+  1. Load data and wrap using dataloaders:
+ 
+  2. Introduce Optuna support:
+  ```python
+  lr = trial.suggest_loguniform("lr", 1e-4, 1e-3)
+  optimizer_name = trial.suggest_categorical("optimizer_name", ["SGD", "Adam"])
+  ```
+  3. Initialize and fit the model using PyTorch Lightning. During the training step, we also exploit Optuna MedianPruner method, which stops unpromising trials according to the median rule.
+  ```python
+  trainer = pl.Trainer(logger=True,
+        max_epochs=5,
+        gpus=-1 if torch.cuda.is_available() else None,
+        callbacks=[PyTorchLightningPruningCallback(trial, monitor='val_acc')])
+  ```
+4. Print tuning procedure results while running the code. To make this experiment reproducible, we fixed the sampler seed.
 
-```bash
-python train.py
-```
-
-7. Merge the experimental branch into the main one, and delete the experimental branch:
-
-```bash
-git checkout main
-git merge experimental_branch
-git branch -d experimental  branch
-```
-
-Congratulations! You have concluded the first move to a reproducible deep learning world. :nerd_face:
-
-Move to the next exercise:
-
-```bash
-git checkout exercise2_hydra
-```
