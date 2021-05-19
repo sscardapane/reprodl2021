@@ -64,19 +64,24 @@ Its inputs must be:
   - data: data element, generally as bytearray;
   - context: item that contains some environment info (e.g. presence of gpus or work directory).
 
-```python
-if __name__ == "__main__":
-    train()
-```
 
-5. Create a [.gitignore file](https://git-scm.com/docs/gitignore) to ignore the *data* and *lightning_logs* folders.
-6. Remove the notebook, and check that the training script is working correctly:
+5. Add the index_to_name.json file that will map the predicted index class for your test sample to its string name.
+> :speech_balloon: We provide a gen_dict.py file to create the json for this specific case.
 
-```bash
-python train.py
-```
 
-7. Merge the experimental branch into the main one, and delete the experimental branch:
+6. Create a test_data folder where to move the data you want to infer.
+
+
+> :speech_balloon: To be clear all the file and folder create until now MUST be in the serve folder. This is a list of what it has to contain:
+  - test_data (folder)
+  - handler.py
+  - model.py
+  - index_to_name.json
+  - model.pth
+  - gen_dict (Optional)
+
+
+7. Now we are ready to serve our model with TorchServe!
 
 ```bash
 git checkout main
