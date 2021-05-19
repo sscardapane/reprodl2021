@@ -1,6 +1,6 @@
 # Reproducible Deep Learning
 ## Extra: TorchServe
-[[Official website](https://pytorch.org/serve/)] 
+Main documentation from Pytorch website for [[Torchserve](https://pytorch.org/serve/)] 
 
 
 ## Prerequisites
@@ -21,7 +21,7 @@ The aim of this exercise is to understand how to serve Pytorch model. In this wa
 
 1. Add to the train.py script a line to save your model once it is trained.
 
-```
+```python
 torch.save(trainer.model.state_dict(), "model.pth")
 ```
 
@@ -29,8 +29,11 @@ In this way we can load the learned parameters and use to evaluate on our data.
 We need to move all the part/code/data (e.g. model.pth file) to the folder "serve".
 
 
+
 2. Then we create an instance of the model copy pasting the class AudioNet from train.py script to a new file named model.py.
 > :speech_balloon: This step is not mandatory, but allows you to make things more orderly for possible future changes.
+
+
 
 
 3. Create handler class in a handler.py script. This is the core of this tool.
@@ -39,6 +42,8 @@ Basically here we define a class with 4 main functions:
   - preprocess: this function receive the data and preprocess them before to feed to the net;
   - inference: where the model extract the prediction;
   - postprocess: some final postprocessing operations, like mapping the index of the class to corresponding class name.
+
+
 
 
 4. In the same file (handler.py) define a function named "handle" that instanciate the previous class and use it.
