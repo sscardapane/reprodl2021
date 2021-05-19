@@ -26,7 +26,7 @@ The aim of this exercise is to get some familarity with Git branches and Python 
 
 ```bash
 git branch experimental_branch
-git checkout experimental branch
+git checkout experimental_branch
 ```
 
 2. Convert the notebook into a Python script by running `nbconvert`:
@@ -60,7 +60,7 @@ python train.py
 ```bash
 git checkout main
 git merge experimental_branch
-git branch -d experimental  branch
+git branch -d experimental_branch
 ```
 
 Congratulations! You have concluded the first move to a reproducible deep learning world. :nerd_face:
