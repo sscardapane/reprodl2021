@@ -1,84 +1,88 @@
 # Reproducible Deep Learning
-## PhD Course in Data Science, 2021, 3 CFU
-[[Official website](https://www.sscardapane.it/teaching/reproducibledl/)]
+## Extra: TorchServe
+[[Official website](https://pytorch.org/serve/)] 
 
-This practical PhD course explores the design of a simple *reproducible* environment for a deep learning project, using free, open-source tools ([Git](https://git-scm.com/), [DVC](http://dvc.org/), [Docker](https://www.docker.com/), [Hydra](https://github.com/facebookresearch/hydra), ...). The choice of tools is opinionated, and was made as a trade-off between practicality and didactical concerns.
 
-## Local set-up
+## Prerequisites
 
-The use case of the course is an audio classification model trained on the [ESC-50](https://github.com/karolpiczak/ESC-50) dataset. To set-up your local machine (or a proper virtual / remote environment), configure [Anaconda](https://www.anaconda.com/products/individual), and create a clean environment:
-
-```bash
-conda create -n reprodl; conda activate reprodl
-```
-
-Then, install a few generic prerequisites (notebook handling, Pandas, …):
+1. Uncompress the [ESC-50 dataset](https://github.com/karolpiczak/ESC-50) inside the *data* folder.
+2. Install requirements (Java and Python libraries):
 
 ```bash
-conda install -y -c conda-forge notebook matplotlib pandas ipywidgets pathlib
+sudo apt install --no-install-recommends -y openjdk-11-jre-headless
+pip install torchserve==0.2.0 torch-model-archiver==0.2.0
+pip install SoundFile==0.10.3.post1
 ```
 
-Finally, install [PyTorch](https://pytorch.org/) and [PyTorch Lightning](https://github.com/PyTorchLightning/pytorch-lightning). The instructions below can vary depending on whether you have a CUDA-enabled machine, Linux, etc. In general, follow the instructions from the websites.
+## Instructions
+
+The aim of this exercise is to understand how to serve Pytorch model. In this way, every user can easily use a pre-trained code without the need of train once again from scratch and without to adapt the code for a simple evaluation on a test data sample. 
+
+
+1. Add to the train.py script a line to save your model once it is trained.
+
+```
+torch.save(trainer.model.state_dict(), "model.pth")
+```
+
+In this way we can load the learned parameters and use to evaluate on our data.
+We need to move all the part/code/data (e.g. model.pth file) to the folder "serve".
+
+
+2. Then we create an instance of the model copy pasting the class AudioNet from train.py script to a new file named model.py.
+> :speech_balloon: This step is not mandatory, but allows you to make things more orderly for possible future changes.
+
+
+3. Create handler class in a handler.py script. This is the core of this tool.
+Basically here we define a class with 4 main functions:
+  - initialize: here we define and load the pre-trained model. Moreover we can set other case-specific initial settings;
+  - preprocess: this function receive the data and preprocess them before to feed to the net;
+  - inference: where the model extract the prediction;
+  - postprocess: some final postprocessing operations, like mapping the index of the class to corresponding class name.
+
+
+4. In the same file (handler.py) define a function named "handle" that instanciate the previous class and use it.
+
+```python
+_service = MyHandler()
+
+_service.initialize(context)
+
+data = _service.preprocess(data)
+
+data = _service.inference(data)
+
+data = _service.postprocess(data)
+```
+
+Its inputs must be:
+  - data: data element, generally as bytearray;
+  - context: item that contains some environment info (e.g. presence of gpus or work directory).
+
+```python
+if __name__ == "__main__":
+    train()
+```
+
+5. Create a [.gitignore file](https://git-scm.com/docs/gitignore) to ignore the *data* and *lightning_logs* folders.
+6. Remove the notebook, and check that the training script is working correctly:
 
 ```bash
-conda install -y pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch -c conda-forge
-conda install -y pytorch-lightning -c conda-forge
+python train.py
 ```
 
-This should be enough to let you run the [initial notebook](https://github.com/sscardapane/reprodl2021/blob/main/Initial%20Notebook.ipynb). More information on the use case can be found inside the notebook itself.
-
-> :warning: For Windows only, install a [backend for torchaudio](https://pytorch.org/audio/stable/backend.html):
-> ```bash
-> pip install soundfile
-> ```
-
-### Additional set-up steps
-
-The following steps are not mandatory, but will considerably simplify the experience.
-
-1. If you are on Windows, install the [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10). This is useful in a number of contexts, including Docker installation.
-2. We will use Git from the command line multiple times, so consider enabling [GitHub access with an SSH key](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh).
-3. We will experiment with Docker reproducibility on the [Sapienza DGX environment](https://www.uniroma1.it/sites/default/files/field_file_allegati/presentazione_ga_13-05-2019_sgiagu.pdf). If you have not done so already, set-up your access to the machine.
-
-## Organization of the course
-
-<p align="center">
-<img align="center" src="https://github.com/sscardapane/reprodl2021/blob/main/reprodl_overview.png" width="500" style="border: 1px solid black;">
-</p>
-
-The course is split into **exercises** (e.g., adding DVC support). The material for each exercise is provided as a Git branch. To follow an exercise, switch to the corresponding branch, and follow the README there. If you want to see the completed exercise, add *_completed* to the name of the branch. Additional material and information can be found on the [main website](https://www.sscardapane.it/teaching/reproducibledl/) of the course.
-
-**List of exercises**:
-
-- [x] Experimenting with Git, branches, and scripting (*exercise1_git*).
-- [x] Adding Hydra configuration (*exercise2_hydra*).
-- [x] Versioning data with DVC (*exercise3_dvc*).
-- [x] Creating a Dockerfile (*exercise4_docker*).
-- [x] Experiment management with Weight & Biases (*exercise5_wandb*). 
-- [x] Unit testing and formatting with continuous integration (*exercise6_hooks*).
-
-### An example
-
-If you want to follow the first exercise, switch to the corresponding branch and follow the instructions from there:
+7. Merge the experimental branch into the main one, and delete the experimental branch:
 
 ```bash
-git checkout exercise1_git
+git checkout main
+git merge experimental_branch
+git branch -d experimental  branch
 ```
 
-If you want to see the completed exercise:
+Congratulations! You have concluded the first move to a reproducible deep learning world. :nerd_face:
+
+Move to the next exercise:
 
 ```bash
-git checkout exercise1_git_completed
+git checkout exercise2_hydra
 ```
-
-You can inspect the commits to look at specific changes in the code:
-
-```bash
-git log --graph --abbrev-commit --decorate
-```
-
-If you want to inspect a specific change, you can checkout again using the ID of the commit.
-
-### Advanced reading material
-
-If you liked the exercises and are planning to explore more, the new edition of [Full Stack Deep Learning](https://fullstackdeeplearning.com/) (UC Berkeley CS194-080) covers a larger set of material than this course. Another good resource (divided in small exercises) is the [MLOps](https://github.com/GokuMohandas/mlops) repository by Goku Mohandas. [lucmos/nn-template](https://github.com/lucmos/nn-template) is a fully-functioning template implementing many of the tools described in this course.
