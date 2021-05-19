@@ -3,6 +3,8 @@
 ### Author: [OfficiallyDAC](https://github.com/OfficiallyDAC)
 [[Official reprodl website](https://www.sscardapane.it/teaching/reproducibledl/)]
 
+> :warning: **extra** branches implement additional exercises created by the students of the course to explore additional libraries and functionalities. They can be read independently from the main branches. Refer to the original authors for more information.
+
 ## Goals
 
 - [ ] Add [Optuna](https://optuna.readthedocs.io/en/latest/installation.html) support for hyperparameters fine-tuning in combination with PyTorch Lightning.
@@ -20,7 +22,7 @@ pip install optuna
 ## Instructions
 ### Task 1: run Optuna along with PyTorch Lightning
 In the first experiment we try to combine `optuna` with `pytorch_lightning` module in order to validate some hyperparameters of the model. The purpose of this section is not to find optimal values for model hyperparameters, but rather to show how it is possible to exploit open-source tools to automate the search for hyperparameters. More precisely, in this experiment, we will implement a code able to tune both the learning rate (`lr`) and which optimizer (`optimizer_name`) to be used in an automatic fashion.
-As an example, we let vary the `lr` between [1.e-4, 1.e-3]. Furthermore, we test two different optimizers (`SGD`, `Adam`). The code is implemented in a Python script called `train.py`.
+As an example, we let the `lr` vary between [1.e-4, 1.e-3]. Furthermore, we test two different optimizers (`SGD`, `Adam`). The code is implemented in a Python script called `train.py`.
 
 1. Import `optuna` library at the beginning of the code, including the pruning module and a sampler as follows:
 ```python
@@ -30,7 +32,7 @@ from optuna.pruners import MedianPrune
 from optuna.samplers import TPESampler
 ```
 2. Build a training function equipped with `optuna` support named `train_with_optuna_support()`. The backbone of this function is essentially constituted by 3 major blocks:
-    1. Load and wrap data using dataloaders
+    1. Load and wrap data using dataloaders.
     2. Introduce `optuna` support:
     ```python
     lr = trial.suggest_loguniform("lr", 1e-4, 1e-3)
@@ -46,7 +48,7 @@ from optuna.samplers import TPESampler
 3. Print the tuning procedure results while running the code. To make this experiment reproducible, we fixed the `sampler` seed.
 
 ### Task 2: call Optuna from Hydra by using Optuna Sweeper Plugin
-In this experiment we equip Hydra with the aformentioned plugin and we exploit once again Optuna for parameters optimisation. In particular, Hydra is an open-source tool which provides an efficient way to manage hyperparameters configuration both from `yaml` file and command line. Therefore, it is worth to experiment with Hydra Optuna Sweeper in order to combine two useful tools for hyperparameters managing and optimisation. The code is implemented in a Python script termed `train_HydraPlusOptuna.py`, whereas the configuration file `default.yaml` is located in the folder `config`.
+In this experiment we equip Hydra with the aformentioned plugin and we exploit once again Optuna for parameters optimisation. In particular, Hydra is an open-source tool which provides an efficient way to manage the hyperparameters configuration both from `yaml` files and command line. Therefore, it is worth to experiment with Hydra Optuna Sweeper in order to combine two useful tools for hyperparameters managing and optimisation. The code is implemented in a Python script termed `train_HydraPlusOptuna.py`, whereas the configuration file `default.yaml` is located in the folder `config`.
 
 1. Create a copy of `train.py` and rename it `train_HydraPlusOptuna.py`. Thus, apply the modification below on the latter.
 
@@ -118,4 +120,4 @@ python train_HydraPlusOptuna.py --multirun
 ```bash
 python train_HydraPlusOptuna.py --multirun 'lr=tag(log, interval(1.e-5,1.e-3))'
 ```
-Please notice that in the command above, the `log` tag allows us to use a `LogUniformDistribution` rather than a `UniformDistribution` (as it happens when using only `interval`). For further details on the search space override, please refer to the plugin [main page](https://hydra.cc/docs/next/plugins/optuna_sweeper) 
+Please notice that in the command above, the `log` tag allows us to use a `LogUniformDistribution` rather than a `UniformDistribution` (as it happens when using only `interval`). For further details on the search space override, please refer to the plugin [main page](https://hydra.cc/docs/next/plugins/optuna_sweeper).
