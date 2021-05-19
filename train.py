@@ -58,7 +58,7 @@ class AudioNet(pl.LightningModule):
     def __init__(self, hparams: DictConfig):
         super().__init__()
 
-        # Fundamental, this will save the hyper-parameters
+        # Fundamentally, this will save the hyper-parameters
         # in a way that is meaningful to PyTorch Lightning.
         self.save_hyperparameters(hparams) 
 
@@ -121,9 +121,9 @@ def train(cfg: DictConfig):
     path = Path(hydra.utils.get_original_cwd()) / Path(cfg.data.path)
 
     # Load data
-    train_data = ESC50Dataset(path=path, folds=cfg.data.train_folds)
-    val_data = ESC50Dataset(path=path, folds=cfg.data.val_folds)
-    test_data = ESC50Dataset(path=path, folds=cfg.data.test_folds)
+    train_data = ESC50Dataset(path=path, sample_rate=cfg.data.sample_rate, folds=cfg.data.train_folds)
+    val_data = ESC50Dataset(path=path, sample_rate=cfg.data.sample_rate, folds=cfg.data.val_folds)
+    test_data = ESC50Dataset(path=path, sample_rate=cfg.data.sample_rate, folds=cfg.data.test_folds)
 
     # Wrap data with appropriate data loaders
     train_loader = torch.utils.data.DataLoader(train_data, batch_size=cfg.data.batch_size, shuffle=True)
