@@ -1,6 +1,8 @@
 # Reproducible Deep Learning
-## Extra: TorchServe
-Main documentation from Pytorch website for [[Torchserve](https://pytorch.org/serve/)] 
+## Extra Exercise: TorchServe
+Main documentation for [Torchserve](https://pytorch.org/serve/) from Pytorch website.
+
+&nbsp;
 
 
 ## Prerequisites
@@ -14,9 +16,19 @@ pip install torchserve==0.2.0 torch-model-archiver==0.2.0
 pip install SoundFile==0.10.3.post1
 ```
 
-## Instructions
+&nbsp;
 
-The aim of this exercise is to understand how to serve Pytorch model. In this way, every user can easily use a pre-trained code without the need of train once again from scratch and without to adapt the code for a simple evaluation on a test data sample. 
+
+## Goal
+
+The aim of this exercise is to understand how to serve Pytorch model. In this way, every user can easily use a pre-trained code without the need of train once again from scratch and without to adapt the code for a simple evaluation on a test data sample.
+
+With these istructions we will see how to deploy model serving and how much is it simple to use for inference.
+
+
+&nbsp;
+
+## Instructions
 
 
 1. Add to the train.py script a line to save your model once it is trained.
@@ -26,24 +38,27 @@ torch.save(trainer.model.state_dict(), "model.pth")
 ```
 
 In this way we can load the learned parameters and use to evaluate on our data.
-We need to move all the part/code/data (e.g. model.pth file) to the folder "serve".
 
 
+**Note:** We need to move all the scripts/folders/data (e.g. model.pth file) to the folder "serve".
+
+&nbsp;
 
 2. Then we create an instance of the model copy pasting the class AudioNet from train.py script to a new file named model.py.
 > :speech_balloon: This step is not mandatory, but allows you to make things more orderly for possible future changes.
 
 
-
+&nbsp;
 
 3. Create handler class in a handler.py script. This is the core of this tool.
 Basically here we define a class with 4 main functions:
-  - initialize: here we define and load the pre-trained model. Moreover we can set other case-specific initial settings;
-  - preprocess: this function receive the data and preprocess them before to feed to the net;
-  - inference: where the model extract the prediction;
+  - initialize: here we instancaite and load the pre-trained model. Moreover we can set other case-specific settings;
+  - preprocess: this function receive the data and then preprocess them before to feed to the net;
+  - inference: where the model extracts the prediction;
   - postprocess: some final postprocessing operations, like mapping the index of the class to corresponding class name.
 
 
+&nbsp;
 
 
 4. In the same file (handler.py) define a function named "handle" that instanciate the previous class and use it.
@@ -65,34 +80,66 @@ Its inputs must be:
   - context: item that contains some environment info (e.g. presence of gpus or work directory).
 
 
+&nbsp;
+
+
 5. Add the index_to_name.json file that will map the predicted index class for your test sample to its string name.
 > :speech_balloon: We provide a gen_dict.py file to create the json for this specific case.
 
+&nbsp;
 
 6. Create a test_data folder where to move the data you want to infer.
 
 
 > :speech_balloon: To be clear all the file and folder create until now MUST be in the serve folder. This is a list of what it has to contain:
-  - test_data (folder)
-  - handler.py
-  - model.py
-  - index_to_name.json
-  - model.pth
-  - gen_dict (Optional)
+>   - test_data (folder)
+>   - handler.py
+>   - model.py
+>   - index_to_name.json
+>   - model.pth
+>   - gen_dict (Optional)
 
+&nbsp;
 
-7. Now we are ready to serve our model with TorchServe!
-
-```bash
-git checkout main
-git merge experimental_branch
-git branch -d experimental  branch
-```
-
-Congratulations! You have concluded the first move to a reproducible deep learning world. :nerd_face:
-
-Move to the next exercise:
+7. Now we are ready to serve our model with TorchServe! Here we will generate the .mar file which contains the archived version of the model. So we create a folder "model_store" to store it and then we create the AUDIONET archived model. 
 
 ```bash
-git checkout exercise2_hydra
+mkdir serve/model_store
+
+torch-model-archiver --model-name AUDIONET --version 1.0 --serialized-file ./serve/model.pth --model-file ./serve/model.py --handler ./serve/handler.py --export-path ./serve/model_store -f --extra-files ./configs/default.yaml,./serve/index_to_name.json
 ```
+
+&nbsp;
+
+8. At the end we deploy the Torchserve REST API on a localhost ready to serve.
+
+```bash
+torchserve --start --model-store ./serve/model_store --models audionet=AUDIONET.mar --no-config-snapshots
+```
+
+&nbsp;
+
+9. On a new terminal (that point at the same folder of the previous one and with the right conda environment activated) we can test our data sample.
+
+```bash
+curl -X POST http://127.0.0.1:8080/predictions/audionet -T ./serve/test_data/1-14262-A-37.wav
+```
+
+&nbsp;
+
+10. Then we can try with all the samples we want. Finally we can stop the API, on the same terminal where we started it, with the following command:
+
+```bash
+torchserve --stop
+```
+
+&nbsp;
+
+> :speech_balloon: All the files created in the steps 1-7 are included in the repo. So you can start directly testing the trained classificator following points 8-10! This is the advantage to serve your model.
+
+
+&nbsp;
+
+Congratulations! You have concluded this extra exercise. :nerd_face:
+
+
