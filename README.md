@@ -12,6 +12,8 @@ The use case of the course is an audio classification model trained on the [ESC-
 conda create -n reprodl; conda activate reprodl
 ```
 
+> ⚠️ For an alternative setup without Anaconda, see [issue #2](https://github.com/sscardapane/reprodl2021/issues/2).
+
 Then, install a few generic prerequisites (notebook handling, Pandas, …):
 
 ```bash
@@ -78,6 +80,20 @@ git log --graph --abbrev-commit --decorate
 ```
 
 If you want to inspect a specific change, you can checkout again using the ID of the commit.
+
+### Contributing
+
+Thanks to [Jeroen Van Goey](https://github.com/BioGeek) for the error hunting. Feel free to open a pull request if you have suggestions on the current material or ideas for some extra exercises (see below). 
+
+> ⚠️ Because of the sequential nature of the repository, changing something in one of the initial branches might trigger necessary changes in all downstream branches.
+
+### Extra material (students & more)
+
+**Extra** branches contain material that was not covered in the course (e.g., new libraries for hyper-parameter optimization), implemented by the students for the exam. They can be read independently from the main branches. Refer to the original authors for more information.
+
+| Author | Branch | Content |
+| ------------- | ------------- |------------- |
+| [OfficiallyDAC](https://github.com/OfficiallyDAC) | [extra_optuna](https://github.com/sscardapane/reprodl2021/tree/extra_optuna) | Fine-tuning hyper-parameters with [Optuna](https://optuna.readthedocs.io/en/latest/installation.html). |
 
 ### Advanced reading material
 
