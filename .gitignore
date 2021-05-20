@@ -1,3 +1,7 @@
-data/*
-.vscode/*
+data/ESC-50/*
 lightning_logs/*
+.ipynb_checkpoints/*
+Initial Notebook.ipynb
+custom_dir/*
+outputs/*
+logs/*

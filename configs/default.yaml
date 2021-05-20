@@ -1,0 +1,25 @@
+seed: 0
+
+data:
+    # All parameters related to the dataset
+    path : "data/ESC-50"
+    sample_rate : 8000
+    train_fold : [1,2,3]
+    val_fold : [4]
+    test_fold : [5]
+    batch_size : 8
+model:
+    # All parameters related to the model
+    base_filters : 32
+    n_classes : 50
+    optimizer:
+        # Subset of parameters related to the optimizer
+        lr : 1e-3
+trainer:
+    # All parameters to be passed at the Trainer object
+    gpus : 0
+    max_epochs : 25
+    
+defaults:
+  - hydra/job_logging: colorlog
+  - hydra/hydra_logging: colorlog
