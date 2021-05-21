@@ -94,6 +94,7 @@ Thanks to [Jeroen Van Goey](https://github.com/BioGeek) for the error hunting. F
 | Author | Branch | Content |
 | ------------- | ------------- |------------- |
 | [OfficiallyDAC](https://github.com/OfficiallyDAC) | [extra_optuna](https://github.com/sscardapane/reprodl2021/tree/extra_optuna) | Fine-tuning hyper-parameters with [Optuna](https://optuna.readthedocs.io/en/latest/installation.html). |
+| [FraLuca](https://github.com/FraLuca) | [extra_torchserve](https://github.com/sscardapane/reprodl2021/tree/extra_torchserve) | Serving models with [TorchServe](https://pytorch.org/serve/) |
 
 ### Advanced reading material
 
