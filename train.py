@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
-
+import pdb
 import torch, torchaudio
 from torch import nn
 from torch.nn import functional as F
@@ -12,6 +12,9 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import pandas as pd
 
+import pdb
+import yaml
+import dvclive
 
 class ESC50Dataset(torch.utils.data.Dataset):
     # Simple class to load the desired folders inside ESC-50
@@ -63,6 +66,7 @@ class AudioNet(pl.LightningModule):
         self.bn4 = nn.BatchNorm2d(base_filters * 4)
         self.pool2 = nn.MaxPool2d(2)
         self.fc1 = nn.Linear(base_filters * 4, n_classes)
+        self.last_acc = None
         
     def forward(self, x):
         x = self.conv1(x)
@@ -85,6 +89,11 @@ class AudioNet(pl.LightningModule):
         y_hat = self(x)
         loss = F.cross_entropy(y_hat, y)
         self.log('train_loss', loss, on_step=True)
+        # logging metric
+        train_loss = loss.data.cpu().numpy().reshape(1)[0].item()
+        dvclive.log('train_loss', train_loss) #log metric
+        dvclive.next_step()
+        
         return loss
     
     def validation_step(self, batch, batch_idx):
@@ -99,7 +108,14 @@ class AudioNet(pl.LightningModule):
         optimizer = torch.optim.Adam(self.parameters(), lr=1e-3)
         return optimizer
 
-def train():
+def train(params):
+    batch_size = params['batch_size']
+    base_filters = params['base_filters']
+    n_classes = params['n_classes']
+    gpus = params['gpus']
+    max_epochs = params['max_epochs']
+    n_classes = params['n_classes']
+    seed = params['seed']
     # This is the main training function requested by the exercise.
     # We use folds 1,2,3 for training, 4 for validation, 5 for testing.
     
@@ -109,16 +125,25 @@ def train():
     test_data = ESC50Dataset(folds=[5])
 
     # Wrap data with appropriate data loaders
-    train_loader = torch.utils.data.DataLoader(train_data, batch_size=8, shuffle=True)
-    val_loader = torch.utils.data.DataLoader(val_data, batch_size=8)
-    test_loader = torch.utils.data.DataLoader(test_data, batch_size=8)
+    train_loader = torch.utils.data.DataLoader(train_data, batch_size=batch_size, shuffle=True)
+    val_loader = torch.utils.data.DataLoader(val_data, batch_size=batch_size)
+    test_loader = torch.utils.data.DataLoader(test_data, batch_size=batch_size)
 
-    pl.seed_everything(0)
+    pl.seed_everything(seed)
 
     # Initialize the network
-    audionet = AudioNet()
-    trainer = pl.Trainer(gpus=1, max_epochs=25)
+    audionet = AudioNet(n_classes, base_filters)
+    trainer = pl.Trainer(gpus=gpus, max_epochs=max_epochs)
     trainer.fit(audionet, train_loader, val_loader)
+    
+    # summary dvc
+    accuracy = trainer.logged_metrics['train_loss'].data.cpu().numpy().reshape(1)[0]
+    
+    summary_data = {'stages':{'train':{'accuracy': accuracy}}}
+    with open('summary.json', 'w') as curr_file:
+        curr_file.write(str(summary_data))
+    
 
 if __name__ == "__main__":
-    train()
+    params = yaml.safe_load(open('params.yaml'))['train']
+    train(params)
