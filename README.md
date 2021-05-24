@@ -1,125 +1,188 @@
 # Reproducible Deep Learning
-## Exercise 2: Configuration with Hydra
-[[Official website](https://www.sscardapane.it/teaching/reproducibledl/)]
+## Extra: DVC for experiments management
 
-## Objectives for the exercise
+### Author: [Official DVC](https://dvc.org/doc/user-guide/experiment-management)
 
-- [ ] Adding Hydra support for configuration.
-- [ ] Experimenting with (colored) logging inside the script.
+[[Official reprodl website](https://www.sscardapane.it/teaching/reproducibledl/)]
 
-See the completed exercise:
+> ⚠️ extra branches implement additional exercises created by the students of the 
+> course to explore additional libraries and functionalities. They can be read 
+> independently from the main branches. Refer to the original authors for more information.
 
-```bash
-git checkout exercise2_hydra_completed
-```
+## Goals
+
+- [ ] Initialize ``dvc`` support for experiment management.
+- [ ] Prepare parameters and metrics configuration files, and checkpoints.
+- [ ] Run experiments and access results.
+
 
 ## Prerequisites
 
 1. Uncompress the [ESC-50 dataset](https://github.com/karolpiczak/ESC-50) inside the *data* folder.
 2. If this is your first exercise, run *train.py* to check that everything is working correctly.
-3. Install [Hydra](https://github.com/facebookresearch/hydra):
+3. Install [dvc](https://dvc.org).
+4. Install [dvclive](https://pypi.org/project/dvclive/).
+5. Install [yaml](https://pypi.org/project/PyYAML/).
 
 ```bash
-pip install hydra-core
+pip install <package_name>
 ```
+
 
 ## Instructions
 
-The aim of this exercise is to move all configuration for the training script inside an external configuration file. This simple step dramatically simplifies development and reproducibility, by providing a single entry point for most hyper-parameters of the model.
+The aim of this tutorial is to use ``dvc`` as a tool to define data pipelines in ML, for experiments management purposes. The following steps present a clear way to initialize the ``dvc`` support for experiment management, prepare configuration files and run experiments.
 
-1. Go through the training script, and make a list of all values that can be considered hyper-parameters (e.g., the **learning rate** of the optimizer, the **sampling rate** of the dataset, the **batch size**, ...).
 
-2. Prepare a `configs/default.yaml` file collecting all hyper-parameters. We suggest the following (macro) organization, but you are free to experiment:
+### Step 0: create simulation folder.
 
-```yaml
-data:
-    # All parameters related to the dataset
-model:
-    # All parameters related to the model
-    optimizer:
-        # Subset of parameters related to the optimizer
-trainer:
-    # All parameters to be passed at the Trainer object
+In the first step we create an experiment-data folder, which is going to contain all experiments results.
+```bash
+mkdir experiments-data
 ```
+Details:
+1 - We aim to access all experiments in an unique dvc version; thus, we create an unique experiment-data folder. (This type of structuring is not unique see [Organization Patterns](https://dvc.org/doc/user-guide/experiment-management) for more details).
+2 - We want to exploit the dvc functionalities and let it track all the generated data; therefore we insert the experiments folder in the ``.gitignore`` file.
 
-> :speech_balloon: Check the [basic example](https://hydra.cc/docs/intro/#basic-example) in the Hydra website for help in creating the configuration file.
-
-3. Decorate the `train()` function to accept the configuration file:
-
+### Step 1: configure parameters.
+Secondly, we create a ``.yaml`` file called ``params.yaml``.
+```bash
+vi params.yaml
+```
+This file contains the definition of the parameters.
 ```python
-@hydra.main(config_path='configs', config_name='default')
-def train(cfg: DictConfig):
-    # ...
+train:
+  data_path: "data/ESC-50"
+  base_filters: 32
+  n_classes: 50
+  batch_size: 8
+  gpus: 1
+  max_epochs: 1
+  seed: 42
+```
+Details:
+1 - Each step of the ML pipeline is called ``stage``. Here we consider an unique training stage: ``train``. 
+2 - All the parameters refer to this stage.
+
+To read the parameters in the training function, we insert the following lines in ``train.py`` and modify the ``train`` function to accept the parameters:
+```python
+params = yaml.safe_load(open('params.yaml'))['train']
+train(params)
 ```
 
-4. Use the `cfg` object to set all hyper-parameters in the script.
-   * Read the [OmegaConf](https://omegaconf.readthedocs.io/en/2.0_branch/usage.html#access-and-manipulation) documentation to learn more about accessing the values of the `DictConfig` object.
-   * `LightningModule` [accepts dictionaries to set hyper-parameters](https://pytorch-lightning.readthedocs.io/en/latest/common/hyperparameters.html).
-   * The `Trainer` object requires key-value parameters, but you can easily solve this with:
-        ```python
-        trainer.fit(**cfg.trainer)
-        ```
-    * Hydra will run your script inside a folder which is dynamically created at runtime. To load the dataset, you can use `hydra.utils.get_original_cwd()` to [recover the original folder](https://hydra.cc/docs/tutorials/basic/running_your_app/working_directory#original-working-directory).
+### Step 2: initialize dvc pipeline.
+In this step we aim to initialize the pipeline. ``dvc`` needs the following 3 details: name of the stage, command, and dependencies. There are two ways to initialize a pipeline but both rely on the same information stated above:
+##### 1 - create a dvc.yaml file:
+```python
+stages:
+  train:
+    cmd: python train.py
+    deps:
+      - train.py
+``` 
+Details: 1. "train" is the name of the stage, "cmd" is line command, "deps" are the dependencies.
 
-If everything went well, you should be able to experiment a little bit with Hydra configuration management:
+##### 2 - run the ``dvc run``:
+We now initialize the simulation pipeline creating the so called stages
+```bash
+dvc run -n train \
+        -d train.py \
+        python train.py 
+```          
+Details: 1. -n is used to define the name of the stage, 2. -d the dependecies. Other parameters can be used to specify the output (-o) or the parameters (-p); 3. if some files are missing ``dvc`` creates the missing files.
 
-- Run a standard training loop: 
-  
-  ``` python train.py ```
-- Dynamically change the batch size (modify according to your YAML file): 
-  
-  ``` python train.py data.batch_size=4 ```
+The folders structure should be like this:
+```bash
+.
+├── simulation-data
++├── dvc.yaml
++├── dvc.lock
+├── simulation-data.dvc
+├── params.yaml
+├── train.py
+└── src
+   ├── ...
+```
 
-- Add new flags for the trainer on-the-fly:
-  
-  ``` python train.py +trainer.fast_dev_run=True ```
+To display the pipeline we can type:
+```bash
+  dvc dag
+```
 
-- Remove a flag from the configuration:
-   
-  ``` python train.py ~trainer.gpus ```
-  
-- Change the output directory:
-   
-  ``` python train.py hydra.run.dir="custom_dir" ```
+### Step 3: configure metrics.
+In the third step we are going to track some metrics, by: 1. modifying the ``dvc.yaml`` file, 2. saving a metrics file.
 
-Congratulations! You have concluded another move to a reproducible deep learning world. :nerd_face:
+1. We add the "metrics" details in the "train" stage, specifying the "json" file containing the metrics and if we want to store these values in cache:
+    ```python
+    stages:
+      train:
+        cmd: python train.py
+        deps:
+          - train.py
+        metrics:
+        - summary.json:
+            cache: true
+    ``` 
+    The summary.json should be like this: i) "stages" key; ii) the specified stage name ("train"); iii) the name of the metric that we choose ("accuracy").
+    ```python
+    {'stages': {'train': {'accuracy': 3.5847707}}}
+    ``` 
+3. We add few lines to save the chosen metric in the json file: i) we use the trainer instance to access the "logged metrics" dictionary and extract the training loss; ii) we extract the scalar value from a 0-dim tensor saved in the gpu; iii) we save in the summary.json the metric value.
+    ```python
+      accuracy = trainer.logged_metrics['train_loss'].data.cpu().numpy().reshape(1)[0]
+    
+      summary_data = {'stages':{'train':{'accuracy': accuracy}}}
+      with open('summary.json', 'w') as curr_file:
+          curr_file.write(str(summary_data))
+      ``` 
+  N.B. in this last step, the first line of code is specifically designed for the PyTorch example used.
 
-Move to the next exercise, or check some additional optional activities below:
+
+### Step 5: insert checkpoints.
+
+In this step we record some checkpoints in the experiments using ``dvclive``.
+Firstly, we import the package:
+    ```python
+      import dvclive
+      ``` 
+Secondly, we log the metric and make the checkpoint with the "next_step" method:
+    ```python
+      dvclive.log('train_loss', train_loss)
+      dvclive.next_step()
+      ``` 
+Details:
+1. dvc creates the logs.json, logs.html files and the logs folder, in order to be able to access the logged metrics.
+2. In the logs.html, the plot of the chosen metric is displayed.
+
+
+### Step 6: do experiments.
+To run the experiments we can use two commands.
+1. ```bash
+      dvc exp run -n first_train
+   ``` 
+2. ```bash
+     dvc repro
+   ``` 
+Details: 1. the "-n" parameter is used to specify a name for the experiment. 2. The command "repro" is an old command for reproducibility and, since it uses the same yaml file which describes the pipeline, it produces the same output. 3. We can access the experiments and confront them by using:
 
 ```bash
-git checkout exercise3_dvc
+     dvc exp show
 ```
+in this case, a table with the named experiments, parameters and result metrics are displayed.
 
-### Optional: add some logging
 
-Using Hydra, we can easily add any amount of logging into the application, that is automatically saved inside the dynamically generated folders.
+### Step 7: commit results.
+Finally, the following steps are required to commit the experiments files:
 
-Start by importing the logging function:
-  
-```python 
-import logging
-logger = logging.getLogger(__name__)
-```
-
-You can use the logger to save some important information, debug messages, errors, etc. You will find the log inside the `train.log` file in each generated folder. For example, you can log the initial configuration of the training script:
-
-```python 
-from omegaconf import OmegaConf
-logger.info(OmegaConf.to_yaml(cfg))
-```
-
-Finally, you can color the logging information to make it more readable on terminal. Hydra has a number of interesting plugins, including a [colorlog](https://hydra.cc/docs/plugins/colorlog) plugin. First, install the plugin:
-
-```bash
-pip install hydra_colorlog
-```
-
-Then, add these instructions inside your configuration file:
-
-```yaml
-defaults:
-  - hydra/job_logging: colorlog
-  - hydra/hydra_logging: colorlog
-```
-
-Run again the scripts above to see the colored output.
+1. we add the experiments-data folder in dvc:
+    ```bash
+        dvc add experiments-data
+    ```
+1. we add the dvc file which tracks the experiments-data folder in git:
+    ```bash
+        git add experiments-data.dvc
+    ```
+1. we commit the changes in the stage:
+    ```bash
+        git commit -m "Committing the first experiment."
+    ```
