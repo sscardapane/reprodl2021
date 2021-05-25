@@ -1,0 +1,8 @@
+train:
+  data_path: "data/ESC-50"
+  base_filters: 32
+  n_classes: 50
+  batch_size: 8
+  gpus: 1
+  max_epochs: 1
+  seed: 42

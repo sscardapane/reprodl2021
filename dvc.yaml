@@ -1,0 +1,13 @@
+stages:
+  train:
+    cmd: python train.py
+    deps:
+      - train.py
+    metrics:
+      - summary.json:
+          cache: true  
+    live:
+      logs:
+        summary: true
+        html: true
+
