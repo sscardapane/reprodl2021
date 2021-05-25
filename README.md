@@ -94,10 +94,10 @@ Details: 1. `-n` is used to define the name of the stage, 2. `-d` the dependenci
 The folders structure should be like this:
 ```bash
 .
-├── simulation-data
+├── experiments-data
 +├── dvc.yaml
 +├── dvc.lock
-├── simulation-data.dvc
+├── experiments-data.dvc
 ├── params.yaml
 ├── train.py
 └── src
