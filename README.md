@@ -1,7 +1,7 @@
 # Reproducible Deep Learning
 ## Extra: DVC for experiments management
 
-### Author: [Official DVC](https://dvc.org/doc/user-guide/experiment-management)
+### Author: [FedericoCinus](https://github.com/FedericoCinus)
 
 [[Official reprodl website](https://www.sscardapane.it/teaching/reproducibledl/)]
 
@@ -41,7 +41,7 @@ In the first step we create an experiment-data folder, which is going to contain
 mkdir experiments-data
 ```
 Details:
-1 - We aim to access all experiments in an unique dvc version; thus, we create an unique experiment-data folder. (This type of structuring is not unique see [Organization Patterns](https://dvc.org/doc/user-guide/experiment-management) for more details).
+1 - We aim to access all experiments in a unique dvc version; thus, we create a unique experiment-data folder. (This type of structuring is not unique, see [Organization Patterns](https://dvc.org/doc/user-guide/experiment-management) for more details).
 2 - We want to exploit the dvc functionalities and let it track all the generated data; therefore we insert the experiments folder in the ``.gitignore`` file.
 
 ### Step 1: configure parameters.
@@ -61,7 +61,7 @@ train:
   seed: 42
 ```
 Details:
-1 - Each step of the ML pipeline is called ``stage``. Here we consider an unique training stage: ``train``. 
+1 - Each step of the ML pipeline is called ``stage``. Here we consider a unique training stage: ``train``. 
 2 - All the parameters refer to this stage.
 
 To read the parameters in the training function, we insert the following lines in ``train.py`` and modify the ``train`` function to accept the parameters:
@@ -82,14 +82,14 @@ stages:
 ``` 
 Details: 1. "train" is the name of the stage, "cmd" is line command, "deps" are the dependencies.
 
-##### 2 - run the ``dvc run``:
-We now initialize the simulation pipeline creating the so called stages
+##### 2 - run ``dvc run``:
+We now initialize the simulation pipeline creating the so-called stages:
 ```bash
 dvc run -n train \
         -d train.py \
         python train.py 
 ```          
-Details: 1. -n is used to define the name of the stage, 2. -d the dependecies. Other parameters can be used to specify the output (-o) or the parameters (-p); 3. if some files are missing ``dvc`` creates the missing files.
+Details: 1. `-n` is used to define the name of the stage, 2. `-d` the dependencies. Other parameters can be used to specify the output (`-o`) or the parameters (`-p`); 3. if some files are missing ``dvc`` creates the missing files.
 
 The folders structure should be like this:
 ```bash
@@ -127,7 +127,7 @@ In the third step we are going to track some metrics, by: 1. modifying the ``dvc
     ```python
     {'stages': {'train': {'accuracy': 3.5847707}}}
     ``` 
-3. We add few lines to save the chosen metric in the json file: i) we use the trainer instance to access the "logged metrics" dictionary and extract the training loss; ii) we extract the scalar value from a 0-dim tensor saved in the gpu; iii) we save in the summary.json the metric value.
+3. We add few lines to save the chosen metric in the json file: i) we use the `Trainer` instance from PyTorch Lightning to access the "logged metrics" dictionary and extract the training loss; ii) we extract the scalar value from a 0-dim tensor saved in the GPU; iii) we save in the summary.json the metric value.
     ```python
       accuracy = trainer.logged_metrics['train_loss'].data.cpu().numpy().reshape(1)[0]
     
@@ -163,12 +163,12 @@ To run the experiments we can use two commands.
 2. ```bash
      dvc repro
    ``` 
-Details: 1. the "-n" parameter is used to specify a name for the experiment. 2. The command "repro" is an old command for reproducibility and, since it uses the same yaml file which describes the pipeline, it produces the same output. 3. We can access the experiments and confront them by using:
+Details: 1. the `-n` parameter is used to specify a name for the experiment. 2. The command "repro" is an old command for reproducibility and, since it uses the same yaml file which describes the pipeline, it produces the same output. 3. We can access the experiments and confront them by using:
 
 ```bash
      dvc exp show
 ```
-in this case, a table with the named experiments, parameters and result metrics are displayed.
+In this case, a table with the named experiments, parameters and result metrics are displayed.
 
 
 ### Step 7: commit results.
