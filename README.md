@@ -1,4 +1,10 @@
-## Ray Tune: distributed hyperparameter tuning
+# Reproducible Deep Learning
+
+## Extra: Ray Tune for distributed hyperparameter tuning
+
+### Authors: [Eleonora Grassucci](https://github.com/eleGAN23), [Valerio Guarrasi](https://github.com/guarrasi1995), [Andrea Marcocchia](https://github.com/andremarco)
+
+[[Official reprodl website]](https://www.sscardapane.it/teaching/reproducibledl/)
 
 Ray Tune is a tool for hyperparameters tuning in a local or distributed fashion. It is integrated in TensorBoard and easy to add in a PyTorch code.
 
@@ -23,8 +29,17 @@ The information passing between your model and Tune is performed by the `tune.re
 Here an example of validation loss and accuracy:
 
 ```python
-tune.report(loss=validation_loss, accuracy=validation_accuracy)
+tune.report(loss=validation_loss, accuracy=val_acc)
 ```
+
+If using PyTorch Lightning, Ray Tune exploits the [Callbacks](https://pytorch-lightning.readthedocs.io/en/latest/callbacks.html) methods from the framework and build the `TuneReportCallback`. When defining the PyTorch Lightning (`pl`) Trainer, you can specificy `TuneReportCallback` as callback:
+
+```python
+trainer = pl.Trainer(max_epochs=1, gpus=0, progress_bar_refresh_rate=0,
+                         callbacks=[TuneReportCallback({"val_acc": "val_acc"}, on="validation_end")])
+```
+
+The callback takes the validation accuracy `val_acc` from the PyTorch Lightning Trainer and reports it to Tune.
 
 The hyperparameter grid is a Python dictionary:
 
@@ -51,3 +66,7 @@ During training, if TensorBoard is installed, hyperparameters are automatically 
 ```bash
 tensorboard --logdir ~/ray_results
 ```
+
+A sample output of Ray Tune while training the net in `train.py`:
+
+![](sample_output.png)
