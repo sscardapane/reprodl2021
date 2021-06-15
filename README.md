@@ -45,18 +45,18 @@ In this way we can use a dataset that will be built by a cron job.
 
 2. Set the `cron` section in the `default.yaml` file.
 
-    > :speech_balloon: This step is just to explain how to do it. For the first try, the file can be left as it is.
+> :speech_balloon: This step is just to explain how to do it. For the first try, the file can be left as it is.
 
-    The `cron` section in `default.yaml` is used by `scheduler.py` to initialize cron jobs. In particular, this is the list of parameters and their purpose:
+The `cron` section in `default.yaml` is used by `scheduler.py` to initialize cron jobs. In particular, this is the list of parameters and their purpose:
     
-    - `username`: the machine username that will run the cron jobs;
-    - `python_path`: specify the path to Python; without this, there may be problems such as "Module not found";
-    - `clean`: If True, the cronjobs in the crontab will be removed;
-    - `stop`: If True, the new cronjobs will not be added to the crontab;
-    - `py_cmds`: the list of python files to run, with the frequency at which they will be executed;
-    - <NAME_OF_PY_FILE>: name of the .py file to run;
-    - <time_type>: name of the time specification as in the `python-crontab` module (e.g. `minute`, `hour`);
-    - <time_value>: value for the time specification (e.g. `4`, `MON`).
+- `username`: the machine username that will run the cron jobs;
+- `python_path`: specify the path to Python; without this, there may be problems such as "Module not found";
+- `clean`: If True, the cronjobs in the crontab will be removed;
+- `stop`: If True, the new cronjobs will not be added to the crontab;
+- `py_cmds`: the list of python files to run, with the frequency at which they will be executed;
+- <NAME_OF_PY_FILE>: name of the .py file to run;
+- <time_type>: name of the time specification as in the `python-crontab` module (e.g. `minute`, `hour`);
+- <time_value>: value for the time specification (e.g. `4`, `MON`).
 
 &nbsp;
 
