@@ -27,7 +27,7 @@ class ESC50Dataset(torch.utils.data.Dataset):
         # Load CSV & initialize all torchaudio.transforms:
         # Resample --> MelSpectrogram --> AmplitudeToDB
         self.path = path
-        self.csv = pd.read_csv(path / Path('meta/esc50.csv'))
+        self.csv = pd.read_csv(path / Path('meta/extra_esc50.csv'))
         self.csv = self.csv[self.csv['fold'].isin(folds)]
         self.resample = torchaudio.transforms.Resample(
             orig_freq=44100, new_freq=sample_rate
