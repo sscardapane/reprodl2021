@@ -1,29 +1,35 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Jun  3 10:17:13 2021
-
-@author: ince
-"""
-
 from autoPyTorch import AutoNetClassification
 
-# data and metric imports
-from sklearn.model_selection import train_test_split
-from sklearn.datasets import load_digits
-from sklearn.metrics import accuracy_score
+import sklearn.metrics
+import sklearn.datasets
+import sklearn.model_selection
 
-X, y = load_digits(return_X_y=True)
-X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=1)
 
-# running Auto-PyTorch
-autoPyTorch = AutoNetClassification("tiny_cs",  # config preset
-                                    log_level='info',
-                                    max_runtime=300,
-                                    min_budget=30,
-                                    max_budget=90)
+import json
 
-autoPyTorch.fit(X_train, y_train, validation_split=0.3)
+X, y = sklearn.datasets.load_digits(return_X_y=True)
+X_train, X_test, y_train, y_test = \
+        sklearn.model_selection.train_test_split(X, y, random_state=193)
+
+autoPyTorch = AutoNetClassification(config_preset="tiny_cs", 
+                                    budget_type='epochs', 
+                                    min_budget=50, 
+                                    max_budget=200, 
+                                    num_iterations=5, 
+                                    log_level='debug')
+results_fit = autoPyTorch.fit(optimize_metric='accuracy',
+                          cross_validator='k_fold',
+                          early_stopping_patience=3,
+                          loss_modules=['cross_entropy', 'cross_entropy_weighted'],
+                          log_level="debug",
+                          X_train=X_train,
+                          Y_train=Y_train,
+                          validation_split=0.3,
+                          cuda=True)
+
+
 y_pred = autoPyTorch.predict(X_test)
+print("Accuracy score", sklearn.metrics.accuracy_score(y_test, y_pred))
 
-print("Accuracy score", accuracy_score(y_test, y_pred))
+with open("logs/results_fit.json", "w") as file:
+    json.dump(results_fit, file)
