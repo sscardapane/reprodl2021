@@ -6,8 +6,8 @@
 This is an extra branch of the **exercise 1** to tune hyperparameters with Bayesian optimization. Adaptive experimentation is the machine-learning guided process of iteratively exploring a (possibly infinite) parameter space in order to identify optimal configurations in a resource-efficient manner, avoiding exhausting random search and grid search processes.
 
 ## Goal
-Implement Bayesian optimiziation to tune hyperparameters and find automatically the optimal ones in Pytorch using [Ax(https://ax.dev/)].
-The details of Bayesian optimization ca be find on the [Ax website(https://ax.dev/docs/bayesopt.html)]
+Implement Bayesian optimiziation to tune hyperparameters and find automatically the optimal ones in Pytorch using [Ax](https://ax.dev/).
+The details of Bayesian optimization ca be find on the [Ax website](https://ax.dev/docs/bayesopt.html)
 
 ## Prerequisites 
 
