@@ -1,23 +1,56 @@
 # Reproducible Deep Learning
-## Exercise 1: Git & Scripting
-[[Official website](https://www.sscardapane.it/teaching/reproducibledl/)] [[Slides](https://docs.google.com/presentation/d/1_AYIcCyVI59QiiXqU4Sn7VzwtVyfqv-lG36EPFzeSdY/edit?usp=sharing)]
+## Extra: Axplatform in PyTorch for hyperparameters tuning using Bayesian optimization 
+[[Official website](https://www.sscardapane.it/teaching/reproducibledl/)] 
 
-This is the completed version of **exercise 1** (turning a Python notebook into a working script). 
+This is an extra branch of the **exercise 1** to tune hyperparameters with Bayesian optimization. Adaptive experimentation is the machine-learning guided process of iteratively exploring a (possibly infinite) parameter space in order to identify optimal configurations in a resource-efficient manner, avoiding exhausting random search and grid search processes.
 
-See the initial instructions:
+## Goal
+Implement Bayesian optimiziation to tune hyperparameters and find automatically the optimal ones in Pytorch using [Ax(https://ax.dev/)].
+The details of Bayesian optimization ca be find on the [Ax website(https://ax.dev/docs/bayesopt.html)]
 
+## Prerequisites 
+
+Install requirements: 
+- Install the ax platform 
 ```bash
-git checkout exercise1_git
+pip3 install ax-platform
 ```
+## Instructions 
 
-You can inspect the commits to look at specific changes in the code:
-
+1. Import Optimize, train and evaluate function from the Ax package 
 ```bash
-git log --graph --abbrev-commit --decorate
+from ax.service.managed_loop import optimize
+from ax.utils.tutorials.cnn_utils import train, evaluate
 ```
-
-Move to the next exercise:
-
+2. Open the script train.py that have to be modified 
+3. Modify the train function in a way that:
+    -  the model is inizialized and the network is ready-to-train. The parameterization argument is a dictionary containing the hyperparameters.
+    -  the train() function is called by the Baesyan optimizer on every run. A new set of hyperparameters is generated in parameterization by the optimizer, tids set is passed to        this function and the returned evaluation results are analyzed. 
+    
 ```bash
-git checkout exercise2_hydra
+# constructing a new training data loader allows us to tune the batch size and the learning rate 
+train_loader = torch.utils.data.DataLoader(train_data, batch_size=parameterization.get("batchsize", 8), shuffle=True)
+val_loader = torch.utils.data.DataLoader(val_data, batch_size=parameterization.get("batchsize", 8))
+test_loader = torch.utils.data.DataLoader(test_data, batch_size=parameterization.get("batchsize", 8))
+audionet = AudioNet(lr=parameterization.get("lr", 1e-3))
+
+# return the evaluation results
+return evaluate(
+        net=audionet,
+        data_loader=test_loader,
+        dtype=dtype,
+        device=device,
+    )
+```
+4. Optimize, specifing he hyperparameters you want to sweep across and pass that to Ax’s optimize() function:
+```bash
+best_parameters, values, experiment, model = optimize(
+        parameters=[
+            {"name": "lr", "type": "range", "bounds": [1e-6, 0.4], "log_scale": True},
+            {"name": "batchsize", "type": "range", "bounds": [8, 32]}
+        ],
+
+        evaluation_function=train,
+        objective_name='accuracy',
+    )
 ```
