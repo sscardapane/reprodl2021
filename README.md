@@ -1,13 +1,13 @@
 # Reproducible Deep Learning
-## Extra: Axplatform in PyTorch for hyperparameters tuning using Bayesian optimization 
+## Extra: Ax Platform in PyTorch for hyperparameters tuning using Bayesian optimization 
 ### Author: [gditeodoro](https://github.com/gditeodoro)
 [[Official website](https://www.sscardapane.it/teaching/reproducibledl/)] 
 
 This is an extra branch of the **exercise 1** to tune hyperparameters with Bayesian optimization. Adaptive experimentation is the machine-learning guided process of iteratively exploring a (possibly infinite) parameter space in order to identify optimal configurations in a resource-efficient manner, avoiding exhausting random search and grid search processes.
 
 ## Goal
-Implement Bayesian optimiziation to tune hyperparameters and find automatically the optimal ones in Pytorch using [Ax](https://ax.dev/).
-The details of Bayesian optimization ca be find on the [Ax website](https://ax.dev/docs/bayesopt.html)
+Implement Bayesian optimization to tune hyperparameters and find automatically the optimal ones in Pytorch using [Ax](https://ax.dev/).
+The details of Bayesian optimization can be find on the [Ax website](https://ax.dev/docs/bayesopt.html)
 
 ## Prerequisites 
 
@@ -18,7 +18,7 @@ pip3 install ax-platform
 ```
 ## Instructions 
 
-1. Import Optimize, train and evaluate function from the Ax package 
+1. Import Optimize, train, and evaluate function from the Ax package 
 ```python
 
 from ax.service.managed_loop import optimize
@@ -27,8 +27,8 @@ from ax.utils.tutorials.cnn_utils import train, evaluate
 ```
 2. Open the script train.py that have to be modified 
 3. Modify the train function in a way that:
-    -  the model is inizialized and the network is ready-to-train. The parameterization argument is a dictionary containing the hyperparameters.
-    -  the train() function is called by the Baesyan optimizer on every run. A new set of hyperparameters is generated in parameterization by the optimizer, tids set is passed to        this function and the returned evaluation results are analyzed. 
+    -  the model is initialized and the network is ready-to-train. The parameterization argument is a dictionary containing the hyperparameters.
+    -  the train() function is called by the Baesyan optimizer on every run. A new set of hyperparameters is generated in parameterization by the optimizer, this set is passed to this function and the returned evaluation results are analyzed. 
     
 ```python
 # constructing a new training data loader allows us to tune the batch size and the learning rate 
