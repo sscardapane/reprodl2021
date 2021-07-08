@@ -8,21 +8,23 @@ from torch.nn import functional as F
 import pytorch_lightning as pl
 from pytorch_lightning.metrics import functional
 
-from pathlib import Path
 import matplotlib.pyplot as plt
+import os
 import pandas as pd
+from ax.service.managed_loop import optimize
+from ax.utils.tutorials.cnn_utils import train, evaluate
 
 
 class ESC50Dataset(torch.utils.data.Dataset):
     # Simple class to load the desired folders inside ESC-50
     
-    def __init__(self, path: Path = Path('data/ESC-50'), 
+    def __init__(self, path= 'data/ESC-50',
                  sample_rate: int = 8000,
                  folds = [1]):
         # Load CSV & initialize all torchaudio.transforms:
         # Resample --> MelSpectrogram --> AmplitudeToDB
         self.path = path
-        self.csv = pd.read_csv(path / Path('meta/esc50.csv'))
+        self.csv = pd.read_csv(os.path.join(path, 'meta/esc50.csv'))
         self.csv = self.csv[self.csv['fold'].isin(folds)]
         self.resample = torchaudio.transforms.Resample(
             orig_freq=44100, new_freq=sample_rate
@@ -35,7 +37,7 @@ class ESC50Dataset(torch.utils.data.Dataset):
     def __getitem__(self, index):
         # Returns (xb, yb) pair, after applying all transformations on the audio file.
         row = self.csv.iloc[index]
-        wav, _ = torchaudio.load(self.path / 'audio' / row['filename'])
+        wav, _ = torchaudio.load(os.path.join(self.path, 'audio', row['filename']))
         label = row['target']
         xb = self.db(
             self.melspec(
@@ -50,7 +52,7 @@ class ESC50Dataset(torch.utils.data.Dataset):
 
 class AudioNet(pl.LightningModule):
     
-    def __init__(self, n_classes = 50, base_filters = 32):
+    def __init__(self, n_classes = 50, base_filters = 32, lr=1e-3):
         super().__init__()
         self.conv1 = nn.Conv2d(1, base_filters, 11, padding=5)
         self.bn1 = nn.BatchNorm2d(base_filters)
@@ -63,6 +65,7 @@ class AudioNet(pl.LightningModule):
         self.bn4 = nn.BatchNorm2d(base_filters * 4)
         self.pool2 = nn.MaxPool2d(2)
         self.fc1 = nn.Linear(base_filters * 4, n_classes)
+        self.lr = lr
         
     def forward(self, x):
         x = self.conv1(x)
@@ -96,10 +99,10 @@ class AudioNet(pl.LightningModule):
         return acc
         
     def configure_optimizers(self):
-        optimizer = torch.optim.Adam(self.parameters(), lr=1e-3)
+        optimizer = torch.optim.Adam(self.parameters(), lr=self.lr)
         return optimizer
 
-def train():
+def train(parameterization):
     # This is the main training function requested by the exercise.
     # We use folds 1,2,3 for training, 4 for validation, 5 for testing.
     
@@ -109,16 +112,39 @@ def train():
     test_data = ESC50Dataset(folds=[5])
 
     # Wrap data with appropriate data loaders
-    train_loader = torch.utils.data.DataLoader(train_data, batch_size=8, shuffle=True)
-    val_loader = torch.utils.data.DataLoader(val_data, batch_size=8)
-    test_loader = torch.utils.data.DataLoader(test_data, batch_size=8)
+    train_loader = torch.utils.data.DataLoader(train_data, batch_size=parameterization.get("batchsize", 8), shuffle=True)
+    val_loader = torch.utils.data.DataLoader(val_data, batch_size=parameterization.get("batchsize", 8))
+    test_loader = torch.utils.data.DataLoader(test_data, batch_size=parameterization.get("batchsize", 8))
 
     pl.seed_everything(0)
 
     # Initialize the network
-    audionet = AudioNet()
-    trainer = pl.Trainer(gpus=1, max_epochs=25)
+    audionet = AudioNet(lr=parameterization.get("lr", 1e-3))
+    trainer = pl.Trainer(gpus=0, max_epochs=25)
     trainer.fit(audionet, train_loader, val_loader)
 
+    return evaluate(
+        net=audionet,
+        data_loader=test_loader,
+        dtype=dtype,
+        device=device,
+    )
+
 if __name__ == "__main__":
-    train()
+    dtype = torch.float
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+    best_parameters, values, experiment, model = optimize(
+        parameters=[
+            {"name": "lr", "type": "range", "bounds": [1e-6, 0.4], "log_scale": True},
+            {"name": "batchsize", "type": "range", "bounds": [8, 32]}
+        ],
+
+        evaluation_function=train,
+        objective_name='accuracy',
+    )
+
+    print(best_parameters)
+    means, covariances = values
+    print(means)
+    print(covariances)
