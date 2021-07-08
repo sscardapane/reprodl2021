@@ -11,8 +11,8 @@
 This is an extra branch of the **exercise 1** to tune hyperparameters with Bayesian optimization. Adaptive experimentation is the machine-learning guided process of iteratively exploring a (possibly infinite) parameter space in order to identify optimal configurations in a resource-efficient manner, avoiding exhausting random search and grid search processes.
 
 ## Goal
-Implement Bayesian optimization to tune hyperparameters and find automatically the optimal ones in Pytorch using [Ax](https://ax.dev/).
-The details of Bayesian optimization can be find on the [Ax website](https://ax.dev/docs/bayesopt.html)
+Implement Bayesian optimization to tune hyperparameters and find automatically the optimal ones in PyTorch using [Ax](https://ax.dev/).
+The details of Bayesian optimization can be found on the [Ax website](https://ax.dev/docs/bayesopt.html).
 
 ## Prerequisites 
 
@@ -23,17 +23,17 @@ pip3 install ax-platform
 ```
 ## Instructions 
 
-1. Import Optimize, train, and evaluate function from the Ax package 
+1. Import the `optimize`, `train`, and `evaluate` functions from the Ax package: 
 ```python
 
 from ax.service.managed_loop import optimize
 from ax.utils.tutorials.cnn_utils import train, evaluate
 
 ```
-2. Open the script train.py that have to be modified 
-3. Modify the train function in a way that:
+2. Open the script `train.py` that has to be modified.
+3. Modify the `train()` function in a way that:
     -  the model is initialized and the network is ready-to-train. The parameterization argument is a dictionary containing the hyperparameters.
-    -  the train() function is called by the Baesyan optimizer on every run. A new set of hyperparameters is generated in parameterization by the optimizer, this set is passed to this function and the returned evaluation results are analyzed. 
+    -  the `train()` function is called by the Bayesian optimizer on every run. A new set of hyperparameters is generated in the parameterization by the optimizer, this set is passed to this function and the returned evaluation results are analyzed. 
     
 ```python
 # constructing a new training data loader allows us to tune the batch size and the learning rate 
@@ -50,7 +50,7 @@ return evaluate(
         device=device,
     )
 ```
-4. Optimize, specifing he hyperparameters you want to sweep across and pass that to Ax’s optimize() function:
+4. Optimize, specifing the hyperparameters you want to sweep across and pass that to Ax’s `optimize()` function:
 ```python
 best_parameters, values, experiment, model = optimize(
         parameters=[
