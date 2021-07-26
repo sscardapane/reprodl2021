@@ -6,9 +6,21 @@
 
 [[Official reprodl website]](https://www.sscardapane.it/teaching/reproducibledl/)
 
+Before going into this branch, please look at the main branch in order to understand the project details.
+> :warning: **extra** branches implement additional exercises created by the students of the course to explore additional libraries and functionalities. They can be read independently from the main branches. Refer to the original authors for more information.
+
+&nbsp;
+
+## Goal
 Ray Tune is a tool for hyperparameters tuning in a local or distributed fashion. It is integrated in TensorBoard and easy to add in a PyTorch code.
 
-### Local set-up
+## Prerequisites
+Start uncompressing the [ESC-50 dataset](https://github.com/karolpiczak/ESC-50) inside the *data* folder and installing the generic requirements:
+
+```bash
+pip install -r requirments.txt
+```
+
 As reported in the [documentation](https://docs.ray.io/en/latest/installation.html), Ray fully supports MacOS and Linux. Windows requires Visual C++ dependencies, check it [here](https://docs.ray.io/en/latest/installation.html#windows-support). 
 
 To install Ray Tune follow:
@@ -16,6 +28,8 @@ To install Ray Tune follow:
 ```bash
 pip install -U ray
 ```
+
+## Instructions
 
 In your code, add imports.
 
