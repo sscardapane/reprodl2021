@@ -66,8 +66,10 @@ scan_object = talos.Scan(x=x_train,
 
 It is possible to analyze the results of a scanning process using the *analyze* function:
 ```python
-talos.Analyze(scan_object)
+analysis = talos.Analyze(scan_object)
 ```
+
+As an example, `analysis.data` returns the results dataframe, while `analysis.best_params` returns the best hyperparameters.
 
 
 For further details on the search space possible settings, please refer to the plugin [page](https://autonomio.github.io/talos/#/Optimization_Strategies?id=optimization-strategies).
