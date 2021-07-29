@@ -136,10 +136,12 @@ if __name__ == "__main__":
     x_train, y_train = next(iter(train_loader))
     x_val, y_val = next(iter(train_loader))
 
+    # Set the parameters dictionary
     params = {"lr": [1e-3, 1e-4, 1e-5, 1e-6],
               "batchsize": [2, 4, 8, 16],
               "epochs": [10, 20, 30, 40]}
 
+    # Talos search for best hyperparameters
     scan_object = talos.Scan(x=x_train,
                              y=y_train,
                              x_val=x_val,
@@ -147,3 +149,12 @@ if __name__ == "__main__":
                              params=params,
                              model=optimize,
                              experiment_name='talos')
+    
+    # Talos analysis
+    analysis = talos.Analyze(scan_object)
+
+    # Access the dataframe with the results
+    analysis.data
+
+    # Returns the dictionary of best hyperparameters 
+    analysis.best_params
