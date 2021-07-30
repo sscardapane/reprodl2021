@@ -9,8 +9,6 @@
 Before going into this branch, please look at the main branch in order to understand the project details.
 > :warning: **extra** branches implement additional exercises created by the students of the course to explore additional libraries and functionalities. They can be read independently from the main branches. Refer to the original authors for more information.
 
-&nbsp;
-
 ## Goal
 Ray Tune is a tool for hyperparameters tuning in a local or distributed fashion. It is integrated in TensorBoard and easy to add in a PyTorch code.
 
@@ -18,7 +16,7 @@ Ray Tune is a tool for hyperparameters tuning in a local or distributed fashion.
 Start uncompressing the [ESC-50 dataset](https://github.com/karolpiczak/ESC-50) inside the *data* folder and installing the generic requirements:
 
 ```bash
-pip install -r requirments.txt
+pip install -r requirements.txt
 ```
 
 As reported in the [documentation](https://docs.ray.io/en/latest/installation.html), Ray fully supports MacOS and Linux. Windows requires Visual C++ dependencies, check it [here](https://docs.ray.io/en/latest/installation.html#windows-support). 
@@ -31,7 +29,7 @@ pip install -U ray
 
 ## Instructions
 
-In your code, add imports.
+In your code, add imports:
 
 ```python
 from ray import tune
@@ -40,13 +38,13 @@ from ray.tune.schedulers import ASHAScheduler
 ```
 
 The information passing between your model and Tune is performed by the `tune.report` method.
-Here an example of validation loss and accuracy:
+Here is an example of reporting validation loss and accuracy:
 
 ```python
 tune.report(loss=validation_loss, accuracy=val_acc)
 ```
 
-If using PyTorch Lightning, Ray Tune exploits the [Callbacks](https://pytorch-lightning.readthedocs.io/en/latest/callbacks.html) methods from the framework and build the `TuneReportCallback`. When defining the PyTorch Lightning (`pl`) Trainer, you can specificy `TuneReportCallback` as callback:
+If using PyTorch Lightning, Ray Tune exploits the [Callbacks](https://pytorch-lightning.readthedocs.io/en/latest/callbacks.html) methods from the framework and build the `TuneReportCallback`. When defining the PyTorch Lightning (`pl`) Trainer, you can specify `TuneReportCallback` as callback:
 
 ```python
 trainer = pl.Trainer(max_epochs=1, gpus=0, progress_bar_refresh_rate=0,
