@@ -137,7 +137,7 @@ print("Accuracy score", sklearn.metrics.accuracy_score(y_test, y_pred))
 
 ```py
 import json
-with open("logs/results_fit.json", "w") as file:
+with open("reprodl/logs/results_fit.json", "w") as file:
     json.dump(results_fit, file)
 ```
 

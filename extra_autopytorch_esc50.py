@@ -114,7 +114,7 @@ current_configuration = autonet.get_current_autonet_config()
 hyperparameter_search_space = autonet.get_hyperparameter_search_space()
 
 # Fit (might need larger budgets)
-results_fit = autonet.fit(  optimize_metric='auc_metric',
+results_fit = autonet.fit(optimize_metric='auc_metric',
                       cross_validator='k_fold',
                       early_stopping_patience=3,
                       loss_modules=['cross_entropy', 'cross_entropy_weighted'],
