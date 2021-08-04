@@ -28,21 +28,23 @@ pip install talos==1.0
 
 ## Goal
 
-The aim of this exercise is to understand how to set talos in a simple way, in order to remain in complete control of the PyTorch models, without bothering with mindless parameter hopping and confusing optimization solutions that add complexity instead of reducing it. Talos incorporates grid, random, and probabilistic hyperparameter optimization strategies, with focus on maximizing the flexibility, efficiency, and result of random strategy.
-&nbsp;
+*Talos* is an hyperparameter optimization tool. The main objective of *Talos* is to simplify the hyperparameter optimization in a machine learning model (eg. PyTorch, Tensorflow, Keras, ...) in order to improve the experiments setup. At the same time, with *Talos* you keep the control of your model, without the classical difficulties of AutoML tools. Moreover, *Talos* does not introduce any new syntax and boilerplate code.
 
+*Talos* can work with:
+
+* grid search (cartesian);
+* random grid search;
+* probabilistic optimization.
 
 ## Instructions
-Finding the right hyperparameters for your deep learning model can be a tedious process. With the right process in place, it will not be difficult to find state-of-the-art hyperparameter configuration for a given prediction task.
+In this branch we implement a hyperparameter scanning based on the already created model. The hyperparameter scan with *Talos* is performed via the `talos.Scan()` command, that requires a parameter dictionary.
 
-In this branch we implement a hyperparameter scanning based on an already created model. In addition to the input model, a hyperparameter scan with *Talos*, via the `talos.Scan()` command and a parameter dictionary is added.
-
-To get started with our experiment we need to have three things:
+To get started with our experiment we have to set up three things:
 1. Prepare the input model;
 2. Define the parameter space;
 3. Configure the experiment.
 
-First of all, we have to define the hyper-parameters dictionary:
+First of all, we have to define the hyperparameters dictionary:
 
 ```json
 params = {"lr": [1e-3, 1e-4, 1e-5, 1e-6],
@@ -50,9 +52,9 @@ params = {"lr": [1e-3, 1e-4, 1e-5, 1e-6],
           "epochs": [10, 20, 30, 40]
          }
 ```
-Depending on the needs, many different parameters could be defined. If different losses, optimizers, and activations functions are defined in the dictionary that we want to include in the scan, we should need to import those functions/classes direct from the main module (PyTorch, Keras, ...).
+Depending on the task, different parameters could be defined. If different losses, optimizers, and activations functions are defined in the dictionary that we want to include in the scan, we should need to import those functions/classes direct from the main module (PyTorch, Keras, ...).
 
-Once the model and parameters are ready, we can start the experiment with the following command:
+Once the model and parameters are ready, we can start the hyperparameter scanning with the following command:
 
 ```python
 scan_object = talos.Scan(x=x_train,
@@ -63,14 +65,32 @@ scan_object = talos.Scan(x=x_train,
                          model=optimize,
                          experiment_name='talos')
 ```
+Once the experiment is done, it is possible to take a look to the results of the scanning process.
 
-It is possible to analyze the results of a scanning process using the *analyze* function:
+Looking at the `scan_object.details` attribute, we can obtain the meta-information of the experiment. We can access the epoch entropy values for each hyperparameter round using `scan_object.learning_entropy`
+
+Using the *analyze* function some more insights could be displayed:
+
 ```python
 analysis = talos.Analyze(scan_object)
 ```
+ 
+The `Analyze` has several attributes to explore the optimization strategy and results:
 
-As an example, `analysis.data` returns the results dataframe, while `analysis.best_params` returns the best hyperparameters.
+* `analysis.data` returns the results dataframe;
+* `analysis.best_params` returns the best hyperparameters;
+* `plot_*` gives a visual insight of different aspects such as an histogram for the selected metric or a correlation heatmap where the metric is plotted against hyperparameters.
 
+In the end, through *Talos* we can easily access the best saved model and weights for each hyperparameter permutation just running the following commands:
+```python
+# Retrieve models
+scan_object.saved_models
+
+# Retrieve weights
+scan_object.saved_weights
+```
+
+When the best setting and hyperparameter values have been found, *Talos* gives the possibility to create a deployment package with `Deploy()`.
 
 For further details on the search space possible settings, please refer to the plugin [page](https://autonomio.github.io/talos/#/Optimization_Strategies?id=optimization-strategies).
 
