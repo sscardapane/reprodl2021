@@ -1,105 +1,211 @@
 # Reproducible Deep Learning
-## PhD Course in Data Science, 2021, 3 CFU
-[[Official website](https://www.sscardapane.it/teaching/reproducibledl/)]
+## Extra: Auto-PyTorch for neural architecture search
 
-This practical PhD course explores the design of a simple *reproducible* environment for a deep learning project, using free, open-source tools ([Git](https://git-scm.com/), [DVC](http://dvc.org/), [Docker](https://www.docker.com/), [Hydra](https://github.com/facebookresearch/hydra), ...). The choice of tools is opinionated, and was made as a trade-off between practicality and didactical concerns.
+### Author: [Lorenzo Giusti](https://github.com/lrnzgiusti)
 
-## Local set-up
+[[Official reprodl website](https://www.sscardapane.it/teaching/reproducibledl/)]
+[AutoML Groups Freiburg and Hannover](http://www.automl.org/)
+[[Official Auto-PyTorch Repository](https://github.com/automl/Auto-PyTorch/)]
 
-The use case of the course is an audio classification model trained on the [ESC-50](https://github.com/karolpiczak/ESC-50) dataset. To set-up your local machine (or a proper virtual / remote environment), configure [Anaconda](https://www.anaconda.com/products/individual), and create a clean environment:
 
-```bash
-conda create -n reprodl; conda activate reprodl
+> ⚠️ extra branches implement additional exercises created by the students of the 
+> course to explore additional libraries and functionalities. They can be read 
+> independently from the main branches. Refer to the original authors for more information.
+
+
+## Installation
+
+Clone repository
+
+```sh
+$ cd install/path
+$ git clone https://github.com/automl/Auto-PyTorch.git
+$ cd Auto-PyTorch
+```
+If you want to contribute to this repository switch to our current development branch
+
+```sh
+$ git checkout development
 ```
 
-> ⚠️ For an alternative setup without Anaconda, see [issue #2](https://github.com/sscardapane/reprodl2021/issues/2).
+Install pytorch: 
+https://pytorch.org/
 
-Then, install a few generic prerequisites (notebook handling, Pandas, …):
+Install Auto-PyTorch:
 
-```bash
-conda install -y -c conda-forge notebook matplotlib pandas ipywidgets pathlib
+```sh
+$ cat requirements.txt | xargs -n 1 -L 1 pip install
+$ python setup.py install
 ```
 
-Finally, install [PyTorch](https://pytorch.org/) and [PyTorch Lightning](https://github.com/PyTorchLightning/pytorch-lightning). The instructions below can vary depending on whether you have a CUDA-enabled machine, Linux, etc. In general, follow the instructions from the websites.
 
-```bash
-conda install -y pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch -c conda-forge
-conda install -y pytorch-lightning -c conda-forge
+
+## Instructions
+
+We want to use ``Auto-PyTorch`` as a framework to optimize traditional ML pipelines and their hyperparameters. The following steps present a clear way to initialize the framework adopted and run the relative experiments.
+
+
+### Step 0: Import AutoPyTorch module for a learning task
+
+For simplicity of the experiments, we've chosen a classification task.
+
+```py
+from autoPyTorch import AutoNetClassification
 ```
 
-This should be enough to let you run the [initial notebook](https://github.com/sscardapane/reprodl2021/blob/main/Initial%20Notebook.ipynb). More information on the use case can be found inside the notebook itself.
 
-> :warning: For Windows only, install a [backend for torchaudio](https://pytorch.org/audio/stable/backend.html):
-> ```bash
-> pip install soundfile
-> ```
+### Step 1: Load Data
 
-### Additional set-up steps
+We use the [ESC50](https://github.com/karolpiczak/ESC-50) dataset. The dataset is a labeled collection of 2000 environmental audio recordings suitable for benchmarking methods of environmental sound classification and consists of 5-second-long recordings organized into 50 semantical classes (with 40 examples per class) loosely arranged into 5 major categories.
 
-The following steps are not mandatory, but will considerably simplify the experience.
+For a more convienient way to load the data, we've overloaded the PyTorch's *Dataset* class with a custom one for this specific dataset.
 
-1. If you are on Windows, install the [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10). This is useful in a number of contexts, including Docker installation.
-2. We will use Git from the command line multiple times, so consider enabling [GitHub access with an SSH key](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh).
-3. We will experiment with Docker reproducibility on the [Sapienza DGX environment](https://www.uniroma1.it/sites/default/files/field_file_allegati/presentazione_ga_13-05-2019_sgiagu.pdf). If you have not done so already, set-up your access to the machine.
+```py
+class ESC50Dataset(torch.utils.data.Dataset):
+    # Simple class to load the desired folders inside ESC-50
+    
+    def __init__(self, path: Path = Path(path), 
+                 sample_rate: int = 8000,
+                 folds = [1]):
+        # Load CSV & initialize all torchaudio.transforms:
+        # Resample --> MelSpectrogram --> AmplitudeToDB
+        self.path = path
+        self.csv = pd.read_csv(path / Path('meta/esc50.csv'))
+        self.csv = self.csv[self.csv['fold'].isin(folds)]
+        self.resample = torchaudio.transforms.Resample(
+            orig_freq=44100, new_freq=sample_rate
+        )
+        self.melspec = torchaudio.transforms.MelSpectrogram(
+            sample_rate=sample_rate)
+        self.db = torchaudio.transforms.AmplitudeToDB(top_db=80)
+        
+        
+    def __getitem__(self, index):
+        # Returns (xb, yb) pair, after applying all transformations on the audio file.
+        row = self.csv.iloc[index]
+        wav, _ = torchaudio.load(self.path / 'audio' / row['filename'])
+        label = row['target']
+        xb = self.db(
+            self.melspec(
+                self.resample(wav)
+            )
+        )
+        return xb, label
+        
+    def __len__(self):
+        # Returns length
+        return len(self.csv)
 
-## Organization of the course
-
-<p align="center">
-<img align="center" src="https://github.com/sscardapane/reprodl2021/blob/main/reprodl_overview.png" width="500" style="border: 1px solid black;">
-</p>
-
-The course is split into **exercises** (e.g., adding DVC support). The material for each exercise is provided as a Git branch. To follow an exercise, switch to the corresponding branch, and follow the README there. If you want to see the completed exercise, add *_completed* to the name of the branch. Additional material and information can be found on the [main website](https://www.sscardapane.it/teaching/reproducibledl/) of the course.
-
-**List of exercises**:
-
-- [x] Experimenting with Git, branches, and scripting (*exercise1_git*).
-- [x] Adding Hydra configuration (*exercise2_hydra*).
-- [x] Versioning data with DVC (*exercise3_dvc*).
-- [x] Creating a Dockerfile (*exercise4_docker*).
-- [x] Experiment management with Weight & Biases (*exercise5_wandb*). 
-- [x] Unit testing and formatting with continuous integration (*exercise6_hooks*).
-
-### An example
-
-If you want to follow the first exercise, switch to the corresponding branch and follow the instructions from there:
-
-```bash
-git checkout exercise1_git
 ```
 
-If you want to see the completed exercise:
+##### Step 1.1: Divide the dataset into train, validation and test sets
 
-```bash
-git checkout exercise1_git_completed
+We use folds 1,2,3 for training, 4 for validation, 5 for testing.
+
+```py
+train_data = ESC50Dataset(folds=[1,2,3])
+val_data = ESC50Dataset(folds=[4])
+test_data = ESC50Dataset(folds=[5])
+
+X_train, y_train = train_data[0]
+y_train = [y_train]
+
+X_val, y_val = val_data[0]
+y_val = [y_val]
 ```
 
-You can inspect the commits to look at specific changes in the code:
 
-```bash
-git log --graph --abbrev-commit --decorate
+##### Step 1.2: Concatenate the data
+
+This step is done to bulk the batches into a single tensor.
+
+```py
+for i in range(1, 50):
+  xb, yb = train_data[i]
+  X_train = torch.cat((X_train, xb), 0)
+  y_train.append(yb)
+
+for i in range(1, 20):
+  xb, yb = val_data[i]
+  X_val = torch.cat((X_val, xb), 0)
+  y_val.append(yb)
+
+y_train = np.array(y_train)
+y_val = np.array(y_val)
+
 ```
 
-If you want to inspect a specific change, you can checkout again using the ID of the commit.
+### Step 2: Initialize the architecture search object
 
-### Contributing
+For a time-based budged use the following code:
 
-Thanks to [Jeroen Van Goey](https://github.com/BioGeek) for the error hunting. Feel free to open a pull request if you have suggestions on the current material or ideas for some extra exercises (see below). 
+```py
+autoPyTorch = AutoNetClassification(config_preset="tiny_cs",   
+                                    log_level='debug',
+                                    budget_type='time',
+                                    num_iterations=5, 
+                                    max_runtime=950,
+                                    min_budget=50,
+                                    max_budget=500)
+```
 
-> ⚠️ Because of the sequential nature of the repository, changing something in one of the initial branches might trigger necessary changes in all downstream branches.
+For an epoch-based budget you simply have to change the respective parameter parameter:
 
-### Extra material (students & more)
+```py
+autoPyTorch = AutoNetClassification(config_preset="tiny_cs", 
+                                    log_level='debug',
+                                    budget_type='epochs',  # <---- 
+                                    num_iterations=5,
+                                    max_runtime=950,
+                                    min_budget=50, 
+                                    max_budget=500)
+```
 
-**Extra** branches contain material that was not covered in the course (e.g., new libraries for hyper-parameter optimization), implemented by the students for the exam. They can be read independently from the main branches. Refer to the original authors for more information.
 
-| Author | Branch | Content |
-| ------------- | ------------- |------------- |
-| [OfficiallyDAC](https://github.com/OfficiallyDAC) | [extra_optuna](https://github.com/sscardapane/reprodl2021/tree/extra_optuna) | Fine-tuning hyper-parameters with [Optuna](https://optuna.readthedocs.io/en/latest/installation.html). |
-| [FraLuca](https://github.com/FraLuca) | [extra_torchserve](https://github.com/sscardapane/reprodl2021/tree/extra_torchserve) | Serving models with [TorchServe](https://pytorch.org/serve/). |
-| [FedericoCinus](https://github.com/FedericoCinus) | [extra_dvc_experiments_management](https://github.com/sscardapane/reprodl2021/tree/extra_dvc_experiments_management) | Using DVC for managing experiments. |
-| [siciliano-diag](https://github.com/siciliano-diag) | [extra_python-crontab](https://github.com/sscardapane/reprodl2021/tree/extra_python-crontab) | Understand how to set cronjobs in a simple way. |
-| [gditeodoro](https://github.com/gditeodoro) | [extra_axplatform](https://github.com/sscardapane/reprodl2021/tree/extra_axplatform) | Fine-tuning hyper-parameters with the [Ax Platform](https://ax.dev/). |
-| [eleGAN23](https://github.com/eleGAN23), [guarrasi1995](https://github.com/guarrasi1995), [andreamarco](https://github.com/andremarco) | [extra_tune](https://github.com/sscardapane/reprodl2021/tree/extra_tune) | Fine-tuning the model with [Ray Tune](https://docs.ray.io/en/master/tune/index.html). |
 
-### Advanced reading material
+### Step 3: Fit the neural network
 
-If you liked the exercises and are planning to explore more, the new edition of [Full Stack Deep Learning](https://fullstackdeeplearning.com/) (UC Berkeley CS194-080) covers a larger set of material than this course. Another good resource (divided in small exercises) is the [MLOps](https://github.com/GokuMohandas/mlops) repository by Goku Mohandas. [lucmos/nn-template](https://github.com/lucmos/nn-template) is a fully-functioning template implementing many of the tools described in this course.
+For a vanilla training you can just pass the training samples and the ratio to split the samples into training & validation sets
+
+```py
+results_fit = autoPyTorch.fit(X_train, y_train, validation_split=0.3)
+```
+
+For a more sophisticated training, you can add many options, without loss of generality you can use the following:
+
+```py
+results_fit = autoPyTorch.fit(optimize_metric='accuracy',
+                          cross_validator='k_fold',
+                          early_stopping_patience=3,
+                          loss_modules=['cross_entropy', 'cross_entropy_weighted'],
+                          log_level="debug",
+                          X_train=X_train,
+                          Y_train=Y_train,
+                          validation_split=0.3,
+                          cuda=True)
+```
+
+
+
+
+
+### Step 4: Measure the performance obtained
+
+
+```py
+import sklearn.metrics
+
+y_pred = autoPyTorch.predict(X_test)
+print("Accuracy score", sklearn.metrics.accuracy_score(y_test, y_pred))
+```
+
+
+### Step 5: Save results into a JSON file
+
+
+```py
+import json
+with open("reprodl/logs/results_fit.json", "w") as file:
+    json.dump(results_fit, file)
+```
+
