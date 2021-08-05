@@ -1,106 +1,97 @@
 # Reproducible Deep Learning
-## PhD Course in Data Science, 2021, 3 CFU
-[[Official website](https://www.sscardapane.it/teaching/reproducibledl/)]
+## Extra: Talos: Hyperparameter Optimization for Keras, TensorFlow and PyTorch
+### Author: [Valerio Guarrasi](https://github.com/guarrasi1995), [Andrea Marcocchia](https://github.com/andremarco), [Eleonora Grassucci](https://github.com/eleGAN23)
 
-This practical PhD course explores the design of a simple *reproducible* environment for a deep learning project, using free, open-source tools ([Git](https://git-scm.com/), [DVC](http://dvc.org/), [Docker](https://www.docker.com/), [Hydra](https://github.com/facebookresearch/hydra), ...). The choice of tools is opinionated, and was made as a trade-off between practicality and didactical concerns.
+Before going into this branch, please look at the main branch in order to understand the project details.
+> :warning: **extra** branches implement additional exercises created by the students of the course to explore additional libraries and functionalities. They can be read independently from the main branches. Refer to the original authors for more information.
 
-## Local set-up
+&nbsp;
 
-The use case of the course is an audio classification model trained on the [ESC-50](https://github.com/karolpiczak/ESC-50) dataset. To set-up your local machine (or a proper virtual / remote environment), configure [Anaconda](https://www.anaconda.com/products/individual), and create a clean environment:
+## Prerequisites
 
-```bash
-conda create -n reprodl; conda activate reprodl
-```
-
-> ⚠️ For an alternative setup without Anaconda, see [issue #2](https://github.com/sscardapane/reprodl2021/issues/2).
-
-Then, install a few generic prerequisites (notebook handling, Pandas, …):
+1. Uncompress the [ESC-50 dataset](https://github.com/karolpiczak/ESC-50) inside the *data* folder.
+2. Install generic requirements:
 
 ```bash
-conda install -y -c conda-forge notebook matplotlib pandas ipywidgets pathlib
+pip install -r requirements.txt
 ```
-
-Finally, install [PyTorch](https://pytorch.org/) and [PyTorch Lightning](https://github.com/PyTorchLightning/pytorch-lightning). The instructions below can vary depending on whether you have a CUDA-enabled machine, Linux, etc. In general, follow the instructions from the websites.
+3. Install the *branch specific* requirments:
+```bash
+pip install talos
+```
+In order to run the experiment explained in this branch, we used the `1.0` *Talos* version. In order to guarantee reproducibility, it is possible to install the specific version:
 
 ```bash
-conda install -y pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch -c conda-forge
-conda install -y pytorch-lightning -c conda-forge
+pip install talos==1.0
+```
+&nbsp;
+
+## Goal
+
+*Talos* is an hyperparameter optimization tool. The main objective of *Talos* is to simplify the hyperparameter optimization in a machine learning model (eg. PyTorch, Tensorflow, Keras, ...) in order to improve the experiments setup. At the same time, with *Talos* you keep the control of your model, without the classical difficulties of AutoML tools. Moreover, *Talos* does not introduce any new syntax and boilerplate code.
+
+*Talos* can work with:
+
+* grid search (cartesian);
+* random grid search;
+* probabilistic optimization.
+
+## Instructions
+In this branch we implement a hyperparameter scanning based on the already created model. The hyperparameter scan with *Talos* is performed via the `talos.Scan()` command, that requires a parameter dictionary.
+
+To get started with our experiment we have to set up three things:
+1. Prepare the input model;
+2. Define the parameter space;
+3. Configure the experiment.
+
+First of all, we have to define the hyperparameters dictionary:
+
+```json
+params = {"lr": [1e-3, 1e-4, 1e-5, 1e-6],
+          "batchsize": [2, 4, 8, 16], 
+          "epochs": [10, 20, 30, 40]
+         }
+```
+Depending on the task, different parameters could be defined. If different losses, optimizers, and activations functions are defined in the dictionary that we want to include in the scan, we should need to import those functions/classes direct from the main module (PyTorch, Keras, ...).
+
+Once the model and parameters are ready, we can start the hyperparameter scanning with the following command:
+
+```python
+scan_object = talos.Scan(x=x_train,
+                         y=y_train,
+                         x_val=x_val,
+                         y_val=y_val,
+                         params=params,
+                         model=optimize,
+                         experiment_name='talos')
+```
+Once the experiment is done, it is possible to take a look to the results of the scanning process.
+
+Looking at the `scan_object.details` attribute, we can obtain the meta-information of the experiment. We can access the epoch entropy values for each hyperparameter round using `scan_object.learning_entropy`.
+
+Using the *analyze* function some more insights could be displayed:
+
+```python
+analysis = talos.Analyze(scan_object)
+```
+ 
+The `Analyze` objject has several attributes to explore the optimization strategy and results:
+
+* `analysis.data` returns the results dataframe;
+* `analysis.best_params` returns the best hyperparameters;
+* `plot_*` gives a visual insight of different aspects such as an histogram for the selected metric or a correlation heatmap where the metric is plotted against hyperparameters.
+
+In the end, through *Talos* we can easily access the best saved model and weights for each hyperparameter permutation just running the following commands:
+```python
+# Retrieve models
+scan_object.saved_models
+
+# Retrieve weights
+scan_object.saved_weights
 ```
 
-This should be enough to let you run the [initial notebook](https://github.com/sscardapane/reprodl2021/blob/main/Initial%20Notebook.ipynb). More information on the use case can be found inside the notebook itself.
+When the best setting and hyperparameter values have been found, *Talos* gives the possibility to create a deployment package with `Deploy()`.
 
-> :warning: For Windows only, install a [backend for torchaudio](https://pytorch.org/audio/stable/backend.html):
-> ```bash
-> pip install soundfile
-> ```
+For further details on the search space possible settings, please refer to the plugin [page](https://autonomio.github.io/talos/#/Optimization_Strategies?id=optimization-strategies).
 
-### Additional set-up steps
-
-The following steps are not mandatory, but will considerably simplify the experience.
-
-1. If you are on Windows, install the [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10). This is useful in a number of contexts, including Docker installation.
-2. We will use Git from the command line multiple times, so consider enabling [GitHub access with an SSH key](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh).
-3. We will experiment with Docker reproducibility on the [Sapienza DGX environment](https://www.uniroma1.it/sites/default/files/field_file_allegati/presentazione_ga_13-05-2019_sgiagu.pdf). If you have not done so already, set-up your access to the machine.
-
-## Organization of the course
-
-<p align="center">
-<img align="center" src="https://github.com/sscardapane/reprodl2021/blob/main/reprodl_overview.png" width="500" style="border: 1px solid black;">
-</p>
-
-The course is split into **exercises** (e.g., adding DVC support). The material for each exercise is provided as a Git branch. To follow an exercise, switch to the corresponding branch, and follow the README there. If you want to see the completed exercise, add *_completed* to the name of the branch. Additional material and information can be found on the [main website](https://www.sscardapane.it/teaching/reproducibledl/) of the course.
-
-**List of exercises**:
-
-- [x] Experimenting with Git, branches, and scripting (*exercise1_git*).
-- [x] Adding Hydra configuration (*exercise2_hydra*).
-- [x] Versioning data with DVC (*exercise3_dvc*).
-- [x] Creating a Dockerfile (*exercise4_docker*).
-- [x] Experiment management with Weight & Biases (*exercise5_wandb*). 
-- [x] Unit testing and formatting with continuous integration (*exercise6_hooks*).
-
-### An example
-
-If you want to follow the first exercise, switch to the corresponding branch and follow the instructions from there:
-
-```bash
-git checkout exercise1_git
-```
-
-If you want to see the completed exercise:
-
-```bash
-git checkout exercise1_git_completed
-```
-
-You can inspect the commits to look at specific changes in the code:
-
-```bash
-git log --graph --abbrev-commit --decorate
-```
-
-If you want to inspect a specific change, you can checkout again using the ID of the commit.
-
-### Contributing
-
-Thanks to [Jeroen Van Goey](https://github.com/BioGeek) for the error hunting. Feel free to open a pull request if you have suggestions on the current material or ideas for some extra exercises (see below). 
-
-> ⚠️ Because of the sequential nature of the repository, changing something in one of the initial branches might trigger necessary changes in all downstream branches.
-
-### Extra material (students & more)
-
-**Extra** branches contain material that was not covered in the course (e.g., new libraries for hyper-parameter optimization), implemented by the students for the exam. They can be read independently from the main branches. Refer to the original authors for more information.
-
-| Author | Branch | Content |
-| ------------- | ------------- |------------- |
-| [OfficiallyDAC](https://github.com/OfficiallyDAC) | [extra_optuna](https://github.com/sscardapane/reprodl2021/tree/extra_optuna) | Fine-tuning hyper-parameters with [Optuna](https://optuna.readthedocs.io/en/latest/installation.html). |
-| [FraLuca](https://github.com/FraLuca) | [extra_torchserve](https://github.com/sscardapane/reprodl2021/tree/extra_torchserve) | Serving models with [TorchServe](https://pytorch.org/serve/). |
-| [FedericoCinus](https://github.com/FedericoCinus) | [extra_dvc_experiments_management](https://github.com/sscardapane/reprodl2021/tree/extra_dvc_experiments_management) | Using DVC for managing experiments. |
-| [siciliano-diag](https://github.com/siciliano-diag) | [extra_python-crontab](https://github.com/sscardapane/reprodl2021/tree/extra_python-crontab) | Understand how to set cronjobs in a simple way. |
-| [gditeodoro](https://github.com/gditeodoro) | [extra_axplatform](https://github.com/sscardapane/reprodl2021/tree/extra_axplatform) | Fine-tuning hyper-parameters with the [Ax Platform](https://ax.dev/). |
-| [eleGAN23](https://github.com/eleGAN23), [guarrasi1995](https://github.com/guarrasi1995), [andreamarco](https://github.com/andremarco) | [extra_tune](https://github.com/sscardapane/reprodl2021/tree/extra_tune) | Fine-tuning the model with [Ray Tune](https://docs.ray.io/en/master/tune/index.html). |
-| [lrnzgiusti](https://github.com/lrnzgiusti) | [extra_autopytorch](https://github.com/sscardapane/reprodl2021/tree/extra_autopytorch) | Fine-tuning hyper-parameters with [Auto-PyTorch](https://github.com/automl/Auto-PyTorch) |
-
-### Advanced reading material
-
-If you liked the exercises and are planning to explore more, the new edition of [Full Stack Deep Learning](https://fullstackdeeplearning.com/) (UC Berkeley CS194-080) covers a larger set of material than this course. Another good resource (divided in small exercises) is the [MLOps](https://github.com/GokuMohandas/mlops) repository by Goku Mohandas. [lucmos/nn-template](https://github.com/lucmos/nn-template) is a fully-functioning template implementing many of the tools described in this course.
+Congrats! The extra exercise is concluded.

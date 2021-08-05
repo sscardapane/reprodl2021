@@ -1,0 +1,5 @@
+data/*
+.vscode/*
+lightning_logs/*
+.idea/*
+venv/*
