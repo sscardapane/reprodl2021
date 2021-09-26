@@ -1,107 +1,67 @@
 # Reproducible Deep Learning
-## PhD Course in Data Science, 2021, 3 CFU
+## Extra: Model Explainability via Global Feature Importance using SAGE
+### Authors: [Andrea Mastropietro](https://github.com/AndMastro), [Maria Sofia Bucarelli](https://github.com/memis12)
+
 [[Official website](https://www.sscardapane.it/teaching/reproducibledl/)]
 
-This practical PhD course explores the design of a simple *reproducible* environment for a deep learning project, using free, open-source tools ([Git](https://git-scm.com/), [DVC](http://dvc.org/), [Docker](https://www.docker.com/), [Hydra](https://github.com/facebookresearch/hydra), ...). The choice of tools is opinionated, and was made as a trade-off between practicality and didactical concerns.
+> :warning: **extra** branches implement additional exercises created by the students of the course to explore additional libraries and functionalities. They can be read independently from the main branches. Refer to the original authors for more information.
 
-## Local set-up
+&nbsp;
 
-The use case of the course is an audio classification model trained on the [ESC-50](https://github.com/karolpiczak/ESC-50) dataset. To set-up your local machine (or a proper virtual / remote environment), configure [Anaconda](https://www.anaconda.com/products/individual), and create a clean environment:
+## Overview
+A well trained neural network is able to deliver good predictive performances. However, in certain fields we are interested to know which are the input features that mostly contribute to the output prediction. There are two approaches to **explainability**:
 
-```bash
-conda create -n reprodl; conda activate reprodl
+* Local: given an input instance, we measure the impact on the output of the features for that very instance.
+* Global: we measure the overall impact (dataset-wise) of the features on the model performances.
+
+The latter is the goal of **SAGE**. Explaining a prediction can be fundamental in order to both prodive meaningful insights on what the network learned and for debugging and inspection purposes.
+
+SAGE uses Shapley values from game theory to compute global feature importance scores. It differentiates in this from other methods (SHAP, Integrated Gradients, etc...) since the latter provide sample-wise explanations rather then dataset-wise.
+
+The original **SAGE** paper can be found [here](https://arxiv.org/abs/2004.00668).\
+The corresponing github repo is [here](https://github.com/iancovert/sage/).
+
+&nbsp;
+
+## Requirements
+
+1. Follow the setup instructions from the `main` branch.
+2. Download the Carifornia Housing Prices dataset inside the `data` folder from here: https://www.kaggle.com/camnugent/california-housing-prices.\
+Alternatively, one can use the Kaggle API:
+
+```bash 
+    kaggle datasets download -d camnugent/california-housing-prices
+```
+3. Install `sage-importance` package using `pip`:
+    ```bash
+    pip install sage-importance
+    ```
+
+## Individual Feature Importance
+Using SAGE we can compute feature importance both considering each feature indepentendly or group them together. You can train your favourite model (SAGE is model-agnostic) and then compute global explanations. What you need to do is to define an `imputer`, which is used to handle missing features, if they occur, and they run a Shapley value estimator that will compute fature importance: 
+
+```python
+import sage
+
+# get your data
+x_test, y_test = ...
+feature_names = ...
+
+# train your favourite model 
+model = ...
+
+# set up an imputer to handle missing features
+imputer = sage.MarginalImputer(model, x_test[:512])
+
+# set up an estimator for Shaply values computation
+estimator = sage.PermutationEstimator(imputer, 'mse')
+
+# calculate SAGE values
+sage_values = estimator(x_test, y_test)
+
+# plot the results
+sage_values.plot(feature_names)
 ```
 
-> ⚠️ For an alternative setup without Anaconda, see [issue #2](https://github.com/sscardapane/reprodl2021/issues/2).
-
-Then, install a few generic prerequisites (notebook handling, Pandas, …):
-
-```bash
-conda install -y -c conda-forge notebook matplotlib pandas ipywidgets pathlib
-```
-
-Finally, install [PyTorch](https://pytorch.org/) and [PyTorch Lightning](https://github.com/PyTorchLightning/pytorch-lightning). The instructions below can vary depending on whether you have a CUDA-enabled machine, Linux, etc. In general, follow the instructions from the websites.
-
-```bash
-conda install -y pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch -c conda-forge
-conda install -y pytorch-lightning -c conda-forge
-```
-
-This should be enough to let you run the [initial notebook](https://github.com/sscardapane/reprodl2021/blob/main/Initial%20Notebook.ipynb). More information on the use case can be found inside the notebook itself.
-
-> :warning: For Windows only, install a [backend for torchaudio](https://pytorch.org/audio/stable/backend.html):
-> ```bash
-> pip install soundfile
-> ```
-
-### Additional set-up steps
-
-The following steps are not mandatory, but will considerably simplify the experience.
-
-1. If you are on Windows, install the [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10). This is useful in a number of contexts, including Docker installation.
-2. We will use Git from the command line multiple times, so consider enabling [GitHub access with an SSH key](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh).
-3. We will experiment with Docker reproducibility on the [Sapienza DGX environment](https://www.uniroma1.it/sites/default/files/field_file_allegati/presentazione_ga_13-05-2019_sgiagu.pdf). If you have not done so already, set-up your access to the machine.
-
-## Organization of the course
-
-<p align="center">
-<img align="center" src="https://github.com/sscardapane/reprodl2021/blob/main/reprodl_overview.png" width="500" style="border: 1px solid black;">
-</p>
-
-The course is split into **exercises** (e.g., adding DVC support). The material for each exercise is provided as a Git branch. To follow an exercise, switch to the corresponding branch, and follow the README there. If you want to see the completed exercise, add *_completed* to the name of the branch. Additional material and information can be found on the [main website](https://www.sscardapane.it/teaching/reproducibledl/) of the course.
-
-**List of exercises**:
-
-- [x] Experimenting with Git, branches, and scripting (*exercise1_git*).
-- [x] Adding Hydra configuration (*exercise2_hydra*).
-- [x] Versioning data with DVC (*exercise3_dvc*).
-- [x] Creating a Dockerfile (*exercise4_docker*).
-- [x] Experiment management with Weight & Biases (*exercise5_wandb*). 
-- [x] Unit testing and formatting with continuous integration (*exercise6_hooks*).
-
-### An example
-
-If you want to follow the first exercise, switch to the corresponding branch and follow the instructions from there:
-
-```bash
-git checkout exercise1_git
-```
-
-If you want to see the completed exercise:
-
-```bash
-git checkout exercise1_git_completed
-```
-
-You can inspect the commits to look at specific changes in the code:
-
-```bash
-git log --graph --abbrev-commit --decorate
-```
-
-If you want to inspect a specific change, you can checkout again using the ID of the commit.
-
-### Contributing
-
-Thanks to [Jeroen Van Goey](https://github.com/BioGeek) for the error hunting. Feel free to open a pull request if you have suggestions on the current material or ideas for some extra exercises (see below). 
-
-> ⚠️ Because of the sequential nature of the repository, changing something in one of the initial branches might trigger necessary changes in all downstream branches.
-
-### Extra material (students & more)
-
-**Extra** branches contain material that was not covered in the course (e.g., new libraries for hyper-parameter optimization), implemented by the students for the exam. They can be read independently from the main branches. Refer to the original authors for more information.
-
-| Author | Branch | Content |
-| ------------- | ------------- |------------- |
-| [OfficiallyDAC](https://github.com/OfficiallyDAC) | [extra_optuna](https://github.com/sscardapane/reprodl2021/tree/extra_optuna) | Fine-tuning hyper-parameters with [Optuna](https://optuna.readthedocs.io/en/latest/installation.html). |
-| [FraLuca](https://github.com/FraLuca) | [extra_torchserve](https://github.com/sscardapane/reprodl2021/tree/extra_torchserve) | Serving models with [TorchServe](https://pytorch.org/serve/). |
-| [FedericoCinus](https://github.com/FedericoCinus) | [extra_dvc_experiments_management](https://github.com/sscardapane/reprodl2021/tree/extra_dvc_experiments_management) | Using DVC for managing experiments. |
-| [siciliano-diag](https://github.com/siciliano-diag) | [extra_python-crontab](https://github.com/sscardapane/reprodl2021/tree/extra_python-crontab) | Understand how to set cronjobs in a simple way. |
-| [gditeodoro](https://github.com/gditeodoro) | [extra_axplatform](https://github.com/sscardapane/reprodl2021/tree/extra_axplatform) | Fine-tuning hyper-parameters with the [Ax Platform](https://ax.dev/). |
-| [eleGAN23](https://github.com/eleGAN23), [guarrasi1995](https://github.com/guarrasi1995), [andreamarco](https://github.com/andremarco) | [extra_tune](https://github.com/sscardapane/reprodl2021/tree/extra_tune) | Fine-tuning hyper-parameters with [Ray Tune](https://docs.ray.io/en/master/tune/index.html). |
-| [lrnzgiusti](https://github.com/lrnzgiusti) | [extra_autopytorch](https://github.com/sscardapane/reprodl2021/tree/extra_autopytorch) | Fine-tuning hyper-parameters with [Auto-PyTorch](https://github.com/automl/Auto-PyTorch). |
-| [eleGAN23](https://github.com/eleGAN23), [guarrasi1995](https://github.com/guarrasi1995), [andreamarco](https://github.com/andremarco) | [extra_talos](https://github.com/sscardapane/reprodl2021/tree/extra_talos) | Fine-tuning hyper-parameters with [Talos](https://github.com/autonomio/talos). |
-
-### Advanced reading material
-
-If you liked the exercises and are planning to explore more, the new edition of [Full Stack Deep Learning](https://fullstackdeeplearning.com/) (UC Berkeley CS194-080) covers a larger set of material than this course. Another good resource (divided in small exercises) is the [MLOps](https://github.com/GokuMohandas/mlops) repository by Goku Mohandas. [lucmos/nn-template](https://github.com/lucmos/nn-template) is a fully-functioning template implementing many of the tools described in this course.
+## Grouped Feature Importance
+TODO
