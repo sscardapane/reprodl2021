@@ -30,7 +30,7 @@ The corresponing github repo is [here](https://github.com/iancovert/sage/).
 Alternatively, one can use the Kaggle API:
 
     ```bash 
-        kaggle datasets download -d camnugent/california-housing-prices
+    kaggle datasets download -d camnugent/california-housing-prices
     ```
     
 3. Install `sage-importance` package using `pip`:
@@ -54,7 +54,7 @@ model = ...
 # set up an imputer to handle missing features
 imputer = sage.MarginalImputer(model, x_test[:512])
 
-# set up an estimator for Shaply values computation
+# set up an estimator for Shapley values computation
 estimator = sage.PermutationEstimator(imputer, 'mse')
 
 # calculate SAGE values
