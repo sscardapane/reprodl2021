@@ -24,6 +24,7 @@ The corresponing github repo is [here](https://github.com/iancovert/sage/).
 &nbsp;
 
 ## Requirements
+In order to run the example [notebook](https://github.com/AndMastro/reprodl2021/blob/extra_sage/train_explain.ipynb), you need the following:
 
 1. Follow the setup instructions from the `main` branch.
 2. Download the Carifornia Housing Prices dataset inside the `data` folder from here: https://www.kaggle.com/camnugent/california-housing-prices.\
@@ -65,4 +66,38 @@ sage_values.plot(feature_names)
 ```
 
 ## Grouped Feature Importance
-TODO
+As stated, we can coalesce features into groups in order to compute their joint importance for the model. Here follows an example from the notebook provided:
+
+```python
+# we create feature groups we may be interested in
+feature_groups = group_names = {
+    'location (grouped)': ['longitude', 'latitude', 'ocean_proximity'],
+    'rooms (grouped)': ['total_rooms', 'total_bedrooms'],
+    'people density (grouped)': ['population', 'households'],
+    'median_income': ['median_income'],
+    'housing_median_age': ['housing_median_age']
+}
+
+group_names = list(feature_groups.keys())
+
+
+# group indices
+groups = []
+for _, group in feature_groups.items():
+    ind_list = []
+    for feature in group:
+        ind_list.append(feature_names.index(feature))
+    groups.append(ind_list)
+```
+
+The Shapley values computation is analogous as for the individual features case, we just need to pass the group indices to the `imputer`:
+
+```python
+imputer = sage.GroupedMarginalImputer(net, X_test[:512], groups)
+estimator = sage.PermutationEstimator(imputer, 'mse')
+sage_values = estimator(X_test, y_test)
+
+sage_values.plot(group_names)
+```
+
+For a complete exaple usage refert to this [notebook](https://github.com/AndMastro/reprodl2021/blob/extra_sage/train_explain.ipynb)
