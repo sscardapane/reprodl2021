@@ -29,9 +29,10 @@ The corresponing github repo is [here](https://github.com/iancovert/sage/).
 2. Download the Carifornia Housing Prices dataset inside the `data` folder from here: https://www.kaggle.com/camnugent/california-housing-prices.\
 Alternatively, one can use the Kaggle API:
 
-```bash 
-    kaggle datasets download -d camnugent/california-housing-prices
-```
+    ```bash 
+        kaggle datasets download -d camnugent/california-housing-prices
+    ```
+    
 3. Install `sage-importance` package using `pip`:
     ```bash
     pip install sage-importance
