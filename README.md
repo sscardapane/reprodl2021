@@ -100,4 +100,4 @@ sage_values = estimator(X_test, y_test)
 sage_values.plot(group_names)
 ```
 
-For a complete exaple usage refert to this [notebook](https://github.com/AndMastro/reprodl2021/blob/extra_sage/train_explain.ipynb)
+For a complete example usage, from data processing to model definition, training and explaination, refer to this [notebook](https://github.com/AndMastro/reprodl2021/blob/extra_sage/train_explain.ipynb)
