@@ -39,7 +39,7 @@ Alternatively, one can use the Kaggle API:
     ```
 
 ## Individual Feature Importance
-Using SAGE we can compute feature importance both considering each feature indepentendly or group them together. You can train your favourite model (SAGE is model-agnostic) and then compute global explanations. What you need to do is to define an `imputer`, which is used to handle missing features, if they occur, and they run a Shapley value estimator that will compute fature importance: 
+Using SAGE we can compute feature importance both considering each feature indepentendly or group them together. You can train your favourite model (SAGE is model-agnostic) and then compute global explanations. What you need to do is to define an `imputer`, which is used to handle missing features, if they occur, and they run a Shapley value estimator that will compute feature importance: 
 
 ```python
 import sage
