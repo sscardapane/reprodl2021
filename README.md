@@ -24,7 +24,7 @@ The corresponing github repo is [here](https://github.com/iancovert/sage/).
 &nbsp;
 
 ## Requirements
-In order to run the example [notebook](https://github.com/AndMastro/reprodl2021/blob/extra_sage/train_explain.ipynb), you need the following:
+In order to run the example [notebook](train_explain.ipynb), you need the following:
 
 1. Follow the setup instructions from the `main` branch.
 2. Download the Carifornia Housing Prices dataset inside the `data` folder from here: https://www.kaggle.com/camnugent/california-housing-prices.\
@@ -42,7 +42,7 @@ Alternatively, one can use the Kaggle API:
 &nbsp;
 
 ## Individual Feature Importance
-Using SAGE we can compute feature importance both considering each feature indepentendly or group them together. You can train your favourite model (SAGE is model-agnostic) and then compute global explanations. What you need to do is to define an `imputer`, which is used to handle missing features, if they occur, and they run a Shapley value estimator that will compute feature importance: 
+Using SAGE we can compute feature importance both considering each feature indepentendly or group them together. You can train your favourite model (SAGE is model-agnostic) and then compute global explanations. What you need to do is to define an `imputer`, which is used to handle missing features, if they occur, and then run a Shapley value estimator that will compute feature importance: 
 
 ```python
 import sage
@@ -113,4 +113,4 @@ The grouped feature importance plot will look like that:
 
 &nbsp;
 
-For a complete example usage, from data processing to model definition, training and explaination, refer to this [notebook](https://github.com/AndMastro/reprodl2021/blob/extra_sage/train_explain.ipynb)
+For a complete example usage, from data processing to model definition, training and explaination, refer to this [notebook](train_explain.ipynb)
