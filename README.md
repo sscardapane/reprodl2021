@@ -39,6 +39,8 @@ Alternatively, one can use the Kaggle API:
     pip install sage-importance
     ```
 
+&nbsp;
+
 ## Individual Feature Importance
 Using SAGE we can compute feature importance both considering each feature indepentendly or group them together. You can train your favourite model (SAGE is model-agnostic) and then compute global explanations. What you need to do is to define an `imputer`, which is used to handle missing features, if they occur, and they run a Shapley value estimator that will compute feature importance: 
 
@@ -69,6 +71,7 @@ Here is an example of a feature importance plot from the notebook case study:
 
 ![individual_importance](https://user-images.githubusercontent.com/22996198/134855011-1cf413d5-02cb-436b-832d-4bf9b8a47c9a.png)
 
+&nbsp;
 
 ## Grouped Feature Importance
 As stated, we can coalesce features into groups in order to compute their joint importance for the model. Here follows an example from the notebook provided:
@@ -107,5 +110,7 @@ sage_values.plot(group_names)
 The grouped feature importance plot will look like that:
 
 ![grouped_importance](https://user-images.githubusercontent.com/22996198/134855161-fb74d5bf-e23d-456b-86e9-35d30cca2285.png)
+
+&nbsp;
 
 For a complete example usage, from data processing to model definition, training and explaination, refer to this [notebook](https://github.com/AndMastro/reprodl2021/blob/extra_sage/train_explain.ipynb)
