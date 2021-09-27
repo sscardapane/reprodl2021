@@ -30,8 +30,7 @@ python install-poetry.py --git https://github.com/python-poetry/poetry.git@maste
 
 
 
-
-## Use of Poetry
+## Use of Poetry _
 ### Potery commands: 
 It is possible to build, add dependencies, track and publish packages do so other monipulation with packages. 
 Avaibale commnads for comand-line can be found here: [Comands for Potery](https://python-poetry.org/docs/cli/).
