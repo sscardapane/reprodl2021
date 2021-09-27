@@ -65,6 +65,11 @@ sage_values = estimator(x_test, y_test)
 sage_values.plot(feature_names)
 ```
 
+Here is an example of a feature importance plot from the notebook case study:
+
+![individual_importance](https://user-images.githubusercontent.com/22996198/134855011-1cf413d5-02cb-436b-832d-4bf9b8a47c9a.png)
+
+
 ## Grouped Feature Importance
 As stated, we can coalesce features into groups in order to compute their joint importance for the model. Here follows an example from the notebook provided:
 
@@ -99,5 +104,8 @@ sage_values = estimator(X_test, y_test)
 
 sage_values.plot(group_names)
 ```
+The grouped feature importance plot will look like that:
+
+![grouped_importance](https://user-images.githubusercontent.com/22996198/134855161-fb74d5bf-e23d-456b-86e9-35d30cca2285.png)
 
 For a complete example usage, from data processing to model definition, training and explaination, refer to this [notebook](https://github.com/AndMastro/reprodl2021/blob/extra_sage/train_explain.ipynb)
