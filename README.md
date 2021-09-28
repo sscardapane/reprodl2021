@@ -2,7 +2,7 @@
 ## Extra: Python-Poetry
 Author: Timur Obukhov
 
-There are several tools that provide functions to manage the environments. The table below provides the comparisons of tolls for dependency and virtual environment management and reproducibility:
+There are several tools that provide functions to manage the environments. The table below provides the comparisons of tools for dependency and virtual environment management and reproducibility:
 
 ```bash
 ┌──────────────────┬────────────────────┬──────────────────────────┬───────────────────────┬───────────────────────────────┐
