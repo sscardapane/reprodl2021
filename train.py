@@ -11,7 +11,7 @@ from pytorch_lightning.metrics import functional
 from pathlib import Path
 import matplotlib.pyplot as plt
 import pandas as pd
-
+import os
 
 class ESC50Dataset(torch.utils.data.Dataset):
     # Simple class to load the desired folders inside ESC-50
@@ -94,6 +94,14 @@ class AudioNet(pl.LightningModule):
         acc = functional.accuracy(y_hat, y)
         self.log('val_acc', acc, on_epoch=True, prog_bar=True)
         return acc
+
+    def test_step(self, batch, batch_idx):
+        x, y = batch
+        y_hat = self(x)
+        y_hat = torch.argmax(y_hat, dim=1)
+        acc = functional.accuracy(y_hat, y)
+        self.log('test_acc', acc, on_epoch=True, prog_bar=True)
+        return acc
         
     def configure_optimizers(self):
         optimizer = torch.optim.Adam(self.parameters(), lr=1e-3)
@@ -108,17 +116,29 @@ def train():
     val_data = ESC50Dataset(folds=[4])
     test_data = ESC50Dataset(folds=[5])
 
+    nump_cpus = os.cpu_count()
     # Wrap data with appropriate data loaders
-    train_loader = torch.utils.data.DataLoader(train_data, batch_size=8, shuffle=True)
-    val_loader = torch.utils.data.DataLoader(val_data, batch_size=8)
-    test_loader = torch.utils.data.DataLoader(test_data, batch_size=8)
+    train_loader = torch.utils.data.DataLoader(train_data, batch_size=8, shuffle=True, num_workers=nump_cpus)
+    val_loader = torch.utils.data.DataLoader(val_data, batch_size=8, num_workers=nump_cpus)
+    test_loader = torch.utils.data.DataLoader(test_data, batch_size=8, num_workers=nump_cpus)
 
     pl.seed_everything(0)
 
     # Initialize the network
     audionet = AudioNet()
-    trainer = pl.Trainer(gpus=1, max_epochs=25)
+    gpu=0
+    if torch.cuda.is_available() : gpu=1
+    trainer = pl.Trainer(gpus=gpu, max_epochs=25)
     trainer.fit(audionet, train_loader, val_loader)
+    trainer.test(audionet, test_loader)
 
+    # Saving ONXX model
+    filepath = "audionet.onnx"
+    # Since PyTorch execution graph is dynamic we need a dummy input variable to generate
+    # the execution graph and produce an ONNX model
+    xb, yb = next(iter(test_loader))
+    input_sample = xb[0].view([1, xb.shape[1], xb.shape[2], xb.shape[3]] )
+    audionet.to_onnx(filepath, input_sample, export_params=True)
+    
 if __name__ == "__main__":
     train()
