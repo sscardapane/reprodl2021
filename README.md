@@ -112,7 +112,7 @@ build-backend = "poetry.core.masonry.api"
 ### Poetry commands: 
 
 Poetry provides various commands to build and add dependencies, track and publish packages, and other manipulation with packages.  
-Avaibale commnads for comand-line can be found here: [Comands for Potery](https://python-poetry.org/docs/cli/).
+Avaibale commands for command-line can be found here: [Commands for Potery](https://python-poetry.org/docs/cli/).
 
 For example, to add dependencies, run the following command:  
 
