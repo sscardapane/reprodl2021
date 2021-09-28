@@ -133,7 +133,7 @@ def train():
     trainer.test(audionet, test_loader)
 
     # Saving ONXX model
-    filepath = "audionet.onnx"
+    filepath = "models/audionet.onnx"
     # Since PyTorch execution graph is dynamic we need a dummy input variable to generate
     # the execution graph and produce an ONNX model
     xb, yb = next(iter(test_loader))
