@@ -19,7 +19,7 @@ The latter is the goal of **SAGE**. Explaining a prediction can be fundamental i
 SAGE uses Shapley values from game theory to compute global feature importance scores. It differentiates in this from other methods (SHAP, Integrated Gradients, etc...) since the latter provide sample-wise explanations rather then dataset-wise.
 
 The original **SAGE** paper can be found [here](https://arxiv.org/abs/2004.00668).\
-The corresponing github repo is [here](https://github.com/iancovert/sage/).
+The related github repository is [here](https://github.com/iancovert/sage/).
 
 &nbsp;
 
