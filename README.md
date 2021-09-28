@@ -26,7 +26,7 @@ There are several tools that provide functions to manage the environments. The t
 The selected tool is Poetry. It is one of the tools suitable for dependency management, virtual environment management, and creating a reproducible environment. 
 It allows to declare the libraries of project dependencies, and it will manage them. 
 
-## Installtion
+## Installation
 
 ```Python-Poetry``` for ```Windows``` installation instruction: 
 
@@ -36,7 +36,7 @@ It allows to declare the libraries of project dependencies, and it will manage t
 
 > ⚠️ The previous ```get-poetry.py``` installer is deprecated.
 
-The installer installs the poetry tool to ```Poetry's``` bin directory. For ```Windows``` it is in:
+The installer installs the poetry tool to ```Poetry's``` bin directory. For ```Windows```, it is in:
 
 ```bash
 %APPDATA%\Python\Scripts
@@ -62,7 +62,7 @@ $ poetry new reprodl2021_extra_poetry
 $ cd reprodl2021_extra_poetry
 ```
 
-This will creates the following folder structure: 
+This creates the following folder structure: 
 
 ```bash
 reprodDL2021_extra_poetry
@@ -109,7 +109,7 @@ pytest = "^5.2"
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 ```
-### Potery commands: 
+### Poetry commands: 
 
 Poetry provides various commands to build and add dependencies, track and publish packages, and other manipulation with packages.  
 Avaibale commnads for comand-line can be found here: [Comands for Potery](https://python-poetry.org/docs/cli/).
@@ -119,7 +119,7 @@ For example, to add dependencies, run the following command:
 ```bash
 $ add flask 
 ```
-This command will download and install ```Flask``` from ```PyPI``` in the virtual environment managed by POetry and adds this to ```poetry.lock``` file and adds it to top-level dependency to ```pyproject.toml```
+This command will download and install ```Flask``` from ```PyPI``` in the virtual environment managed by Poetry and add this to ```poetry.lock``` file and adds it to top-level dependency to ```pyproject.toml```
 
 ```bash
 [tool.poetry.dependencies]
