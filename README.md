@@ -149,7 +149,7 @@ Again, you can use the `--dev` option to remove a package from the development d
 
 ### Updating packages to the latest versions
 
-As mentioned above, the `poetry.lock` file prevents you from automatically getting the latest versions of your dependencies. If you want to force the installation of the latest versions, use the **update** command. This will fetch the latest matching versions (according to your `pyproject.toml` file) and update the lock file with the new versions. 
+As mentioned before, the `poetry.lock` file prevents you from automatically getting the latest versions of your dependencies. If you want to force the installation of the latest versions, you can use the **update** command. This will fetch the latest matching versions (according to your `pyproject.toml` file) and update the lock file with the new versions. 
 
 ```bash
 poetry update
@@ -160,3 +160,21 @@ If you just want to update a few packages and not all, you can list them as such
 ```bash
 poetry update torch torchaudio
 ```
+
+### Publish packages
+Poetry allows you to easily publish your packages. 
+1. Before you can publish your library, you will need to create a package.
+ 
+```bash
+poetry build
+```
+
+2. Now you can publish it. By default, Poetry will publish to PyPI.
+
+```bash
+poetry publish
+```
+
+You can even publish your library to a private repository by adding `-r your-private-repository`.
+
+
