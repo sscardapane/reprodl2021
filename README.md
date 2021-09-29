@@ -1,8 +1,7 @@
 # Reproducible Deep Learning
 ## Extra: Python-Poetry
 Author: Timur Obukhov
-
-There are several tools that provide functions to manage the environments. The table below provides the comparisons of tools for dependency and virtual environment management and reproducibility:
+There are several tools in Python space for dependency and workspace management. The table below shows a comparison between the most prominent tools: 
 
 ```bash
 ┌──────────────────┬────────────────────┬──────────────────────────┬───────────────────────┬───────────────────────────────┐
@@ -23,8 +22,8 @@ There are several tools that provide functions to manage the environments. The t
 │ Conda            │         YES        │            YES           │           YES         │               NO              │
 └──────────────────┴────────────────────┴──────────────────────────┴───────────────────────┴───────────────────────────────┘
 ```
-The selected tool is Poetry. It is one of the tools suitable for dependency management, virtual environment management, and creating a reproducible environment. 
-It allows to declare the libraries of project dependencies, and it will manage them. 
+The choice for dependency management and reproducibility is Poetry. 
+Out of the options presented above, Poetry provides an exhaustive dependency resolver. In addition, poetry configures a virtual environment for the project.  Poetry commands are intuitive and easy to use. 
 
 ## Installation
 
@@ -50,7 +49,7 @@ It is also possible to install Poetry from a ```git``` repository by using ```--
 python install-poetry.py --git https://github.com/python-poetry/poetry.git@master
 ```
 
-
+For Linux/Mac please see installation instructions here:[Potery installation](https://python-poetry.org/docs/)
 
 ## Use of Poetry
 ### Creating and managing a new project: 
@@ -117,7 +116,7 @@ Avaibale commands for command-line can be found here: [Commands for Potery](http
 For example, to add dependencies, run the following command:  
 
 ```bash
-$ add flask 
+$ poetry add flask 
 ```
 This command will download and install ```Flask``` from ```PyPI``` in the virtual environment managed by Poetry and add this to ```poetry.lock``` file and adds it to top-level dependency to ```pyproject.toml```
 
@@ -126,6 +125,32 @@ This command will download and install ```Flask``` from ```PyPI``` in the virtua
 python = "^3.8"
 flask = "^1.1.2"
 ```
+
+### Virtual enviroments:
+
+Poetry makes project environment isolation one of its core features.
+To get basic information about the currently activated virtual environment use  ```env info``` command:
+
+```bash
+poetry env info 
+```
+This provides the following output: 
+
+```bash
+Virtualenv
+Python:         3.8
+Implementation: CPython
+Path:           /path/to/poetry/cache/virtualenvs/reprodDL2021_extra_poetry07e py3.8
+Valid:          True
+
+System
+Platform: Win32
+OS:       nt
+Python:   /path/to/main/python
+```
+
+For more information on virtual environment, please follow this link: [Virtualenv](https://python-poetry.org/docs/managing-environments/)
+
 ### Conclusion: 
 
 This exercise looked at the use of tools for dependency management. For the experiment, Poetry was selected. 
