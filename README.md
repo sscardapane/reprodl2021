@@ -4,7 +4,7 @@
 [Poetry](https://python-poetry.org/)
 
 Before going into this branch, please look at the main branch in order to understand the project details.
->⚠️ extra branches implement additional exercises created by the students of the course to explore additional libraries and functionalities.
+>:warning: extra branches implement additional exercises created by the students of the course to explore additional libraries and functionalities.
 > They can be read independently from the main branches. Refer to the original authors for more information.
 
 &nbsp;
@@ -102,7 +102,7 @@ The easiest way to activate the virtual environment is to create a new shell wit
 
 &nbsp;
 
-## Poetry tips
+## :star: Extra tips
 
 ### Add new packages
 
