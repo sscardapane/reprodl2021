@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "reprodl2021"
+version = "0.1.0"
+description = "Reproducible deep learning course."
+authors = ["Luca Maiano <maiano@diag.uniroma1.it>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+torch = "^1.9.1"
+torchaudio = "^0.9.1"
+pytorch-lightning = "^1.4.8"
+hydra-core = "^1.1.1"
+hydra-colorlog = "^1.1.0"
+matplotlib = "^3.4.3"
+pandas = "^1.3.3"
+
+[tool.poetry.dev-dependencies]
+black = {version = "^21.9b0", allow-prereleases = true}
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
