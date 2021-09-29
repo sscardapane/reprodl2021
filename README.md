@@ -9,7 +9,7 @@ Before going into this branch, please look at the main branch in order to unders
 
 &nbsp;
 
-This is an extra branch of **exercise2_hydra_completed** that is intended to introduce Poetry, a tool for dependency management and packaging in Python. 
+This is an extra branch of **exercise2_hydra_completed** that is intended to introduce Poetry, a tool that simplifies dependency management and the creation of new packages in Python. 
 
 &nbsp;
 
