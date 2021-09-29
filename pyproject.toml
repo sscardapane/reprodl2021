@@ -3,6 +3,7 @@ name = "reprodDL2021_extra_poetry"
 version = "0.1.0"
 description = ""
 authors = ["kforcode-intellect <kaushal.prajapati@intellectdesign.com>"]
+authors = ["Timur Obukhov <obukhov@diag.uniroma1.it>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
