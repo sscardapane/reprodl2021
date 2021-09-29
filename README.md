@@ -42,13 +42,17 @@ Check the [official documentation](https://python-poetry.org/docs/#installation)
 
 ## Step 2: project setup
 
-Poetry offers two ways to initialize a project: (i) the `new` command allows you to create a new project from scratch and will automatically initialize a folder with structured content; and (ii) `init` which we will use here since we want to add poetry to an existing project. Move with the terminal inside the folder of this repository and type:
+Poetry offers two ways to initialize a project: 
+
+1. the `new` command allows you to create a new project from scratch and will automatically initialize a folder with structured content;
+
+2. `init` which we will use here since we want to add poetry to an existing project. Move with the terminal inside the folder of this repository and type:
 
 ```bash
 poetry init
 ```
 
-This command will guide you through creating your `pyproject.toml` config file. This will prompt few questions about the desired Python packages you want to install. You can press Enter to proceed with default options if you want to skip this part now. The *toml* file have a main section for all dependencies (used in both production and development environments), but you can also define a section that contains packages mainly used for development purposes only. This is the one of the advantages over other dependency management tools. Only one configuration file is required for both the production and development environments. Eventually, you will find your configuration file with a structure similar to this.
+This command will guide you through creating your `pyproject.toml` config file. This will prompt few questions about the desired Python packages you want to install. You can press *Enter* to proceed with default options if you want to skip this part now. The *toml* file have a main section for all dependencies (used in both production and development environments), but you can also define a section that contains packages mainly used for development purposes only. This is the one of the advantages over other dependency management tools. Only one configuration file is required for both the production and development environments. Eventually, you will find your configuration file with a structure similar to this.
 
 ```toml
 [tool.poetry]
@@ -82,6 +86,7 @@ poetry install
 ```
 
 If you have never run the command before and there is also no `poetry.lock` file present, Poetry simply resolves all dependencies listed in your `pyproject.toml` file and downloads the latest version of their files. When Poetry has finished installing, it writes all of the packages and the exact versions of them that it downloaded to the `poetry.lock` file, locking the project to those specific versions. If you're running this command on an existing repository containing the *lock* file, you can specify to the command that you do not want the development dependencies installed by passing the `--no-dev` option.
+
 Committing this file in git is important because it will ensure that whoever sets up the project is using the exact same dependency versions you are using. This will ensure that everything and everyone run on the same dependencies, which reduces the potential for bugs affecting only certain parts of distributions. I strongly advise you not to manually update the `poetry.lock` file manually. Let Poetry do its magic!
 
 &nbsp;
