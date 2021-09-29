@@ -2,11 +2,11 @@
 name = "reprodDL2021_extra_poetry"
 version = "0.1.0"
 description = ""
-authors = ["kforcode-intellect <kaushal.prajapati@intellectdesign.com>"]
 authors = ["Timur Obukhov <obukhov@diag.uniroma1.it>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
+flask = "^1.1.2"
 matplotlib = "3.4.1"
 torch = "1.8.1"
 numpy = "1.20.2"
