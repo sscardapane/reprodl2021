@@ -101,6 +101,7 @@ Thanks to [Jeroen Van Goey](https://github.com/BioGeek) for the error hunting. F
 | [eleGAN23](https://github.com/eleGAN23), [guarrasi1995](https://github.com/guarrasi1995), [andreamarco](https://github.com/andremarco) | [extra_tune](https://github.com/sscardapane/reprodl2021/tree/extra_tune) | Fine-tuning hyper-parameters with [Ray Tune](https://docs.ray.io/en/master/tune/index.html). |
 | [lrnzgiusti](https://github.com/lrnzgiusti) | [extra_autopytorch](https://github.com/sscardapane/reprodl2021/tree/extra_autopytorch) | Fine-tuning hyper-parameters with [Auto-PyTorch](https://github.com/automl/Auto-PyTorch). |
 | [eleGAN23](https://github.com/eleGAN23), [guarrasi1995](https://github.com/guarrasi1995), [andreamarco](https://github.com/andremarco) | [extra_talos](https://github.com/sscardapane/reprodl2021/tree/extra_talos) | Fine-tuning hyper-parameters with [Talos](https://github.com/autonomio/talos). |
+| [lucamaiano](https://github.com/lucamaiano) | [extra_poetry](https://github.com/sscardapane/reprodl2021/tree/extra_poetry) | Dependency management with [Poetry](https://python-poetry.org/). |
 
 ### Advanced reading material
 
