@@ -61,10 +61,10 @@ your_model.to_onnx(filepath, input_sample, export_params=True) #export your mode
 
 As show in the code, we need a dummy input variable to generate the graph and produce an ONNX model, since PyTorch execution graph is dynamically built.
 
-The file ```train.py``` in this repository is an example script that can be used to train and save a CNN model for audio classification. The model can be later inspected using Netron.
+The file ```train.py``` in this repository can be used to train and save a CNN model for audio classification. The model can be later inspected using Netron.
 
-Here is an example visualization from the model implemented in ```train.py```:
+Here is the network visualization of the model implemented in ```train.py```:
 
-<img src="images/audionet_graph.png" width="267" height="1213" />
+<img src="images/audionet_graph.png" width="176" height="800"/>
 
 By inspecting the graph we see the components the network is made of. On the top we have the input (in our case, a single-channel image with dimensions 128x201). The first component of the network is a convolutional layer with 32 filters and a kernel of size 11x11. After this component we find a non-linearity. By clicking on the components in the visualization it is possible to explore additional information (such the stride and the amount of padding for convolutional layers). After three convolutions interleaved by max pooling layers, we notice a Global Average Pooling. In the code, it was actually implemented as ```F.adaptive_avg_pool2d(x, (1, 1))```. Since the output dimension is 1x1, it is correcly considered as a Global Average Pooling. The final ```GEMM``` component is a general matrix multiplication, which represents our linear layer with 50 output neurons, corresponding to the number of classes.
