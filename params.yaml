@@ -1,0 +1,12 @@
+prepared:
+  sample_rate: 8000
+  folds_train: [1, 2, 3]
+  folds_val: [4]
+  folds_test: [5]
+audio_net:
+  n_classes: 50
+  base_filters: 8
+data_loader:
+  batch_size: 8
+training:
+  max_epochs: 3
