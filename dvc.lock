@@ -1,0 +1,86 @@
+schema: '2.0'
+stages:
+  prepare_train_data:
+    cmd: python3 src/prepare_data.py data/initial/ESC-50 train
+    deps:
+    - path: data/initial
+      md5: 19aa16c87b780ee5dea12debfe9b71b9.dir
+      size: 884044130
+      nfiles: 2011
+    - path: src/prepare_data.py
+      md5: 6c37ae46bb6ab5b89caaeb8c589c5164
+      size: 2110
+    params:
+      params.yaml:
+        prepared.folds_train:
+        - 1
+        - 2
+        - 3
+        prepared.sample_rate: 8000
+    outs:
+    - path: data/prepared/train.pickle
+      md5: e4b4889ec2784fd47be085a4ac7bb97e
+      size: 346325
+  prepare_val_data:
+    cmd: python3 src/prepare_data.py data/initial/ESC-50 val
+    deps:
+    - path: data/initial
+      md5: 19aa16c87b780ee5dea12debfe9b71b9.dir
+      size: 884044130
+      nfiles: 2011
+    - path: src/prepare_data.py
+      md5: 6c37ae46bb6ab5b89caaeb8c589c5164
+      size: 2110
+    params:
+      params.yaml:
+        prepared.folds_val:
+        - 4
+        prepared.sample_rate: 8000
+    outs:
+    - path: data/prepared/val.pickle
+      md5: a1335f7a38f7c80dbd2cacf926f00360
+      size: 296638
+  prepare_test_data:
+    cmd: python3 src/prepare_data.py data/initial/ESC-50 test
+    deps:
+    - path: data/initial
+      md5: 19aa16c87b780ee5dea12debfe9b71b9.dir
+      size: 884044130
+      nfiles: 2011
+    - path: src/prepare_data.py
+      md5: 6c37ae46bb6ab5b89caaeb8c589c5164
+      size: 2110
+    params:
+      params.yaml:
+        prepared.folds_test:
+        - 5
+        prepared.sample_rate: 8000
+    outs:
+    - path: data/prepared/test.pickle
+      md5: c179411759374a536ae42e5579ea29a9
+      size: 296646
+  train_and_test:
+    cmd: python3 src/train.py data/prepared results
+    deps:
+    - path: data/prepared/test.pickle
+      md5: c179411759374a536ae42e5579ea29a9
+      size: 296646
+    - path: data/prepared/train.pickle
+      md5: e4b4889ec2784fd47be085a4ac7bb97e
+      size: 346325
+    - path: data/prepared/val.pickle
+      md5: a1335f7a38f7c80dbd2cacf926f00360
+      size: 296638
+    - path: src/train.py
+      md5: 01b731c9b1fd1eeece7d8d1f97967724
+      size: 4864
+    params:
+      params.yaml:
+        audio_net.base_filters: 8
+        audio_net.n_classes: 50
+        data_loader.batch_size: 8
+        training.max_epochs: 3
+    outs:
+    - path: results/test_scores.json
+      md5: a6be83e47c8e32391829326b1e03eaa2
+      size: 66

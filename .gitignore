@@ -1,3 +1,4 @@
 data/initial/*
 .vscode/*
 lightning_logs/*
+data/prepared/*

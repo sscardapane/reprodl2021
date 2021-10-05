@@ -1,0 +1,46 @@
+stages:
+  prepare_train_data:
+    cmd: python3 src/prepare_data.py data/initial/ESC-50 train
+    deps:
+    - data/initial
+    - src/prepare_data.py
+    params:
+    - prepared.folds_train
+    - prepared.sample_rate
+    outs:
+    - data/prepared/train.pickle
+  prepare_val_data:
+    cmd: python3 src/prepare_data.py data/initial/ESC-50 val
+    deps:
+    - data/initial
+    - src/prepare_data.py
+    params:
+    - prepared.folds_val
+    - prepared.sample_rate
+    outs:
+    - data/prepared/val.pickle
+  prepare_test_data:
+    cmd: python3 src/prepare_data.py data/initial/ESC-50 test
+    deps:
+    - data/initial
+    - src/prepare_data.py
+    params:
+    - prepared.folds_test
+    - prepared.sample_rate
+    outs:
+    - data/prepared/test.pickle
+  train_and_test:
+    cmd: python3 src/train.py data/prepared results
+    deps:
+    - data/prepared/test.pickle
+    - data/prepared/train.pickle
+    - data/prepared/val.pickle
+    - src/train.py
+    params:
+    - audio_net.base_filters
+    - audio_net.n_classes
+    - data_loader.batch_size
+    - training.max_epochs
+    metrics:
+    - results/test_scores.json:
+        cache: false

@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+import json
 import torch, torchaudio
 from torch import nn
 from torch.nn import functional as F
@@ -66,11 +67,21 @@ class AudioNet(pl.LightningModule):
         self.log('val_acc', acc, on_epoch=True, prog_bar=True)
         return acc
 
+    def test_step(self, batch, batch_idx):
+        x, y = batch
+        y_hat = self(x)
+        loss = F.cross_entropy(y_hat, y)
+        y_hat = torch.argmax(y_hat, dim=1)
+        acc = functional.accuracy(y_hat, y)
+        metrics = {"test_acc": acc, "test_loss": loss}
+        self.log_dict(metrics)
+        return metrics
+
     def configure_optimizers(self):
         optimizer = torch.optim.Adam(self.parameters(), lr=1e-3)
         return optimizer
 
-def train(train_data, val_data, test_data, n_classes=20, base_filters=16,\
+def train(train_data, val_data, n_classes=20, base_filters=16,\
         batch_size=8, max_epochs=5):
     # input: ESC50Dataset objects train_data, val_data, test_data
     # This is the main training function requested by the exercise.
@@ -79,7 +90,6 @@ def train(train_data, val_data, test_data, n_classes=20, base_filters=16,\
     # Wrap data with appropriate data loaders
     train_loader = torch.utils.data.DataLoader(train_data, batch_size=batch_size, shuffle=True)
     val_loader = torch.utils.data.DataLoader(val_data, batch_size=batch_size)
-    test_loader = torch.utils.data.DataLoader(test_data, batch_size=batch_size)
 
     pl.seed_everything(0)
 
@@ -87,10 +97,17 @@ def train(train_data, val_data, test_data, n_classes=20, base_filters=16,\
     audionet = AudioNet(n_classes, base_filters)
     trainer = pl.Trainer(max_epochs=max_epochs)
     trainer.fit(audionet, train_loader, val_loader)
+    return trainer
+
+def test(trainer, test_data, batch_size):
+    test_loader = torch.utils.data.DataLoader(test_data, batch_size=batch_size)
+    test_metrics = trainer.test(dataloaders=test_loader)
+    return test_metrics
+
 
 if __name__ == "__main__":
 
-    if len(sys.argv) != 2:
+    if len(sys.argv) != 3:
         sys.stderr.write("Arguments error. Usage:\n")
         sys.stderr.write("\tpython prepare.py data-file\n")
         sys.exit(1)
@@ -98,6 +115,10 @@ if __name__ == "__main__":
     train_data_file = os.path.join(sys.argv[1], "train.pickle")
     val_data_file = os.path.join(sys.argv[1], "val.pickle")
     test_data_file = os.path.join(sys.argv[1], "test.pickle")
+
+    os.makedirs(os.path.join("results"), exist_ok=True)
+    test_scores_file = os.path.join(sys.argv[2], "test_scores.json")
+
 
     with open(train_data_file, 'rb') as train_file:
         train_data = pickle.load(train_file)
@@ -108,7 +129,7 @@ if __name__ == "__main__":
     with open(test_data_file, 'rb') as test_file:
         test_data = pickle.load(test_file)
 
-    params = yaml.safe_load(open("../params.yaml"))
+    params = yaml.safe_load(open("params.yaml"))
     params_audio_net = params["audio_net"]
     params_data_loader = params["data_loader"]
     params_training = params["training"]
@@ -119,4 +140,8 @@ if __name__ == "__main__":
     batch_size = params_data_loader["batch_size"]
     max_epochs = params_training["max_epochs"]
 
-    train(train_data, val_data, test_data, n_classes, base_filters, batch_size, max_epochs)
+    trainer = train(train_data, val_data, n_classes, base_filters, batch_size, max_epochs)
+    test_metrics = test(trainer, test_data, batch_size)[0]
+
+    with open(test_scores_file, 'w') as test_s_f:
+        json.dump(test_metrics, test_s_f)
