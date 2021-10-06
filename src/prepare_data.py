@@ -49,7 +49,8 @@ class ESC50Dataset(torch.utils.data.Dataset):
 if __name__ == "__main__":
     if len(sys.argv) != 3:
         sys.stderr.write("Arguments error. Usage:\n")
-        sys.stderr.write("\tpython prepare_data.py data-file\n")
+        sys.stderr.write("\tpython prepare_data.py"+\
+                         " path-to-data mode\n")
         sys.exit(1)
 
     data_path = Path(sys.argv[1])

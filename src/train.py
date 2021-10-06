@@ -99,9 +99,10 @@ def train(train_data, val_data, n_classes=20, base_filters=16,\
     trainer.fit(audionet, train_loader, val_loader)
     return trainer
 
-def test(trainer, test_data, batch_size):
-    test_loader = torch.utils.data.DataLoader(test_data, batch_size=batch_size)
-    test_metrics = trainer.test(dataloaders=test_loader)
+def test(tr, test_d, b_s):
+    #tr is trainer, test_d is test_data, b_s is batch_size
+    test_loader = torch.utils.data.DataLoader(test_d, batch_size=b_s)
+    test_metrics = tr.test(dataloaders=test_loader)
     return test_metrics
 
 
