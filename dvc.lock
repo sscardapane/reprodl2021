@@ -76,11 +76,11 @@ stages:
       size: 4864
     params:
       params.yaml:
-        audio_net.base_filters: 8
+        audio_net.base_filters: 16
         audio_net.n_classes: 50
         data_loader.batch_size: 8
-        training.max_epochs: 3
+        training.max_epochs: 4
     outs:
     - path: results/test_scores.json
-      md5: a6be83e47c8e32391829326b1e03eaa2
+      md5: ef104745e833942243779d59fa130259
       size: 66

@@ -5,8 +5,8 @@ prepared:
   folds_test: [5]
 audio_net:
   n_classes: 50
-  base_filters: 8
+  base_filters: 16
 data_loader:
   batch_size: 8
 training:
-  max_epochs: 3
+  max_epochs: 4
