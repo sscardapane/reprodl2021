@@ -303,3 +303,43 @@ dvc dag
 ```
 
 ### Dvc Experiments
+
+We are now ready to run the experiments with dvc. We queue them up and then run them one after the other. For each experiment there will be different values for the parameters base_filters and max_epochs.
+
+Let's activate the reprodl environment
+
+```bash
+conda activate reprodl
+```
+Now, let's queue the experiments
+
+```bash
+dvc exp run --queue --set-param training.max_epochs=3\
+ --set-param audio_net.base_filters=8
+
+dvc exp run --queue --set-param training.max_epochs=3\
+ --set-param audio_net.base_filters=16
+
+dvc exp run --queue --set-param training.max_epochs=3\
+ --set-param audio_net.base_filters=32
+
+dvc exp run --queue --set-param training.max_epochs=4\
+ --set-param audio_net.base_filters=8
+
+dvc exp run --queue --set-param training.max_epochs=4\
+ --set-param audio_net.base_filters=16
+
+dvc exp run --queue --set-param training.max_epochs=4\
+ --set-param audio_net.base_filters=32
+```
+
+To see the results of the experiments
+
+```bash
+dvc exp show --num 2 --no-timestamp --include-params audio_net.base_filters,training.max_epochs
+```
+
+- ```--num 2``` is to show the last 2 commits from HEAD.
+- ```--no-timestamp``` is to not show the timestamps
+- ```--include-params audio_net.base_filters,training.max_epochs``` is to show audio_net.base_filters and training.max_epochs in the table only
+
