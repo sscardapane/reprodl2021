@@ -102,6 +102,7 @@ Thanks to [Jeroen Van Goey](https://github.com/BioGeek) for the error hunting. F
 | [lrnzgiusti](https://github.com/lrnzgiusti) | [extra_autopytorch](https://github.com/sscardapane/reprodl2021/tree/extra_autopytorch) | Fine-tuning hyper-parameters with [Auto-PyTorch](https://github.com/automl/Auto-PyTorch). |
 | [eleGAN23](https://github.com/eleGAN23), [guarrasi1995](https://github.com/guarrasi1995), [andreamarco](https://github.com/andremarco) | [extra_talos](https://github.com/sscardapane/reprodl2021/tree/extra_talos) | Fine-tuning hyper-parameters with [Talos](https://github.com/autonomio/talos). |
 | [lucamaiano](https://github.com/lucamaiano) | [extra_poetry](https://github.com/sscardapane/reprodl2021/tree/extra_poetry) | Dependency management with [Poetry](https://python-poetry.org/). |
+| [memis12](https://github.com/memis12), [AndMastro](https://github.com/AndMastro) | [extra_netron](https://github.com/sscardapane/reprodl2021/tree/extra_netron) | Visualizing the model using [Netron](https://netron.app/) |
 
 ### Advanced reading material
 
