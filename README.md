@@ -1,6 +1,11 @@
 # Reproducible Deep Learning
 ## PhD Course in Data Science, 2021, 3 CFU
 [[Official website](https://www.sscardapane.it/teaching/reproducibledl/)]
+## Extra: Adversarial Attack
+### Author: [Carlo Abrate](https://github.com/carlo-abrate)
+
+> :warning: **extra** branches implement additional exercises created by the students of the course to explore additional libraries and functionalities. They can be read independently from the main branches. Refer to the original authors for more information.
+
 
 ### Adversarial Attack
 On the https://landscape.lfai.foundation/ in the Trusted and Responsible AI (AI Explainability 360 Toolkit), we can find an Adversarial Attack framework. 
@@ -17,12 +22,12 @@ Install requirements:
 ```bash
 pip install adversarial-robustness-toolbox
 ```
-## Instructions to implement Adversariol Attack
+## Instruction to implement Adversariol Attack
 
 Follow the notebook 'Adversarial Notebook.ipynb':
 
 0. Execute the notebook until step 3.
-1. Run step 3 if you want to train the model, otherwise jump to step 4 an load the model
+1. Run step 3 if you want to train the model, otherwise jump to step 4 to load the model
 2. Import the ART toolbox to get the perturbation function and model function:
 ```python
 from art.attacks.evasion import ProjectedGradientDescent
@@ -40,7 +45,7 @@ adv_waveform = pgd.generate(
     x=torch.unsqueeze(waveform, 0).numpy()
 )
 ```
-4. Visualize the class of the original waveform and the perturber waveform
+4. Visualize the class of the original waveform and the perturbed waveform
 ```python
 with torch.no_grad():
     _, pred = torch.max(audionet(torch.unsqueeze(waveform, 0)), 1)
@@ -50,7 +55,7 @@ with torch.no_grad():
 print(f"Original prediction (ground truth):\t{pred.tolist()[0]} ({label})")
 print(f"Adversarial prediction:\t\t\t{pred_adv.tolist()[0]}")
 ```
-5. Visualize the original waveform and the perturber waveform
+5. Visualize the original waveform and the perturbed waveform
 ```python
 def display_waveform(waveform, title="", sr=8000):
     """Display waveform plot and audio play UI."""
