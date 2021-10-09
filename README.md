@@ -334,10 +334,10 @@ dvc exp run --queue --set-param training.max_epochs=4\
 To see the results of the experiments
 
 ```bash
-dvc exp show --num 5 --no-timestamp --include-params audio_net.base_filters,training.max_epochs
+dvc exp show --num 6 --no-timestamp --include-params audio_net.base_filters,training.max_epochs
 ```
 
-- ```--num 5``` is to show the last 4 commits from HEAD.
+- ```--num 6``` is to show the last 6 commits from HEAD.
 - ```--no-timestamp``` is to not show the timestamps
 - ```--include-params audio_net.base_filters,training.max_epochs``` is to show audio_net.base_filters and training.max_epochs in the table only
 
