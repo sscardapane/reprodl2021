@@ -3,6 +3,8 @@
 ## Extra: experiment_management_dvc
 ### Author: [Riccardo Denni](https://github.com/rdenni)
 [DVC experiments management](https://dvc.org/doc/start/experiments)
+
+
 Before going into this branch, please look at the main branch in order to understand the project details.
 >:warning: extra branches implement additional exercises created by the students of the course to explore additional libraries and functionalities.
 > They can be read independently from the main branches. Refer to the original authors for more information.
@@ -15,9 +17,7 @@ This is an extra branch of **exercise1_git_completed** whose intent is to show a
 
 ## Goal
 
-Make an introduction to how to handle experiments with dvc!
-
-Experiments proliferate quickly in ML projects where there are many parameters to tune or other permutations of the code, dvc can help you to manage experiments!
+The goal is to show the first basic steps to run machine learning experiments with dvc.
 
 
 ## Prerequisites
@@ -48,13 +48,11 @@ git commit -m 'dvc initialized'
 
 ### Dvc Pipelines
 
-A data pipelines is a series of data processes that transforms data and produce a final result. Dvc introduces a mechanism to capture data pipelines, the pipelines and their data can also be easily versioned (using git).
+A data pipelines is a series of processes that transforms data and produce a final result. It is composed of stages, a stage represent a process which form a step of the pipeline. Stages also connect code to its corresponding data input and output. 
 
-A dvc pipeline is composed of stages. A stage represent the process which form the step of the pipeline, stages also connect code to its corresponding data input and output.
+Our idea is to keep the data transformation phase separate from the training, validation and testing phase, to do this we build a pipeline with several stages. 
 
-Our idea is to keep the data transformation phase separate from the training, validation and testing phase. 
-
-#### Data Transformation Pipelines
+#### Data Transformation Stages
 
 Regarding the data transformation phase we create three stages: one is in charge of preparing the data for training, one for validation and one for testing.
 In order to do this, we create two subdirectories inside the data directory, "initial" and "prepared". We move ESC-50 inside "initial".
@@ -66,9 +64,9 @@ dvc add data/initial
 ```
 Now we divide *train.py* into two programs: one deals with data transformation and the other with training, validation and testing. We create a *src* folder where we insert the codes. 
 
-The program to transform the data is called *prepare_data.py*. It takes in input two command line arguments: the path from which to take the data and a variable *mode*, to be set equal to *train*, *val* or *test* and indicates, respectively, whether the data is to be prepared for training, validation or testing.
+The program to transform the data is called *prepare_data.py*. It takes in input two command line arguments: the path from which to take the data and a variable *mode*, to be set equal to *train*, *val* or *test* which indicates, respectively, whether the data is to be prepared for training, validation or testing.
 
-In preparing the data we observe that there are parameters such as the sample rate and the folders from which to take the data, so, inside the folder *reprodl2021* then we create a file *params.yaml*
+In preparing the data we observe that there are parameters such as the sample rate and the folders from which to take the data, so, inside the folder *reprodl2021* we create a file *params.yaml*
 
 ```python
 prepared:
@@ -78,7 +76,7 @@ prepared:
   folds_test: [5]
 ``` 
 
-Instead of just one folds parameter *folds_train*, *folds_val* and *folds_test* have been created to avoid as much as possible that one or more folders are used for more than one operation between training, validation and testing.
+The parameters *folds_train*, *folds_val* and *folds_test* have been created to avoid as much as possible that one or more folders are used for more than one operation between training, validation and testing.
 
 Now we create another subdirectory of data that we call "prepared", where we will save the output of the program.
 
@@ -166,7 +164,7 @@ Let's examine one at random among these dvc run commands, let's say the last one
 
 #### Data Train, Val & Test Pipeline
 
-Now let's deal with the program that works with the prepared data, which is called *train.py*. It takes two inputs from the command line: one is the folder from which to take the ESC50Dataset objects and the other is the path where to save the metrics that the model produces in the testing phase. The ESC50Dataset objects it works with are *train.pickle*, *val.pickle* and *test.pickle* Metrics will be saved in the  directory *reprodl2021/results*
+Now let's deal with the program that works with the prepared data, which is called *train.py*. It takes two inputs from the command line: one is the folder from which to take the ESC50Dataset objects and the other is the path where to save the metrics that the model produces in the testing phase. The ESC50Dataset objects it works with are *train.pickle*, *val.pickle* and *test.pickle*. Metrics will be saved in the  directory *reprodl2021/results*
 
 
 Again, there are parameters such as the number of classes, the number of neural network filters, the batch size of the DataLoader, and the number of epochs. So we add these lines to the *params.yaml* file:
@@ -336,10 +334,10 @@ dvc exp run --queue --set-param training.max_epochs=4\
 To see the results of the experiments
 
 ```bash
-dvc exp show --num 4 --no-timestamp --include-params audio_net.base_filters,training.max_epochs
+dvc exp show --num 5 --no-timestamp --include-params audio_net.base_filters,training.max_epochs
 ```
 
-- ```--num 4``` is to show the last 4 commits from HEAD.
+- ```--num 5``` is to show the last 4 commits from HEAD.
 - ```--no-timestamp``` is to not show the timestamps
 - ```--include-params audio_net.base_filters,training.max_epochs``` is to show audio_net.base_filters and training.max_epochs in the table only
 
