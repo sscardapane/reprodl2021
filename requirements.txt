@@ -10,3 +10,4 @@ matplotlib==3.4.1
 librosa==0.8.0
 pytest==6.2.4
 seaborn==0.11.1
+keepsake

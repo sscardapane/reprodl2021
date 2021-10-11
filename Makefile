@@ -22,7 +22,10 @@ run:
 run_background:
 	docker run -d  \
          -t $(DOCKER_IMAGE) \
-
+.PHONY: run_cli
+run_cli:
+	docker run \
+         -it $(DOCKER_IMAGE) bash \
 
 test:
 	python train.py
