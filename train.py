@@ -18,6 +18,11 @@ from omegaconf import DictConfig, OmegaConf
 import logging
 logger = logging.getLogger(__name__)
 
+import os
+import keepsake
+from keepsake.pl_callback import KeepsakeCallback 
+
+
 class ESC50Dataset(torch.utils.data.Dataset):
     # Simple class to load the desired folders inside ESC-50
     
@@ -117,6 +122,8 @@ def train(cfg: DictConfig):
     # Simple logging of the configuration
     logger.info(OmegaConf.to_yaml(cfg))
     
+    
+    
     # We recover the original path of the dataset:
     path = Path(hydra.utils.get_original_cwd()) / Path(cfg.data.path)
 
@@ -134,7 +141,15 @@ def train(cfg: DictConfig):
 
     # Initialize the network
     audionet = AudioNet(cfg.model)
-    trainer = pl.Trainer(**cfg.trainer)
+    
+    os.chdir("../../..")
+    
+    print(cfg)
+    print(type(cfg))
+ 
+    
+    trainer = pl.Trainer(**cfg.trainer, checkpoint_callback=False, callbacks=[KeepsakeCallback(primary_metric=("train_loss", "minimize"), period=1,
+    params =  {"base_filters": cfg['model']["base_filters"], 'n_classes': cfg['model']['n_classes'], 'learning_rate': cfg['model']['optimizer']['lr']})])
     trainer.fit(audionet, train_loader, val_loader)
 
 if __name__ == "__main__":

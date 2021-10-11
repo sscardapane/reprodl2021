@@ -2,3 +2,5 @@ data/ESC-50/*
 .vscode/*
 lightning_logs/*
 outputs/*
+model.pth
+.keepsake/
