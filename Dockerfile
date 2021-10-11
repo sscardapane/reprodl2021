@@ -13,12 +13,6 @@ FROM env
 # Copy the files
 COPY . ./
 
-# install google cloud sdk
-RUN curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-360.0.0-linux-x86_64.tar.gz
-RUN tar -xf google-cloud-sdk-360.0.0-linux-x86_64.tar.gz
-RUN ./google-cloud-sdk/bin/gcloud auth activate-service-account --key-file=credential_key.json
-RUN ./google-cloud-sdk/bin/gcloud config set project reprodl
-
 # Install DVC
 RUN pip install dvc boto3 --ignore-installed ruamel.yaml
 

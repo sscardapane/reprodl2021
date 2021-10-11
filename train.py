@@ -114,7 +114,6 @@ class AudioNet(pl.LightningModule):
         optimizer = torch.optim.Adam(self.parameters(), lr=self.hparams.optimizer.lr)
         return optimizer
 
-
 @hydra.main(config_path='configs', config_name='default')
 def train(cfg: DictConfig):
     # The decorator is enough to let Hydra load the configuration file.

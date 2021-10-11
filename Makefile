@@ -18,10 +18,6 @@ run:
 	docker run \
          -t $(DOCKER_IMAGE)
 
-.PHONY: run_background
-run_background:
-	docker run -d  \
-         -t $(DOCKER_IMAGE) \
 .PHONY: run_cli
 run_cli:
 	docker run \
