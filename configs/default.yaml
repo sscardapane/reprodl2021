@@ -15,5 +15,5 @@ model:
     lr: 3e-4
 
 trainer:
-  gpus: 1
-  max_epochs: 10
+  gpus: 0
+  max_epochs: 1

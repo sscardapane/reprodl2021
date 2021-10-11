@@ -4,3 +4,5 @@ lightning_logs/*
 outputs/*
 reprodl/
 credential_key.json
+model.pth
+.keepsake/
