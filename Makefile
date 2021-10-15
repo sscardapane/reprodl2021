@@ -23,5 +23,8 @@ run_cli:
 	docker run \
          -it $(DOCKER_IMAGE) bash \
 
+result:
+	python results.py
+
 test:
 	python train.py

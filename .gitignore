@@ -5,4 +5,5 @@ outputs/*
 reprodl/
 credential_key.json
 model.pth
-.keepsake/
+.key
+keepsake-repository-reprodl/exp.zip
