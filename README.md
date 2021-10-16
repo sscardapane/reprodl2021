@@ -73,7 +73,7 @@ exp = keepsake.experiments.list()
 
 And we can easily compare the performance of our model within different experiments:
 
-![](train_loss.pdf)
+![](train_loss.png)
 
 
 ### A step forward: makefiles
