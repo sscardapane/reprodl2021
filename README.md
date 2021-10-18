@@ -76,7 +76,7 @@ And we can easily compare the performance of our model within different experime
 ![](train_loss.png)
 
 
-### An old friend: the makefile to make your command easier to type.
+### An old friend: Makefile to make your command easier to type.
 
 If you want to run or update a task when certain files are updated, the make utility is what your are looking for. The make utility requires a file, *Makefile* (or *makefile*), which defines set of tasks to be executed. You may have used make to compile a program from source code.
 
