@@ -1,0 +1,71 @@
+{
+ "id": "c70633d493a280a9ab85184007b6b9f1fa7148150192ce505310b6c83ad75356",
+ "created": "2021-10-14T11:57:35.957389116Z",
+ "params": {
+  "base_filters": 32,
+  "learning_rate": 0.0003,
+  "n_classes": 50
+ },
+ "host": "",
+ "user": "root",
+ "config": {
+  "repository": "file:///reprodl/keepsake-repository-reprodl",
+  "storage": ""
+ },
+ "command": "train.py",
+ "path": ".",
+ "python_version": "3.8.8",
+ "python_packages": {
+  "boto3": "1.18.58",
+  "botocore": "1.21.58",
+  "cachetools": "4.2.4",
+  "certifi": "2021.10.8",
+  "cffi": "1.14.6",
+  "chardet": "4.0.0",
+  "cryptography": "3.2.1",
+  "cycler": "0.10.0",
+  "fsspec": "2021.10.0",
+  "idna": "3.2",
+  "jmespath": "0.10.0",
+  "keepsake": "0.4.2",
+  "kiwisolver": "1.3.2",
+  "matplotlib": "3.4.1",
+  "numpy": "1.20.2",
+  "omegaconf": "2.0.6",
+  "packaging": "21.0",
+  "pandas": "1.2.3",
+  "pyparsing": "2.4.7",
+  "pytz": "2021.1",
+  "requests": "2.26.0",
+  "scipy": "1.7.1",
+  "six": "1.16.0",
+  "soundfile": "0.10.3.post1",
+  "tensorboard": "2.6.0",
+  "torch": "1.8.1",
+  "torchaudio": "0.8.1",
+  "torchmetrics": "0.5.1",
+  "torchtext": "0.9.1",
+  "tqdm": "4.62.3",
+  "urllib3": "1.26.7",
+  "zipp": "3.6.0"
+ },
+ "checkpoints": [
+  {
+   "id": "1a1851e24051cf51fc1693cf7eda8a7b05b46bf19bc0932908d1af35f952e93a",
+   "created": "2021-10-14T11:59:08.314208984Z",
+   "metrics": {
+    "epoch": 0,
+    "global_step": 149,
+    "train_loss": 3.3467960357666016,
+    "val_acc": 0
+   },
+   "step": 0,
+   "path": "model.pth",
+   "primary_metric": {
+    "name": "train_loss",
+    "goal": "minimize"
+   }
+  }
+ ],
+ "keepsake_version": "0.4.2"
+}

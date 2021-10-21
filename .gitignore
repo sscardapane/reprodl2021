@@ -2,3 +2,8 @@ data/ESC-50/*
 .vscode/*
 lightning_logs/*
 outputs/*
+reprodl/
+credential_key.json
+model.pth
+.key
+keepsake-repository-reprodl/exp.zip

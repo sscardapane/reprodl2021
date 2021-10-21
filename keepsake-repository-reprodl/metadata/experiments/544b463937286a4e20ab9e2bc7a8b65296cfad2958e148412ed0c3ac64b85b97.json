@@ -1,0 +1,135 @@
+{
+ "id": "544b463937286a4e20ab9e2bc7a8b65296cfad2958e148412ed0c3ac64b85b97",
+ "created": "2021-10-14T12:48:35.530702114Z",
+ "params": {
+  "base_filters": 16,
+  "learning_rate": 0.00003,
+  "n_classes": 50
+ },
+ "host": "",
+ "user": "root",
+ "config": {
+  "repository": "file:///reprodl/keepsake-repository-reprodl",
+  "storage": ""
+ },
+ "command": "train.py",
+ "path": ".",
+ "python_version": "3.8.8",
+ "python_packages": {
+  "boto3": "1.18.58",
+  "botocore": "1.21.58",
+  "cachetools": "4.2.4",
+  "certifi": "2021.10.8",
+  "cffi": "1.14.6",
+  "chardet": "4.0.0",
+  "cryptography": "3.2.1",
+  "cycler": "0.10.0",
+  "fsspec": "2021.10.0",
+  "idna": "3.2",
+  "jmespath": "0.10.0",
+  "keepsake": "0.4.2",
+  "kiwisolver": "1.3.2",
+  "matplotlib": "3.4.1",
+  "numpy": "1.20.2",
+  "omegaconf": "2.0.6",
+  "packaging": "21.0",
+  "pandas": "1.2.3",
+  "pyparsing": "2.4.7",
+  "pytz": "2021.1",
+  "requests": "2.26.0",
+  "scipy": "1.7.1",
+  "six": "1.16.0",
+  "soundfile": "0.10.3.post1",
+  "tensorboard": "2.6.0",
+  "torch": "1.8.1",
+  "torchaudio": "0.8.1",
+  "torchmetrics": "0.5.1",
+  "torchtext": "0.9.1",
+  "tqdm": "4.62.3",
+  "urllib3": "1.26.7",
+  "zipp": "3.6.0"
+ },
+ "checkpoints": [
+  {
+   "id": "c4ff5aa4bd3511c14dfe1b7d31215881bed5bb1ca7c7c2260a6d81fc4287348b",
+   "created": "2021-10-14T12:49:39.144593954Z",
+   "metrics": {
+    "epoch": 0,
+    "global_step": 149,
+    "train_loss": 3.933253765106201,
+    "val_acc": 0
+   },
+   "step": 0,
+   "path": "model.pth",
+   "primary_metric": {
+    "name": "train_loss",
+    "goal": "minimize"
+   }
+  },
+  {
+   "id": "ab9f782c3a7f71d678a20435e1a3fd520faa6400d0b3fd0332df696d26208135",
+   "created": "2021-10-14T12:50:21.671668053Z",
+   "metrics": {
+    "epoch": 1,
+    "global_step": 299,
+    "train_loss": 3.729344367980957,
+    "val_acc": 0.027499999850988388
+   },
+   "step": 1,
+   "path": "model.pth",
+   "primary_metric": {
+    "name": "train_loss",
+    "goal": "minimize"
+   }
+  },
+  {
+   "id": "6f0afadf1e617634554e77af0dc540800ae172bc944f7b7a15472f008a520c63",
+   "created": "2021-10-14T12:51:04.680090904Z",
+   "metrics": {
+    "epoch": 2,
+    "global_step": 449,
+    "train_loss": 3.802398443222046,
+    "val_acc": 0.027499999850988388
+   },
+   "step": 2,
+   "path": "model.pth",
+   "primary_metric": {
+    "name": "train_loss",
+    "goal": "minimize"
+   }
+  },
+  {
+   "id": "96596b7e86a549236b9f38388654c5f984e5b63095e22efdd808c77b6fe77a0e",
+   "created": "2021-10-14T12:51:47.758508921Z",
+   "metrics": {
+    "epoch": 3,
+    "global_step": 599,
+    "train_loss": 3.477680206298828,
+    "val_acc": 0.05249999836087227
+   },
+   "step": 3,
+   "path": "model.pth",
+   "primary_metric": {
+    "name": "train_loss",
+    "goal": "minimize"
+   }
+  },
+  {
+   "id": "e89f84b1bb8c93b9953aead88746ba6b6dd32b5c9c8535fe77331ea36978d139",
+   "created": "2021-10-14T12:52:31.010647058Z",
+   "metrics": {
+    "epoch": 4,
+    "global_step": 749,
+    "train_loss": 3.749020576477051,
+    "val_acc": 0.06499999761581421
+   },
+   "step": 4,
+   "path": "model.pth",
+   "primary_metric": {
+    "name": "train_loss",
+    "goal": "minimize"
+   }
+  }
+ ],
+ "keepsake_version": "0.4.2"
+}

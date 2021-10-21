@@ -6,7 +6,7 @@ WORKDIR /reprodl
 # Install requirements
 COPY requirements.txt .
 RUN pip install -r requirements.txt
-RUN apt-get update && apt-get install libsndfile1-dev -y
+RUN apt-get update && apt-get install libsndfile1-dev curl -y
 
 FROM env
 
@@ -21,7 +21,7 @@ ARG AWS_ACCESS_KEY_ID
 ARG AWS_SECRET_ACCESS_KEY
 
 # Download the data
-RUN dvc pull
+# RUN dvc pull
 
 CMD ["python", "train.py", "~trainer.gpus"]
 
