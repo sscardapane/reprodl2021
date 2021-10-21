@@ -3,9 +3,6 @@
 ### Authors: [Marco Zecchini](https://github.com/marcozecchini), [Tommaso Lanciano](https://github.com/tlancian), [Matteo Bohm](https://github.com/matteoboh)
 
 [[Official reprodl website](https://www.sscardapane.it/teaching/reproducibledl/)]
-[AutoML Groups Freiburg and Hannover](http://www.automl.org/)
-[[Official Auto-PyTorch Repository](https://github.com/automl/Auto-PyTorch/)]
-
 
 > ⚠️ extra branches implement additional exercises created by the students of the 
 > course to explore additional libraries and functionalities. They can be read 
