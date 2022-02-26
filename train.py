@@ -51,10 +51,6 @@ class ESC50Dataset(torch.utils.data.Dataset):
         # Returns length
         return len(self.csv)
 
-    def get_columns_header(self):
-        # Returns the list of columns' headers
-        return list(self.csv.columns)
-
 
 class AudioNet(pl.LightningModule):
     
@@ -163,22 +159,14 @@ def train():
     audionet = AudioNet()
     trainer = pl.Trainer(gpus=0, max_epochs=2)
     trainer.fit(audionet, train_loader, val_loader)
-
+    
+    # Perform testing phase
     result = trainer.test(audionet, test_loader)
 
+    # Get results obtained for different phases
     (str_accuratezza, str_y_hat, str_y) = audionet.get_training_results()
     (val_accuratezza, val_y_hat, val_y, val_x) = audionet.get_validation_results()
     (accuratezza, y_hat, y, x) = audionet.get_results()
-
-    print(accuratezza)
-
-    print(y_hat)
-
-    print(y)
-
-    list_columns_header = train_data.get_columns_header()
-
-    print(list_columns_header)
 
     return accuratezza, y_hat, y, x, str_accuratezza, str_y_hat, str_y, val_accuratezza, val_y_hat, val_y, val_x, list_columns_header
 
