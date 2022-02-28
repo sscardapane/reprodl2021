@@ -1,109 +1,202 @@
 # Reproducible Deep Learning
-## PhD Course in Data Science, 2021, 3 CFU
-[[Official website](https://www.sscardapane.it/teaching/reproducibledl/)]
+## Extra: Evidently
+### Author: [giu.gr](https://github.com/giu.gr)
+[Evidently](https://docs.evidentlyai.com/)
 
-This practical PhD course explores the design of a simple *reproducible* environment for a deep learning project, using free, open-source tools ([Git](https://git-scm.com/), [DVC](http://dvc.org/), [Docker](https://www.docker.com/), [Hydra](https://github.com/facebookresearch/hydra), ...). The choice of tools is opinionated, and was made as a trade-off between practicality and didactical concerns.
+Before going into this branch, please look at the main branch in order to understand the project details.
+>:warning: extra branches implement additional exercises created by the students of the course to explore additional libraries and functionalities.
+> They can be read independently from the main branches. Refer to the original authors for more information.
 
-## Local set-up
+&nbsp;
 
-The use case of the course is an audio classification model trained on the [ESC-50](https://github.com/karolpiczak/ESC-50) dataset. To set-up your local machine (or a proper virtual / remote environment), configure [Anaconda](https://www.anaconda.com/products/individual), and create a clean environment:
+This is an extra branch of **exercise1_git_completed** that is intended to introduce Evidently, a useful library to build graphical dashboards for features and performance analysis.
 
-```bash
-conda create -n reprodl; conda activate reprodl
+&nbsp;
+
+## Goal
+Integrate Evidently dashboards to improve data visualization and performance analysis. Basically Evidently is an open source Python library for machine learning engineers, that aims to be a useful tool for performance evaluation and monitoring of machine learning models, both during the development phase and in production. It can build interactive visual reports integrated with notebooks, data and model profiling dashboards, and perform real-time monitoring (further integrable with projects like [Graphana and Prometheus](https://docs.evidentlyai.com/integrations/evidently-and-grafana)).
+
+
+## Step 1: installation
+1. Evidently can be installed on Windows, GNU/Linux and Mac OS with PyPi:
+
+```sh
+pip install evidently
 ```
 
-> ⚠️ For an alternative setup without Anaconda, see [issue #2](https://github.com/sscardapane/reprodl2021/issues/2).
+To integrate it with a Jupyter notebook, an nbextension is required to install:
 
-Then, install a few generic prerequisites (notebook handling, Pandas, …):
+```sh
+$ jupyter nbextension install --sys-prefix --symlink --overwrite --py evidently
+```
+This extension can be enabled invoking the following command
 
-```bash
-conda install -y -c conda-forge notebook matplotlib pandas ipywidgets pathlib
+```sh
+$ jupyter nbextension enable evidently --py --sys-prefix
 ```
 
-Finally, install [PyTorch](https://pytorch.org/) and [PyTorch Lightning](https://github.com/PyTorchLightning/pytorch-lightning). The instructions below can vary depending on whether you have a CUDA-enabled machine, Linux, etc. In general, follow the instructions from the websites.
+If you are running your project on Google Colab you do not require to install any nbextension.
 
-```bash
-conda install -y pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch -c conda-forge
-conda install -y pytorch-lightning -c conda-forge
+2. To check your installation, you can try importing in your Python project a specific tab to plot:
+
+```python
+from evidently.dashboard import Dashboard
+from evidently.dashboard.tabs import RegressionPerformanceTab
 ```
 
-This should be enough to let you run the [initial notebook](https://github.com/sscardapane/reprodl2021/blob/main/Initial%20Notebook.ipynb). More information on the use case can be found inside the notebook itself.
+Check the [official documentation](https://docs.evidentlyai.com/tutorial) for further details.
 
-> :warning: For Windows only, install a [backend for torchaudio](https://pytorch.org/audio/stable/backend.html):
-> ```bash
-> pip install soundfile
-> ```
+&nbsp;
 
-### Additional set-up steps
+## Step 2: project setup and integration
 
-The following steps are not mandatory, but will considerably simplify the experience.
+Essentially, the kind of data required to Evidently to plot dashboards depends on the tabs themselves, which can be synthesized with the following categories:
 
-1. If you are on Windows, install the [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10). This is useful in a number of contexts, including Docker installation.
-2. We will use Git from the command line multiple times, so consider enabling [GitHub access with an SSH key](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh).
-3. We will experiment with Docker reproducibility on the [Sapienza DGX environment](https://www.uniroma1.it/sites/default/files/field_file_allegati/presentazione_ga_13-05-2019_sgiagu.pdf). If you have not done so already, set-up your access to the machine.
+* Data Drift
+* Numerical Target Drift
+* Categorical Target Drift
+* Regression Performance
+* Classification Performance
+* Probabilistic Classification Performance.
 
-## Organization of the course
+Tabs we are interested in can be called through the suitable Dashboard class constructor parameters that get a list in input:
 
-<p align="center">
-<img align="center" src="https://github.com/sscardapane/reprodl2021/blob/main/reprodl_overview.png" width="500" style="border: 1px solid black;">
-</p>
-
-The course is split into **exercises** (e.g., adding DVC support). The material for each exercise is provided as a Git branch. To follow an exercise, switch to the corresponding branch, and follow the README there. If you want to see the completed exercise, add *_completed* to the name of the branch. Additional material and information can be found on the [main website](https://www.sscardapane.it/teaching/reproducibledl/) of the course.
-
-**List of exercises**:
-
-- [x] Experimenting with Git, branches, and scripting (*exercise1_git*).
-- [x] Adding Hydra configuration (*exercise2_hydra*).
-- [x] Versioning data with DVC (*exercise3_dvc*).
-- [x] Creating a Dockerfile (*exercise4_docker*).
-- [x] Experiment management with Weight & Biases (*exercise5_wandb*). 
-- [x] Unit testing and formatting with continuous integration (*exercise6_hooks*).
-
-### An example
-
-If you want to follow the first exercise, switch to the corresponding branch and follow the instructions from there:
-
-```bash
-git checkout exercise1_git
+```python
+test_report = Dashboard(tabs=[RegressionPerformanceTab()])
 ```
 
-If you want to see the completed exercise:
+Next, we consider that we have validation and test data after performing processing with a given supervised learning algorithm:
 
-```bash
-git checkout exercise1_git_completed
+```python
+test_report = Dashboard(tabs=[ClassificationPerformanceTab()])
+
+validationset_reference = {"target": val_set_labels, "prediction": val_set_predicted_labels}
+testset_production = {"target": test_set_labels, "prediction": test_set_predicted_labels}
+
+df_reference = pd.DataFrame(dict_reference)
+df_production = pd.DataFrame(dict_production)
 ```
 
-You can inspect the commits to look at specific changes in the code:
+In the previous snippet of code we are using the validation set as reference performance and test set labels as production performance so that we can compare model behavior.
 
-```bash
-git log --graph --abbrev-commit --decorate
+So Panda's DataFrames integration require passing classification data as a dictionary, with columns named "target" and "prediction".
+
+
+
+## Step 3: dashboard plotting
+
+Lastly, we can proceed processing data and showing the dashboard itself:
+
+```python
+test_report.calculate(df_reference, df_production, column_mapping = None)
+test_report.show()
 ```
 
-If you want to inspect a specific change, you can checkout again using the ID of the commit.
+In situations where there are too much data in input to Evidently is suggested to avoid plotting inside a notebook and save results directly to HTML or JSON.
 
-### Contributing
 
-Thanks to [Jeroen Van Goey](https://github.com/BioGeek) for the error hunting. Feel free to open a pull request if you have suggestions on the current material or ideas for some extra exercises (see below). 
+## Creating custom reports
 
-> ⚠️ Because of the sequential nature of the repository, changing something in one of the initial branches might trigger necessary changes in all downstream branches.
+Evidently reports can be customized using custom widgets or entire tabs. Custom widgets building requires deriving a class from the [base Widget class](https://github.com/evidentlyai/evidently/blob/main/src/evidently/dashboard/widgets/widget.py), or from the [base Tab class](https://github.com/evidentlyai/evidently/blob/main/src/evidently/dashboard/tabs/base_tab.py).
 
-### Extra material (students & more)
+## AudioNet integration
+In this section we outline how Evidently integration with the AudioNet project has been performed.
 
-**Extra** branches contain material that was not covered in the course (e.g., new libraries for hyper-parameter optimization), implemented by the students for the exam. They can be read independently from the main branches. Refer to the original authors for more information.
+### Performance parameters extraction
 
-| Author | Branch | Content |
-| ------------- | ------------- |------------- |
-| [OfficiallyDAC](https://github.com/OfficiallyDAC) | [extra_optuna](https://github.com/sscardapane/reprodl2021/tree/extra_optuna) | Fine-tuning hyper-parameters with [Optuna](https://optuna.readthedocs.io/en/latest/installation.html). |
-| [FraLuca](https://github.com/FraLuca) | [extra_torchserve](https://github.com/sscardapane/reprodl2021/tree/extra_torchserve) | Serving models with [TorchServe](https://pytorch.org/serve/). |
-| [FedericoCinus](https://github.com/FedericoCinus) | [extra_dvc_experiments_management](https://github.com/sscardapane/reprodl2021/tree/extra_dvc_experiments_management) | Using DVC for managing experiments. |
-| [siciliano-diag](https://github.com/siciliano-diag) | [extra_python-crontab](https://github.com/sscardapane/reprodl2021/tree/extra_python-crontab) | Understand how to set cronjobs in a simple way. |
-| [gditeodoro](https://github.com/gditeodoro) | [extra_axplatform](https://github.com/sscardapane/reprodl2021/tree/extra_axplatform) | Fine-tuning hyper-parameters with the [Ax Platform](https://ax.dev/). |
-| [eleGAN23](https://github.com/eleGAN23), [guarrasi1995](https://github.com/guarrasi1995), [andreamarco](https://github.com/andremarco) | [extra_tune](https://github.com/sscardapane/reprodl2021/tree/extra_tune) | Fine-tuning hyper-parameters with [Ray Tune](https://docs.ray.io/en/master/tune/index.html). |
-| [lrnzgiusti](https://github.com/lrnzgiusti) | [extra_autopytorch](https://github.com/sscardapane/reprodl2021/tree/extra_autopytorch) | Fine-tuning hyper-parameters with [Auto-PyTorch](https://github.com/automl/Auto-PyTorch). |
-| [eleGAN23](https://github.com/eleGAN23), [guarrasi1995](https://github.com/guarrasi1995), [andreamarco](https://github.com/andremarco) | [extra_talos](https://github.com/sscardapane/reprodl2021/tree/extra_talos) | Fine-tuning hyper-parameters with [Talos](https://github.com/autonomio/talos). |
-| [lucamaiano](https://github.com/lucamaiano) | [extra_poetry](https://github.com/sscardapane/reprodl2021/tree/extra_poetry) | Dependency management with [Poetry](https://python-poetry.org/). |
-| [memis12](https://github.com/memis12), [AndMastro](https://github.com/AndMastro) | [extra_netron](https://github.com/sscardapane/reprodl2021/tree/extra_netron) | Visualizing the model using [Netron](https://netron.app/) |
+First of all, we need to get original and predicted validation set labels, so we edit the AudioNet class adding a method able to return validation and test results
 
-### Advanced reading material
+```python
+class AudioNet(pl.LightningModule):
+    
+    def __init__(self, n_classes = 50, base_filters = 32):
+        # [...]
 
-If you liked the exercises and are planning to explore more, the new edition of [Full Stack Deep Learning](https://fullstackdeeplearning.com/) (UC Berkeley CS194-080) covers a larger set of material than this course. Another good resource (divided in small exercises) is the [MLOps](https://github.com/GokuMohandas/mlops) repository by Goku Mohandas. [lucmos/nn-template](https://github.com/lucmos/nn-template) is a fully-functioning template implementing many of the tools described in this course.
+        self.test_results = tuple()
+        self.validation_results = tuple()
+    
+    # [...]
+
+    def validation_step(self, batch, batch_idx):
+        x, y = batch
+        y_hat = self(x)
+        y_hat = torch.argmax(y_hat, dim=1)
+        acc = torchmetrics.functional.accuracy(y_hat, y)
+        self.log('acc', acc, on_epoch=True, prog_bar=True)
+
+        self.validation_results = acc, y_hat, y
+
+        return acc
+    
+    def test_step(self, batch, batch_idx):
+        x, y = batch
+        y_hat = self(x)
+        y_hat = torch.argmax(y_hat, dim=1)
+        acc = torchmetrics.functional.accuracy(y_hat, y)
+        self.log("test_acc", acc, on_epoch=True, prog_bar=True)
+
+        self.results = acc, y_hat, y
+```
+
+Next, we modified the `train()` function to return these values
+
+```python
+def train():
+    # [...]
+
+    # Initialize the network
+    audionet = AudioNet()
+    trainer = pl.Trainer(gpus=0, max_epochs=2)
+    trainer.fit(audionet, train_loader, val_loader)
+
+    result = trainer.test(audionet, test_loader)
+
+    (val_accuratezza, val_y_hat, val_y, val_x) = audionet.get_validation_results()
+    (accuratezza, y_hat, y, x) = audionet.get_results()
+
+    return accuratezza, y_hat, y, val_accuratezza, val_y_hat, val_y
+```
+
+### Dashboard preparation and plotting
+Now we can take values returned by the train() function and use them with Evidently. As explained before, Dashboard can be prepared directly passing the DataFrames reference and production.
+
+```python
+if __name__ == "__main__":
+    acc, y_hat, y, val_acc, val_y_hat, val_y, = train()
+
+    # [...]
+
+    reference = {"target": val_y.tolist(), "prediction": val_y_hat.tolist()}
+    production = {"target": y.tolist(), "prediction": y_hat.tolist()}
+
+    df_reference = pd.DataFrame(dict_reference)
+    df_production = pd.DataFrame(dict_production)
+
+    audionet_report = Dashboard(tabs=[RegressionPerformanceTab()])
+    audionet_report.calculate(df_reference, df_production, column_mapping = None)
+    audionet_report.show()
+```
+
+
+### Google Colab integration sidenote
+
+The work described in this repository has been performed on Google Colab due to the lack of a suitable GPU.
+Right now it seems that PyTorch-Lightning and TorchAudio version bundled in the Colab's runtime are not fully compatible. So, in order to setup correctly PyTorch-Lightning and TorchAudio in this platform we used directly the git version of PyTorch-Lightning, which seems not affected by the issue described.
+
+```sh
+!pip install git+https://github.com/PyTorchLightning/pytorch-lightning
+```
+
+For reference, the branch used for this work is the `290fb466de1fcc2ac6025f74b56906592911e856`, along with `torchaudio 0.10.0+cu111`.
+
+## Conclusions and further observations
+
+In this section we sum up a few more observations and tips that could be useful:
+
+* in case of datasets particularly big is useful to perform dashboard and report plotting directly to HTML or JSON files;
+* Evidently requires data passed as DataFrame using lists, so PyTorch's tensor should be converted to lists (with the tolist() method);
+* the ClassificationPerformance tab require that all labels of the classification problem appear in the reference DataFrame.
+
+In conclusion, Evidently is a powerful open source tool to plot performance metrics and compare machine learning models. It can also be customized by providing JSON description files.
+
+Enjoy.
