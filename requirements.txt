@@ -1,0 +1,10 @@
+notebook
+matplotlib
+pandas
+ipywidgets
+pathlib
+torch
+torchvision
+torchaudio
+pytorch-lightning
+
